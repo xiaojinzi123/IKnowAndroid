@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion versions.android_compile_sdk
+    defaultConfig {
+        applicationId "com.iknow"
+        minSdkVersion versions.android_min_sdk
+        targetSdkVersion versions.android_target_sdk
+        versionCode versions.version_code
+        versionName versions.version_name
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                // 组件化注解驱动器的配置
+                arguments = ["HOST": "app"]
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    kapt libs.component_compiler
+
+    implementation project(':ModuleBase')
+    implementation project(':ModuleUser')
+    implementation project(':ModuleWelcome')
+    implementation project(':ModuleMain')
+    implementation project(':ModuleHelp')
+    implementation project(':ModuleUI')
+    implementation project(':ModuleDatasource')
+
+}

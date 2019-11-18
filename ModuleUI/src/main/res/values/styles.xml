@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/resource_theme</item>
+        <item name="colorPrimaryDark">@color/resourceColorPrimaryDark</item>
+        <item name="colorAccent">@color/resourceColorAccent</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/resource_theme</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="toolbarStyle">@style/AppToolbar</item>
+        <item name="buttonStyle">@style/UiButton</item>
+    </style>
+
+    <style name="AppToolbar" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/resource_theme</item>
+        <item name="titleTextAppearance">@style/AppToolbarTitle</item>
+    </style>
+
+    <style name="AppToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/resource_18</item>
+        <item name="android:textColor">@color/resource_white</item>
+    </style>
+
+    <style name="UiButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/ui_button_selector</item>
+    </style>
+
+    <!-- Dialog进度条 -->
+    <style name="UiLoadingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@color/resource_transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="UiLoadingDialogAnim" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/ui_loading_dialog_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/ui_loading_dialog_exit_anim</item>
+    </style>
+
+</resources>

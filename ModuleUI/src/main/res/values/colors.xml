@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="resourceColorPrimary">#EEEEEE</color>
+    <color name="resourceColorPrimaryDark">#00574B</color>
+    <color name="resourceColorAccent">#D81B60</color>
+    <color name="resource_white">#FFFFFF</color>
+    <color name="resource_theme">#98D373</color>
+
+    <!--整个项目的主风格-->
+    <color name="ui_primary">#98D373</color>
+    <!--整个项目的不可用的时候的风格-->
+    <color name="ui_disabled">#EFD4D4</color>
+
+    <color name="button_primary">@color/ui_primary</color>
+    <color name="button_disabled">@color/ui_disabled</color>
+
+</resources>

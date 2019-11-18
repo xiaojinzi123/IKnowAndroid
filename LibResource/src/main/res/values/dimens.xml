@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="resource_2">2dp</dimen>
+    <dimen name="resource_4">4dp</dimen>
+    <dimen name="resource_6">6dp</dimen>
+    <dimen name="resource_8">8dp</dimen>
+    <dimen name="resource_10">10dp</dimen>
+    <dimen name="resource_14">14dp</dimen>
+    <dimen name="resource_16">16dp</dimen>
+    <dimen name="resource_18">18dp</dimen>
+    <dimen name="resource_20">20dp</dimen>
+    <dimen name="resource_26">26dp</dimen>
+    <dimen name="resource_32">32dp</dimen>
+    <dimen name="resource_45">45dp</dimen>
+
+</resources>

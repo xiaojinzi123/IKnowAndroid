@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LibResource</string>
+    <string name="resource_login">Login</string>
+    <string name="resource_home">Home</string>
+    <string name="resource_component_technical_support">Component 提供组件化支持!</string>
+    <string name="resource_please_input_name">请输入用户名</string>
+    <string name="resource_please_input_pass">请输入密码</string>
+</resources>

@@ -1,0 +1,2 @@
+include ':app', ':ModuleWelcome', ':ModuleUser', ':ModuleBase', ':LibTools', ':ModuleBeans', ':LibResource', ':ModuleMain', ':ModuleUI', ':ModuleDatasource', ':ModuleHelp'
+rootProject.name='IKnowAndroid'

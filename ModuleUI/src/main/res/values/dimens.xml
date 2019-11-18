@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ui_content_padding">@dimen/resource_16</dimen>
+    <dimen name="ui_content_margin">@dimen/resource_16</dimen>
+    <dimen name="ui_text_normal">@dimen/resource_14</dimen>
+</resources>

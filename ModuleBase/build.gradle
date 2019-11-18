@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion versions.android_compile_sdk
+    defaultConfig {
+        minSdkVersion versions.android_min_sdk
+        targetSdkVersion versions.android_target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //网络环境
+            buildConfigField("String", "BASE_URL", "\"$urls.release\"")
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //网络环境
+            buildConfigField("String", "BASE_URL", "\"$urls.debug\"")
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api libs.kotlin_stdlib
+    api libs.appcompat
+    api libs.core_ktx
+    api libs.constraintLayout
+    api libs.multidex
+    // android support
+    api libs.support_v4
+    api libs.recyclerview
+    api libs.design
+    // glide
+    api libs.glide
+    annotationProcessor libs.glide_compiler
+
+    api libs.component_impl_rx
+    api libs.lifecycle_extensions
+    api libs.room
+    api libs.room_rxjava2
+    api libs.room_ktx
+    api libs.rxjava
+    api libs.rxandroid
+    api libs.databinding
+    api libs.retrofit2_converter_gson
+    api project(':ModuleBeans')
+    api project(':LibResource')
+    api project(':LibTools')
+    api project(':ModuleUI')
+}

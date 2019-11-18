@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.iknow.module.help">
+
+    <application>
+        <meta-data
+                android:name="host_help"
+                android:value="help" />
+        <activity android:name=".web.view.WebAct" />
+    </application>
+
+</manifest>
