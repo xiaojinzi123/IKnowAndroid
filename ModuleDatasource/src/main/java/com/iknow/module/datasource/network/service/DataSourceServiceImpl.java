@@ -1,5 +1,8 @@
 package com.iknow.module.datasource.network.service;
 
+import androidx.annotation.NonNull;
+
+import com.iknow.lib.beans.ArticleBean;
 import com.iknow.lib.beans.BannerBean;
 import com.iknow.module.base.service.datasource.DataSourceService;
 import com.iknow.module.datasource.network.ApiManager;
@@ -17,6 +20,14 @@ public class DataSourceServiceImpl implements DataSourceService {
         return ApiManager.getInstance()
                 .getIknowApi()
                 .bannerList();
+    }
+
+    @NonNull
+    @Override
+    public Single<List<ArticleBean>> articleList(int pageNumber, int pageSize) {
+        return ApiManager.getInstance()
+                .getIknowApi()
+                .articleList(pageNumber, pageSize);
     }
 
 }

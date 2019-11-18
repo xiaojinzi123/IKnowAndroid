@@ -4,13 +4,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.iknow.module.datasource.network.support.RemoveShell;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
 
 /**
  * A {@linkplain Converter.Factory converter} which uses Gson for JSON.
@@ -49,8 +51,19 @@ public final class IknowConverterFactory extends Converter.Factory {
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations,
                                                             Retrofit retrofit) {
-        TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new IknowResponseBodyConverter<>(gson, adapter, type);
+        boolean isRemoveShell = false;
+        for (Annotation annotation : annotations) {
+            if (annotation.annotationType() == RemoveShell.class) {
+                isRemoveShell = true;
+                break;
+            }
+        }
+        if (isRemoveShell) {
+            TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
+            return new IknowResponseBodyConverter<>(gson, adapter, type);
+        } else {
+            return null;
+        }
     }
 
     @Override

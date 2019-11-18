@@ -2,7 +2,7 @@ package com.iknow
 
 import androidx.multidex.MultiDexApplication
 import com.iknow.lib.tools.ToolsConfig
-import com.iknow.module.base.ModuleConfig
+import com.iknow.module.base.ModuleInfo
 import com.xiaojinzi.component.Component
 import com.xiaojinzi.component.impl.application.ModuleManager
 import com.xiaojinzi.component.support.RxErrorIgnoreUtil
@@ -20,12 +20,12 @@ class App : MultiDexApplication() {
         // 初始化组件化
         Component.init(this, BuildConfig.DEBUG)
         ModuleManager.getInstance().registerArr(
-            ModuleConfig.App.NAME,
-            ModuleConfig.Datasource.NAME,
-            ModuleConfig.Welcome.NAME,
-            ModuleConfig.Main.NAME,
-            ModuleConfig.User.NAME,
-            ModuleConfig.Help.NAME
+            ModuleInfo.App.NAME,
+            ModuleInfo.Datasource.NAME,
+            ModuleInfo.Welcome.NAME,
+            ModuleInfo.Main.NAME,
+            ModuleInfo.User.NAME,
+            ModuleInfo.Help.NAME
         )
         RxErrorIgnoreUtil.ignoreError()
 

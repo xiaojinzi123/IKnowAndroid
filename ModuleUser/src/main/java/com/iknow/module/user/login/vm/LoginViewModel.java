@@ -3,16 +3,11 @@ package com.iknow.module.user.login.vm;
 import android.app.Application;
 import android.text.TextUtils;
 import androidx.annotation.NonNull;
-import com.iknow.module.base.util.RxUtil;
+
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.vm.BaseViewModel;
-import io.reactivex.Completable;
-import io.reactivex.CompletableObserver;
+
 import io.reactivex.Observable;
-import io.reactivex.Single;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;

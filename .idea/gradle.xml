@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/LibResource" />
             <option value="$PROJECT_DIR$/LibTools" />
+            <option value="$PROJECT_DIR$/LibWidget" />
             <option value="$PROJECT_DIR$/ModuleBase" />
             <option value="$PROJECT_DIR$/ModuleBeans" />
             <option value="$PROJECT_DIR$/ModuleDatasource" />

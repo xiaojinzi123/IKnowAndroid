@@ -4,7 +4,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import androidx.annotation.Nullable;
-import com.iknow.module.base.ModuleConfig;
+import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.base.widget.TextWatcherAdapter;
 import com.iknow.module.user.R;
@@ -12,9 +12,7 @@ import com.iknow.module.user.databinding.UserLoginActBinding;
 import com.iknow.module.user.login.vm.LoginViewModel;
 import com.xiaojinzi.component.anno.RouterAnno;
 import com.xiaojinzi.component.impl.Router;
-import com.xiaojinzi.component.impl.RouterErrorResult;
-import com.xiaojinzi.component.impl.RouterResult;
-import com.xiaojinzi.component.support.CallbackAdapter;
+
 import io.reactivex.functions.Consumer;
 
 /**
@@ -23,7 +21,7 @@ import io.reactivex.functions.Consumer;
  * time: 2019/4/2
  */
 @RouterAnno(
-        path = ModuleConfig.User.LOGIN
+        path = ModuleInfo.User.LOGIN
 )
 public class LoginAct extends BaseAct<LoginViewModel> {
 
@@ -128,8 +126,8 @@ public class LoginAct extends BaseAct<LoginViewModel> {
     private void goToHome() {
         // 跳转到首页
         Router.with(mContext)
-                .host(ModuleConfig.Main.NAME)
-                .path(ModuleConfig.Main.HOME)
+                .host(ModuleInfo.Main.NAME)
+                .path(ModuleInfo.Main.HOME)
                 .afterEventAction(() -> finish())
                 .forward();
 

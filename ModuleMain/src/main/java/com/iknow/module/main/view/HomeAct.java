@@ -3,27 +3,25 @@ package com.iknow.module.main.view;
 import android.view.Gravity;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.iknow.module.base.ModuleConfig;
+import com.iknow.module.base.FragmentInfo;
+import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
-import com.iknow.module.base.view.Tip;
 import com.iknow.module.main.R;
 import com.iknow.module.main.databinding.MainHomeActBinding;
-import com.iknow.module.main.vm.HomeViewModel;
 import com.xiaojinzi.component.anno.RouterAnno;
-
-import io.reactivex.Observable;
+import com.xiaojinzi.component.impl.Router;
 
 /**
  * 主界面
  */
 @RouterAnno(
-        path = ModuleConfig.Main.HOME
+        path = ModuleInfo.Main.HOME
 )
-public class HomeAct extends BaseAct<HomeViewModel> {
+public class HomeAct extends BaseAct {
 
     private MainHomeActBinding mBinding;
 
@@ -33,26 +31,27 @@ public class HomeAct extends BaseAct<HomeViewModel> {
         return mBinding.getRoot();
     }
 
-    @Nullable
-    @Override
-    protected Class<? extends HomeViewModel> getViewModelClass() {
-        return HomeViewModel.class;
-    }
-
     @Override
     protected void onInit() {
         super.onInit();
         setSupportActionBar(mBinding.toolbar);
         mBinding.toolbar.setNavigationOnClickListener(v -> mBinding.drawerLayout.openDrawer(Gravity.LEFT));
 
-        subscibeUi(mViewModel.getBannerSubject(), item -> {
+        // 拿到 HomeFragment
+        Fragment homeFragment = Router.with(FragmentInfo.Main.HOME).navigate();
+        if (homeFragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(mBinding.fl.getId(), homeFragment);
+            ft.commit();
+        }
+
+        /*subscibeUi(mViewModel.getBannerSubject(), item -> {
             mView.tip(Tip.normal("成功了"));
-        });
+        });*/
 
     }
 
     public void clickView(View view) {
-        mViewModel.loadBanner();
     }
 
 }

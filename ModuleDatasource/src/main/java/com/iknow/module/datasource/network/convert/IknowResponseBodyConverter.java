@@ -33,10 +33,12 @@ final class IknowResponseBodyConverter<T> implements Converter<ResponseBody, T> 
 
     @Override
     public T convert(ResponseBody value) throws IOException {
+
         String body = value.string();
         if (TextUtils.isEmpty(body)) {
             throw new JsonParseException("The body is empty that can't convert Object!");
         }
+
         Result response;
         try {
             response = gson.fromJson(body, Result.class);
@@ -55,7 +57,7 @@ final class IknowResponseBodyConverter<T> implements Converter<ResponseBody, T> 
             return (T) new EmptyResponse();
         }
         if (null == response.getData()) {
-            throw new IKnowApiException(response.getErrorMsg());
+            return null;
         }
         InputStream inputStream = new ByteArrayInputStream(gson.toJson(response.getData()).getBytes());
         Reader reader = new InputStreamReader(inputStream, "UTF-8");

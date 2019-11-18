@@ -1,4 +1,4 @@
-package com.iknow.module.base.util;
+package com.iknow.module.base.support;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;

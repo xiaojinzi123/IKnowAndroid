@@ -6,7 +6,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
-import com.iknow.module.base.ModuleConfig;
+import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.help.R;
 import com.iknow.module.help.databinding.HelpWebActBinding;
@@ -15,7 +15,7 @@ import com.xiaojinzi.component.anno.FiledAutowiredAnno;
 import com.xiaojinzi.component.anno.RouterAnno;
 
 @RouterAnno(
-        path = ModuleConfig.Help.WEB
+        path = ModuleInfo.Help.WEB
 )
 public class WebAct extends BaseAct<WebViewModel> {
 

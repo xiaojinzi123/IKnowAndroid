@@ -4,31 +4,28 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
+import com.iknow.lib.beans.ArticleBean;
 import com.iknow.lib.beans.BannerBean;
 import com.iknow.module.base.service.datasource.DataSourceService;
-import com.iknow.module.base.util.RxUtil;
+import com.iknow.module.base.support.HotObservable;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.vm.BaseViewModel;
 import com.xiaojinzi.component.impl.service.RxServiceManager;
 
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
+import java.util.List;
+
+import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class HomeViewModel extends BaseViewModel {
 
     private Subject<List<BannerBean>> bannerSubject = BehaviorSubject.create();
+    private Subject<List<ArticleBean>> articleSubject = BehaviorSubject.create();
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
-        loadBanner();
+        loadArticle();
     }
 
     public void loadBanner() {
@@ -43,7 +40,26 @@ public class HomeViewModel extends BaseViewModel {
         );
     }
 
-    public Subject<List<BannerBean>> getBannerSubject() {
+    public void loadArticle() {
+        disposables.add(
+                RxServiceManager.with(DataSourceService.class)
+                        .flatMap(service -> service.articleList(1, 10))
+                        .compose(singleTransformer())
+                        .subscribe(
+                                items -> articleSubject.onNext(items),
+                                error -> tipSubject.onNext(Tip.normal(error.getMessage()))
+                        )
+        );
+    }
+
+    @HotObservable("banner数据")
+    public Observable<List<BannerBean>> getBannerSubject() {
         return bannerSubject;
     }
+
+    @HotObservable("文章列表数据")
+    public Observable<List<ArticleBean>> getArticleSubject() {
+        return articleSubject;
+    }
+
 }

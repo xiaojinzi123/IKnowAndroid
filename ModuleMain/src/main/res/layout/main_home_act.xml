@@ -21,8 +21,8 @@
                     app:navigationIcon="@drawable/resource_menu_white"
                     app:title="@string/resource_login" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv"
+            <FrameLayout
+                    android:id="@+id/fl"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/toolbar" />

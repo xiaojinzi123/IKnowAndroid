@@ -3,20 +3,12 @@ package com.iknow.module.welcome.view;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.iknow.module.base.ModuleConfig;
+import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.welcome.R;
 import com.iknow.module.welcome.vm.LoadingViewModel;
 import com.xiaojinzi.component.impl.Router;
-import com.xiaojinzi.component.impl.RouterErrorResult;
-import com.xiaojinzi.component.impl.RouterResult;
-import com.xiaojinzi.component.support.CallbackAdapter;
-
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 
 /**
  * Loading 页面
@@ -54,8 +46,8 @@ public class LoadingAct extends BaseAct<LoadingViewModel> {
         subscibeUi(
                 mViewModel.countdownObservable(),
                 () -> Router.with(mContext)
-                        .host(ModuleConfig.Main.NAME)
-                        .path(ModuleConfig.Main.HOME)
+                        .host(ModuleInfo.Main.NAME)
+                        .path(ModuleInfo.Main.HOME)
                         .afterJumpAction(() -> finish())
                         .forward()
         );

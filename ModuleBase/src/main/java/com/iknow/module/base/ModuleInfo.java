@@ -5,7 +5,7 @@ package com.iknow.module.base;
  *
  * @author : xiaojinzi 30212
  */
-public class ModuleConfig {
+public class ModuleInfo {
 
     /**
      * 项目的 Scheme,用于跳转项目中的界面

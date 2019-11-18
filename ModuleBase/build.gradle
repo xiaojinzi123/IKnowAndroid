@@ -62,5 +62,9 @@ dependencies {
     api project(':ModuleBeans')
     api project(':LibResource')
     api project(':LibTools')
+    api project(':LibWidget')
     api project(':ModuleUI')
+
+    // 额外的第三方控件
+
 }
