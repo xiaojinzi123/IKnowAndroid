@@ -12,6 +12,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -53,6 +58,7 @@ dependencies {
     api libs.rxandroid
     api libs.databinding
     api libs.retrofit2_converter_gson
+    api libs.retrofit2_rxjava2_adapter
     api project(':ModuleBeans')
     api project(':LibResource')
     api project(':LibTools')

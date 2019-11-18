@@ -3,7 +3,7 @@ package com.iknow.module.datasource.network;
 import androidx.annotation.NonNull;
 import com.iknow.lib.tools.ResourceUtil;
 import com.iknow.module.base.BuildConfig;
-import com.iknow.module.datasource.network.convert.IknoeConverterFactory;
+import com.iknow.module.datasource.network.convert.IknowConverterFactory;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -51,7 +51,7 @@ public class RetrofitFactory {
                     retrofit = new Retrofit.Builder()
                             .baseUrl(BuildConfig.BASE_URL)
                             .client(builder.build())
-                            .addConverterFactory(IknoeConverterFactory.create())
+                            .addConverterFactory(IknowConverterFactory.create())
                             // TODO 加拦截器
 //                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .build();

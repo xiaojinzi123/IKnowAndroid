@@ -188,9 +188,7 @@ public abstract class BaseAct<VM extends BaseViewModel> extends AppCompatActivit
         return new BaseViewImpl(mContext);
     }
 
-    /**
-     * 订阅方法
-     */
+
     protected final <E> void subscibeUi(Observable<E> observable, Consumer<E> consumer) {
         disposables.add(observable
                 .observeOn(AndroidSchedulers.mainThread())

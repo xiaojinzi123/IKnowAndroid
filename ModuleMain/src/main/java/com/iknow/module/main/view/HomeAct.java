@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.iknow.module.base.ModuleConfig;
 import com.iknow.module.base.view.BaseAct;
+import com.iknow.module.base.view.Tip;
 import com.iknow.module.main.R;
 import com.iknow.module.main.databinding.MainHomeActBinding;
 import com.iknow.module.main.vm.HomeViewModel;
@@ -42,16 +43,16 @@ public class HomeAct extends BaseAct<HomeViewModel> {
     protected void onInit() {
         super.onInit();
         setSupportActionBar(mBinding.toolbar);
-        mBinding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBinding.drawerLayout.openDrawer(Gravity.LEFT);
-            }
+        mBinding.toolbar.setNavigationOnClickListener(v -> mBinding.drawerLayout.openDrawer(Gravity.LEFT));
+
+        subscibeUi(mViewModel.getBannerSubject(), item -> {
+            mView.tip(Tip.normal("成功了"));
         });
+
     }
 
     public void clickView(View view) {
-        mViewModel.testLoading();
+        mViewModel.loadBanner();
     }
 
 }

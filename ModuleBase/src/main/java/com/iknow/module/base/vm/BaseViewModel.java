@@ -1,11 +1,24 @@
 package com.iknow.module.base.vm;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+
+import com.iknow.module.base.util.RxUtil;
 import com.iknow.module.base.view.Tip;
+
+import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.SingleSource;
+import io.reactivex.SingleTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
@@ -16,10 +29,32 @@ import io.reactivex.subjects.Subject;
  */
 public class BaseViewModel extends AndroidViewModel {
 
+    private final SingleTransformer singleTransformer = new SingleTransformer() {
+        @Override
+        public SingleSource apply(Single upstream) {
+            return upstream
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .doOnEvent((item, error) -> {
+                        loadingSubject.onNext(false);
+                    })
+                    .doOnSubscribe(
+                            disposable -> loadingSubject.onNext(true)
+                    );
+        }
+    };
+
+    public <T> SingleTransformer<T, T> singleTransformer() {
+        return singleTransformer;
+    }
+
     public BaseViewModel(@NonNull Application application) {
         super(application);
     }
 
+    /**
+     * disposable 容器
+     */
     protected CompositeDisposable disposables = new CompositeDisposable();
 
     /**
@@ -36,11 +71,21 @@ public class BaseViewModel extends AndroidViewModel {
     @NonNull
     protected final Subject<Tip> tipSubject = BehaviorSubject.create();
 
+    /**
+     * 返回的热信号
+     *
+     * @return 返回的热信号
+     */
     @NonNull
     public Observable<Boolean> loadingObservable() {
         return loadingSubject;
     }
 
+    /**
+     * 返回的热信号
+     *
+     * @return 返回的热信号
+     */
     @NonNull
     public Observable<Tip> tipObservable() {
         return tipSubject;

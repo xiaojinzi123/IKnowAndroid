@@ -20,12 +20,12 @@ import java.lang.reflect.Type;
  * you must {@linkplain Retrofit.Builder#addConverterFactory(Converter.Factory) add this instance}
  * last to allow the other converters a chance to see their types.
  */
-public final class IknoeConverterFactory extends Converter.Factory {
+public final class IknowConverterFactory extends Converter.Factory {
     /**
      * Create an instance using a default {@link Gson} instance for conversion. Encoding to JSON and
      * decoding from JSON (when no charset is specified by a header) will use UTF-8.
      */
-    public static IknoeConverterFactory create() {
+    public static IknowConverterFactory create() {
 //        return create(new Gson());//默认是不序列化null对象的
         return create(new GsonBuilder().serializeNulls().create());
     }
@@ -35,14 +35,14 @@ public final class IknoeConverterFactory extends Converter.Factory {
      * decoding from JSON (when no charset is specified by a header) will use UTF-8.
      */
     @SuppressWarnings("ConstantConditions") // Guarding public API nullability.
-    public static IknoeConverterFactory create(Gson gson) {
+    public static IknowConverterFactory create(Gson gson) {
         if (gson == null) throw new NullPointerException("gson == null");
-        return new IknoeConverterFactory(gson);
+        return new IknowConverterFactory(gson);
     }
 
     private final Gson gson;
 
-    private IknoeConverterFactory(Gson gson) {
+    private IknowConverterFactory(Gson gson) {
         this.gson = gson;
     }
 
