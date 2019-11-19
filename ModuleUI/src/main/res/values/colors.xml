@@ -11,6 +11,11 @@
     <!--整个项目的不可用的时候的风格-->
     <color name="ui_disabled">#EFD4D4</color>
 
+    <color name="ui_text">#333333</color>
+    <color name="ui_text1">#009688</color>
+
+    <color name="ui_bg">#EEEEEE</color>
+
     <color name="button_primary">@color/ui_primary</color>
     <color name="button_disabled">@color/ui_disabled</color>
 

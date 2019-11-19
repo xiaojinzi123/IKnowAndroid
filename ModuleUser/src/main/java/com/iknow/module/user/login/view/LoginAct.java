@@ -1,9 +1,13 @@
 package com.iknow.module.user.login.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+
 import androidx.annotation.Nullable;
+
 import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.base.widget.TextWatcherAdapter;
@@ -11,14 +15,11 @@ import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserLoginActBinding;
 import com.iknow.module.user.login.vm.LoginViewModel;
 import com.xiaojinzi.component.anno.RouterAnno;
-import com.xiaojinzi.component.impl.Router;
 
 import io.reactivex.functions.Consumer;
 
 /**
- * desc: 登录页面
- * auth: 32052
- * time: 2019/4/2
+ * 登录页面
  */
 @RouterAnno(
         path = ModuleInfo.User.LOGIN
@@ -107,7 +108,7 @@ public class LoginAct extends BaseAct<LoginViewModel> {
 
         subscibeUi(
                 mViewModel.loginSuccessObservable(),
-                b -> goToHome()
+                b -> returnData()
         );
 
     }
@@ -123,14 +124,10 @@ public class LoginAct extends BaseAct<LoginViewModel> {
     private void initTabLayout() {
     }
 
-    private void goToHome() {
-        // 跳转到首页
-        Router.with(mContext)
-                .host(ModuleInfo.Main.NAME)
-                .path(ModuleInfo.Main.HOME)
-                .afterEventAction(() -> finish())
-                .forward();
-
+    private void returnData() {
+        Intent intent = new Intent();
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 
 }

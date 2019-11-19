@@ -19,20 +19,13 @@
                     android:layout_height="wrap_content"
                     android:fitsSystemWindows="true"
                     app:navigationIcon="@drawable/resource_menu_white"
-                    app:title="@string/resource_login" />
+                    app:title="@string/resource_home" />
 
             <FrameLayout
                     android:id="@+id/fl"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/toolbar" />
-
-            <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:onClick="clickView"
-                    android:text="点我测试" />
 
         </RelativeLayout>
 
