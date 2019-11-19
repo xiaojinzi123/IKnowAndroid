@@ -3,5 +3,6 @@
 
     <color name="resource_transparent">#00ffffff</color>
     <color name="resource_white">#FFFFFF</color>
+    <color name="resource_red">#FF0000</color>
 
 </resources>

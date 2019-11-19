@@ -2,7 +2,7 @@ package com.iknow.module.datasource.network;
 
 import com.iknow.lib.tools.NetWorkUtil;
 import com.iknow.lib.tools.ResourceUtil;
-import com.iknow.module.datasource.network.exception.IKnowApiException;
+import com.iknow.module.datasource.network.exception.NetworkException;
 import okhttp3.*;
 import okio.Buffer;
 
@@ -46,23 +46,23 @@ final class InterceptorFactory {
      */
     public static Interceptor buildNetworkStatusInterceptor() {
         return chain -> {
-            IKnowApiException e = null;
+            NetworkException e = null;
             if (!NetWorkUtil.isNetworkConnected(ResourceUtil.getApp())) {
-                throw new IKnowApiException("网络异常,请检查网络连接");
+                throw new NetworkException("网络异常,请检查网络连接");
             }
             Request request = chain.request();
             Response response = chain.proceed(request);
 
             if (401 == response.code()) {
-                e = new IKnowApiException("401");
+                e = new NetworkException("401");
             } else if (403 == response.code()) {
-                e = new IKnowApiException("403");
+                e = new NetworkException("403");
             } else if (503 == response.code()) {
-                e = new IKnowApiException("503");
+                e = new NetworkException("503");
             } else if (500 == response.code()) {
-                e = new IKnowApiException("500");
+                e = new NetworkException("500");
             } else if (404 == response.code()) {
-                e = new IKnowApiException("404");
+                e = new NetworkException("404");
             }
             if (null != e) {
                 throw e;

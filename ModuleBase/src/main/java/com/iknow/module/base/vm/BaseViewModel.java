@@ -5,7 +5,10 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.iknow.module.base.support.ServiceException;
+import com.iknow.module.base.support.SingleObserverAdapter;
 import com.iknow.module.base.view.Tip;
+import com.xiaojinzi.component.support.Utils;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -13,6 +16,7 @@ import io.reactivex.SingleSource;
 import io.reactivex.SingleTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
@@ -90,6 +94,42 @@ public class BaseViewModel extends AndroidViewModel {
     protected void onCleared() {
         super.onCleared();
         disposables.dispose();
+    }
+
+    // 一些 RxJava 订阅的通用方法
+
+    protected <T> Disposable subscribe(@NonNull Single<T> observable,
+                                       @NonNull SingleObserverAdapter<T> adapter) {
+        Disposable disposable = observable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(innerDisposable -> loadingSubject.onNext(true))
+                .doFinally(() -> loadingSubject.onNext(false))
+                .subscribe(
+                        item -> adapter.getSuccessConsumer().accept(item),
+                        error -> {
+                            if (adapter.getErrorConsumer() == null) {
+                                normalErrorSolve(error);
+                            }else {
+                                adapter.getErrorConsumer().accept(error);
+                            }
+                        }
+                );
+        disposables.add(disposable);
+        return disposable;
+    }
+
+    private void normalErrorSolve(@NonNull Throwable error) {
+        error = Utils.getRealThrowable(error);
+        String message = error.getMessage();
+        if (message == null) {
+            message = "";
+        }
+        if (error instanceof ServiceException) {
+            tipSubject.onNext(Tip.error(error.getMessage()));
+        } else {
+            tipSubject.onNext(Tip.error("未知异常"));
+        }
     }
 
 }

@@ -4,12 +4,22 @@ import androidx.annotation.NonNull;
 
 import com.iknow.lib.beans.ArticleBean;
 import com.iknow.lib.beans.BannerBean;
+import com.iknow.lib.beans.LoginBean;
 
 import java.util.List;
 
 import io.reactivex.Single;
 
 public interface DataSourceService {
+
+    /**
+     * 登陆
+     *
+     * @param userName 用户名
+     * @param password 密码
+     */
+    @NonNull
+    Single<LoginBean> login(@NonNull String userName, @NonNull String password);
 
     /**
      * 获取banner 的数据

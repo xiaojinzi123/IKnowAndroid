@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
-import com.iknow.module.datasource.network.exception.IKnowApiException;
+import com.iknow.module.datasource.network.exception.NetworkException;
 import com.iknow.module.datasource.network.EmptyResponse;
 import com.iknow.module.datasource.network.Result;
 
@@ -50,7 +50,7 @@ final class IknowResponseBodyConverter<T> implements Converter<ResponseBody, T> 
             throw new JsonParseException("This is not rule body!");
         }
         if (!response.isSuccess()) {
-            throw new IKnowApiException(response.getErrorMsg(), response.getErrorCode());
+            throw new NetworkException(response.getErrorMsg(), response.getErrorCode());
         }
         if (type == EmptyResponse.class) {
             value.close();

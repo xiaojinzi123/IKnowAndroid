@@ -18,6 +18,8 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.5.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // 注册MobSDK
+        classpath "com.mob.sdk:MobSDK:2018.0319.1724"
     }
 }
 

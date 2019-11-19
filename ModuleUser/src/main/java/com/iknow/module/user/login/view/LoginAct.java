@@ -6,10 +6,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
+import com.iknow.module.base.view.Tip;
+import com.iknow.module.base.view.inter.IBaseView;
 import com.iknow.module.base.widget.TextWatcherAdapter;
 import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserLoginActBinding;
@@ -128,6 +131,29 @@ public class LoginAct extends BaseAct<LoginViewModel> {
         Intent intent = new Intent();
         setResult(Activity.RESULT_OK, intent);
         finish();
+
+        /*RxServiceManager.with(HelpService.class)
+                .flatMap(item -> item.phoneCheck(this))
+                .subscribe(item -> {
+                    System.out.println("2313123");
+                });*/
+
+    }
+
+    @NonNull
+    @Override
+    protected IBaseView onCreateBaseView() {
+        final IBaseView target = super.onCreateBaseView();
+        return new IBaseView.IBaseViewProxy(target){
+            @Override
+            public void tip(@NonNull Tip tip) {
+                if (tip.getTipEnum() == Tip.TipEnum.Error) {
+                    mBinding.tvError.setText(tip.getTip());
+                }else {
+                    super.tip(tip);
+                }
+            }
+        };
     }
 
 }

@@ -2,13 +2,18 @@ package com.iknow.module.user.login.vm;
 
 import android.app.Application;
 import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 
+import com.iknow.lib.beans.LoginBean;
+import com.iknow.module.base.service.datasource.DataSourceService;
+import com.iknow.module.base.support.SingleObserverAdapter;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.vm.BaseViewModel;
+import com.xiaojinzi.component.impl.service.RxServiceManager;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Predicate;
+import io.reactivex.Single;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
@@ -49,7 +54,10 @@ public class LoginViewModel extends BaseViewModel {
         disposables.add(
                 Observable
                         .combineLatest(mUserName, mPassword, (s1, s2) -> !TextUtils.isEmpty(s1) && !TextUtils.isEmpty(s2))
-                        .subscribe(b -> mCommitEnable.onNext(b))
+                        .subscribe(b -> {
+                            tipSubject.onNext(Tip.error(""));
+                            mCommitEnable.onNext(b);
+                        })
         );
 
     }
@@ -58,11 +66,11 @@ public class LoginViewModel extends BaseViewModel {
      * 登录的流程
      */
     public void login() {
-        if ("123".equals(mUserName.getValue()) && "123".equals(mPassword.getValue())) {
-            mLoginSuccess.onNext(true);
-        } else {
-            tipSubject.onNext(Tip.error("登录失败"));
-        }
+        Single<LoginBean> loginObservable = RxServiceManager.with(DataSourceService.class)
+                .flatMap(service -> service.login(mUserName.getValue(), mPassword.getValue()));
+        subscribe(loginObservable, new SingleObserverAdapter<>(result -> {
+            tipSubject.onNext(Tip.normal("成功：" + result.getName()));
+        }));
     }
 
     public Observable<String> userName() {
@@ -92,13 +100,7 @@ public class LoginViewModel extends BaseViewModel {
      * @return
      */
     public Observable<Boolean> loginSuccessObservable() {
-        return mLoginSuccess
-                .filter(new Predicate<Boolean>() {
-                    @Override
-                    public boolean test(Boolean b) throws Exception {
-                        return b;
-                    }
-                });
+        return mLoginSuccess.filter(b -> b);
     }
 
     public void clearUserName() {

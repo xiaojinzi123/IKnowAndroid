@@ -1,19 +1,19 @@
 package com.iknow.module.datasource.network.exception;
 
+import com.iknow.module.base.support.ServiceException;
+
 /**
- * @author Bacchus
- * @desc api业务异常 errorCode !=0
- * @date: 2019.04.28
+ * 网络业务异常
  */
-public class IKnowApiException extends RuntimeException {
+public class NetworkException extends ServiceException {
 
     private Integer errorCode;
 
-    public IKnowApiException(String msg) {
+    public NetworkException(String msg) {
         super(msg);
     }
 
-    public IKnowApiException(String message, Integer errorCode) {
+    public NetworkException(String message, Integer errorCode) {
         super(message);
         this.errorCode = errorCode;
     }

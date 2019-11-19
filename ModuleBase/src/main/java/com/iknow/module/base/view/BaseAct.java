@@ -99,22 +99,16 @@ public abstract class BaseAct<VM extends BaseViewModel> extends AppCompatActivit
     protected void onInit() {
         Component.inject(this);
         if (mViewModel != null) {
-            subscibeUi(mViewModel.loadingObservable(), new Consumer<Boolean>() {
-                @Override
-                public void accept(Boolean isLoading) throws Exception {
-                    if (isLoading && mView != null) {
-                        mView.showProgress();
-                    } else {
-                        mView.closeProgress();
-                    }
+            subscibeUi(mViewModel.loadingObservable(), isLoading -> {
+                if (isLoading && mView != null) {
+                    mView.showProgress();
+                } else {
+                    mView.closeProgress();
                 }
             });
-            subscibeUi(mViewModel.tipObservable(), new Consumer<Tip>() {
-                @Override
-                public void accept(Tip tip) throws Exception {
-                    if (mView != null) {
-                        mView.tip(tip);
-                    }
+            subscibeUi(mViewModel.tipObservable(), tip -> {
+                if (mView != null) {
+                    mView.tip(tip);
                 }
             });
         }

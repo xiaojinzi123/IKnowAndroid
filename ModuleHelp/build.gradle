@@ -2,6 +2,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.mob.sdk'
+
+MobSDK {
+    appKey "2d2920090f94d"
+    appSecret "1967a113d3669994743472aa7a37c8df"
+    SMSSDK {
+    }
+}
 
 android {
     compileSdkVersion versions.android_compile_sdk
