@@ -69,7 +69,7 @@ public class LoginViewModel extends BaseViewModel {
         Single<LoginBean> loginObservable = RxServiceManager.with(DataSourceService.class)
                 .flatMap(service -> service.login(mUserName.getValue(), mPassword.getValue()));
         subscribe(loginObservable, new SingleObserverAdapter<>(result -> {
-            tipSubject.onNext(Tip.normal("成功：" + result.getName()));
+            mLoginSuccess.onNext(true);
         }));
     }
 
