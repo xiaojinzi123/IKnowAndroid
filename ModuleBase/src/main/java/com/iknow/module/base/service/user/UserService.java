@@ -8,6 +8,7 @@ import com.iknow.module.base.support.HotObservable;
 
 import java.util.Optional;
 
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
 public interface UserService {
@@ -21,8 +22,7 @@ public interface UserService {
      * 获取用户信息, 可能为空, 既没有信号发射出来, 只有完成信号
      */
     @NonNull
-    @HotObservable
-    Observable<Optional<UserInfoBean>> getUserInfo();
+    Maybe<Optional<UserInfoBean>> getUserInfo();
 
     /**
      * 订阅登陆状态.
@@ -40,7 +40,7 @@ public interface UserService {
      */
     @NonNull
     @HotObservable
-    Observable<UserInfoBean> subscribeUser();
+    Observable<Optional<UserInfoBean>> subscribeUser();
 
     /**
      * 获取用户的默认头像 rsd

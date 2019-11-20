@@ -8,21 +8,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.iknow.module.base.FragmentInfo;
+import com.iknow.module.base.InterceptorInfo;
 import com.iknow.module.base.ModuleInfo;
-import com.iknow.module.base.service.user.UserInfoMenuService;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.main.R;
 import com.iknow.module.main.databinding.MainHomeActBinding;
 import com.xiaojinzi.component.anno.RouterAnno;
 import com.xiaojinzi.component.impl.Router;
-import com.xiaojinzi.component.impl.service.ServiceManager;
 
 /**
  * 主界面
  */
 @RouterAnno(
-        path = ModuleInfo.Main.HOME
-        // interceptorNames = InterceptorInfo.USER_LOGIN
+        path = ModuleInfo.Main.HOME,
+        interceptorNames = InterceptorInfo.USER_LOGIN
 )
 public class HomeAct extends BaseAct {
 
@@ -46,12 +45,6 @@ public class HomeAct extends BaseAct {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(mBinding.fl.getId(), homeFragment);
             ft.commit();
-        }
-
-        // 可能为空
-        UserInfoMenuService userInfoMenuService = ServiceManager.get(UserInfoMenuService.class);
-        if (userInfoMenuService != null) {
-
         }
 
     }

@@ -15,6 +15,8 @@ import com.iknow.module.base.service.user.UserService;
 import com.iknow.module.main.R;
 import com.xiaojinzi.component.impl.service.ServiceManager;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+
 public class HomeMenuWidget extends FrameLayout {
 
     public HomeMenuWidget(@NonNull Context context) {
@@ -28,11 +30,21 @@ public class HomeMenuWidget extends FrameLayout {
     public HomeMenuWidget(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         View.inflate(context, R.layout.main_home_menu, this);
+
         iv_user_bg = findViewById(R.id.iv_user_bg);
         iv_user_icon = findViewById(R.id.iv_user_icon);
         tv_name = findViewById(R.id.tv_name);
 
         UserService userService = ServiceManager.get(UserService.class);
+        if (userService != null) {
+            userService.subscribeUser()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(userInfoPresent -> {
+                        userInfoPresent.ifPresent(userInfo -> {
+
+                        });
+                    });
+        }
 
         Glide.with(context)
                 .load("https://i.loli.net/2019/11/19/mwl3x6pYcU7ovhF.png")

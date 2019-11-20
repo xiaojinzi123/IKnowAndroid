@@ -42,6 +42,8 @@ public class UserInfoManager {
     }
 
     public boolean isLogin() {
-        return userInfoSubject.getValue().isPresent();
+        return userInfoSubject.getValue() != null
+                && userInfoSubject.getValue().isPresent();
     }
+
 }

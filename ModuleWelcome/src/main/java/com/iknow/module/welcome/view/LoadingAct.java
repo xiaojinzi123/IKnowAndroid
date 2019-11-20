@@ -48,7 +48,7 @@ public class LoadingAct extends BaseAct<LoadingViewModel> {
                 () -> Router.with(mContext)
                         .host(ModuleInfo.Main.NAME)
                         .path(ModuleInfo.Main.HOME)
-                        .afterJumpAction(() -> finish())
+                        .afterEventAction(() -> finish())
                         .forward()
         );
 
