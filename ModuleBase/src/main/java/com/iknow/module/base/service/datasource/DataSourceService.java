@@ -5,12 +5,24 @@ import androidx.annotation.NonNull;
 import com.iknow.lib.beans.ArticleBean;
 import com.iknow.lib.beans.BannerBean;
 import com.iknow.lib.beans.LoginBean;
+import com.iknow.lib.beans.user.UserInfoBean;
 
 import java.util.List;
 
 import io.reactivex.Single;
 
+/**
+ * 整体架构中的 DataSource 层
+ */
 public interface DataSourceService {
+
+    /**
+     * 获取用户信息
+     *
+     * @param userId 用户ID
+     */
+    @NonNull
+    Single<UserInfoBean> getUser(@NonNull Integer userId);
 
     /**
      * 登陆

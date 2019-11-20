@@ -29,37 +29,11 @@
 
         </RelativeLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.iknow.module.main.view.HomeMenuWidget
                 android:layout_width="match_parent"
+                android:clickable="true"
                 android:layout_height="match_parent"
-                android:layout_gravity="left|start"
-                android:background="#00FF00">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/header"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ui_default_user_wall" />
-
-                <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="@dimen/ui_content_margin"
-                        android:layout_marginBottom="80dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ui_default_user_icon"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_gravity="left|start" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
 
