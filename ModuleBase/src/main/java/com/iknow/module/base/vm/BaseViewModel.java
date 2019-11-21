@@ -5,11 +5,13 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.iknow.module.base.support.CompleableObserverAdapter;
 import com.iknow.module.base.support.ServiceException;
 import com.iknow.module.base.support.SingleObserverAdapter;
 import com.iknow.module.base.view.Tip;
 import com.xiaojinzi.component.support.Utils;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.SingleSource;
@@ -110,7 +112,28 @@ public class BaseViewModel extends AndroidViewModel {
                         error -> {
                             if (adapter.getErrorConsumer() == null) {
                                 normalErrorSolve(error);
-                            }else {
+                            } else {
+                                adapter.getErrorConsumer().accept(error);
+                            }
+                        }
+                );
+        disposables.add(disposable);
+        return disposable;
+    }
+
+    protected <T> Disposable subscribe(@NonNull Completable observable,
+                                       @NonNull CompleableObserverAdapter adapter) {
+        Disposable disposable = observable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(innerDisposable -> loadingSubject.onNext(true))
+                .doFinally(() -> loadingSubject.onNext(false))
+                .subscribe(
+                        () -> adapter.getCompleteAction().run(),
+                        error -> {
+                            if (adapter.getErrorConsumer() == null) {
+                                normalErrorSolve(error);
+                            } else {
                                 adapter.getErrorConsumer().accept(error);
                             }
                         }

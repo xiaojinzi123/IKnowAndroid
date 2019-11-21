@@ -16,6 +16,7 @@ import com.iknow.module.main.R;
 import com.xiaojinzi.component.impl.service.ServiceManager;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class HomeMenuWidget extends FrameLayout {
 
@@ -37,13 +38,14 @@ public class HomeMenuWidget extends FrameLayout {
 
         UserService userService = ServiceManager.get(UserService.class);
         if (userService != null) {
-            userService.subscribeUser()
+            disposables.add(userService.subscribeUser()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(userInfoPresent -> {
                         userInfoPresent.ifPresent(userInfo -> {
-
+                            tv_name.setText(userInfo.getName());
                         });
-                    });
+                    })
+            );
         }
 
         Glide.with(context)
@@ -56,12 +58,18 @@ public class HomeMenuWidget extends FrameLayout {
                 .circleCrop()
                 .into(iv_user_icon);
 
-        tv_name.setText("HomeMenu");
-
     }
 
     private ImageView iv_user_bg;
     private ImageView iv_user_icon;
     private TextView tv_name;
+
+    private CompositeDisposable disposables = new CompositeDisposable();
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        disposables.clear();
+    }
 
 }

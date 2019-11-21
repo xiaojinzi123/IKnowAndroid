@@ -8,12 +8,12 @@ import com.iknow.module.user.R;
 import com.iknow.module.user.UserInfoManager;
 import com.xiaojinzi.component.anno.ServiceAnno;
 
+import java.util.Objects;
 import java.util.Optional;
 
+import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.MaybeSource;
 import io.reactivex.Observable;
-import io.reactivex.functions.Function;
 
 @ServiceAnno(UserService.class)
 public class UserServiceImpl implements UserService {
@@ -57,6 +57,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public int getDefaultUserAvatar() {
         return R.drawable.user_default_avatar;
+    }
+
+    @NonNull
+    @Override
+    public Completable updateUser(@NonNull UserInfoBean userInfoBean) {
+        Objects.nonNull(userInfoBean);
+        return UserInfoManager
+                .getInstance()
+                .updateUser(userInfoBean);
     }
 
 }

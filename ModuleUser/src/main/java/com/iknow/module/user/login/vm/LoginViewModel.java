@@ -5,15 +5,18 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.iknow.lib.beans.LoginBean;
+import com.iknow.lib.beans.user.UserInfoBean;
 import com.iknow.module.base.service.datasource.DataSourceService;
-import com.iknow.module.base.support.SingleObserverAdapter;
+import com.iknow.module.base.service.user.UserService;
+import com.iknow.module.base.support.CompleableObserverAdapter;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.vm.BaseViewModel;
 import com.xiaojinzi.component.impl.service.RxServiceManager;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Action;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
@@ -66,10 +69,21 @@ public class LoginViewModel extends BaseViewModel {
      * 登录的流程
      */
     public void login() {
-        Single<LoginBean> loginObservable = RxServiceManager.with(DataSourceService.class)
-                .flatMap(service -> service.login(mUserName.getValue(), mPassword.getValue()));
-        subscribe(loginObservable, new SingleObserverAdapter<>(result -> {
-            mLoginSuccess.onNext(true);
+
+        Single<UserInfoBean> loginObservable = RxServiceManager.with(DataSourceService.class)
+                .flatMap(service -> service.login(mUserName.getValue(), mPassword.getValue()))
+                .map(item -> new UserInfoBean(item));
+        Single<UserService> userServiceObservable = RxServiceManager.with(UserService.class);
+
+        Completable observable = Single
+                .zip(loginObservable, userServiceObservable, (loginBean, userService) -> userService.updateUser(loginBean))
+                .flatMapCompletable(item -> item);
+
+        subscribe(observable, new CompleableObserverAdapter(new Action() {
+            @Override
+            public void run() throws Exception {
+                mLoginSuccess.onNext(true);
+            }
         }));
     }
 

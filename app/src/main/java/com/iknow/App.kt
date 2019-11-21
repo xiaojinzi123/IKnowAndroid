@@ -8,7 +8,9 @@ import com.xiaojinzi.component.impl.application.ModuleManager
 import com.xiaojinzi.component.support.RxErrorIgnoreUtil
 
 /**
- * time   : 2019/03/27
+ * @TODO: 首页登陆的时候, 拦截登陆对需要销毁的界面不合适. 需要从登陆界面启动
+ * @TODO: ViewModel 由于官方的库, 和 Activity 有关联的 Fragment, Dialog 等获取到的都是同一个对象. 但是BaseAct 和 BaseFragment 都会对loading 和 tip 响应. 需要解决
+ *
  *
  * @author : xiaojinzi 30212
  */

@@ -4,10 +4,11 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 import com.iknow.lib.beans.user.UserInfoBean;
-import com.iknow.module.base.support.HotObservable;
+import com.iknow.module.base.support.HotObservableAnno;
 
 import java.util.Optional;
 
+import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
@@ -30,7 +31,7 @@ public interface UserService {
      * @return 返回一个登陆状态的热信号, 当登陆状态发生变化的时候, 通知出去
      */
     @NonNull
-    @HotObservable
+    @HotObservableAnno
     Observable<Boolean> subscribeLoginState();
 
     /**
@@ -39,7 +40,7 @@ public interface UserService {
      * @return 返回一个热信号, 发射用户的信息
      */
     @NonNull
-    @HotObservable
+    @HotObservableAnno
     Observable<Optional<UserInfoBean>> subscribeUser();
 
     /**
@@ -47,5 +48,11 @@ public interface UserService {
      */
     @DrawableRes
     int getDefaultUserAvatar();
+
+    /**
+     * 更新用户信息
+     */
+    @NonNull
+    Completable updateUser(@NonNull UserInfoBean userInfoBean);
 
 }

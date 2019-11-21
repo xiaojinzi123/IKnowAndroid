@@ -1,10 +1,20 @@
 package com.iknow.lib.beans.user;
 
+import androidx.annotation.NonNull;
+
+import com.iknow.lib.beans.LoginBean;
+
 public class UserInfoBean {
 
     private Integer id;
     private String name;
     private String gender;
+
+    public UserInfoBean(@NonNull LoginBean target) {
+        id = target.getUserId();
+        name = target.getName();
+        gender = target.getGender();
+    }
 
     public int getId() {
         return id;
