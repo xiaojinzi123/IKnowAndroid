@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.iknow.module.base.ModuleInfo;
+import com.iknow.module.base.service.help.HelpService;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.view.inter.IBaseView;
@@ -18,6 +19,7 @@ import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserLoginActBinding;
 import com.iknow.module.user.login.vm.LoginViewModel;
 import com.xiaojinzi.component.anno.RouterAnno;
+import com.xiaojinzi.component.impl.service.RxServiceManager;
 
 import io.reactivex.functions.Consumer;
 

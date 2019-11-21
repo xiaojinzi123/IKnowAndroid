@@ -22,7 +22,7 @@ public interface UserService {
      * 获取用户信息, 可能为空, 既没有信号发射出来, 只有完成信号
      */
     @NonNull
-    Maybe<Optional<UserInfoBean>> getUserInfo();
+    Maybe<UserInfoBean> getUserInfo();
 
     /**
      * 订阅登陆状态.

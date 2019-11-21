@@ -10,7 +10,10 @@ import com.xiaojinzi.component.anno.ServiceAnno;
 
 import java.util.Optional;
 
+import io.reactivex.Maybe;
+import io.reactivex.MaybeSource;
 import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 
 @ServiceAnno(UserService.class)
 public class UserServiceImpl implements UserService {
@@ -22,8 +25,16 @@ public class UserServiceImpl implements UserService {
 
     @NonNull
     @Override
-    public Observable<Optional<UserInfoBean>> getUserInfo() {
-        return UserInfoManager.getInstance().subscribeUserInfo();
+    public Maybe<UserInfoBean> getUserInfo() {
+        return UserInfoManager.getInstance().subscribeUserInfo()
+                .firstOrError()
+                .flatMapMaybe(userInfoBeanOptional -> {
+                    if (userInfoBeanOptional.isPresent()) {
+                        return Maybe.just(userInfoBeanOptional.get());
+                    }else {
+                        return Maybe.empty();
+                    }
+                });
     }
 
     @NonNull
@@ -37,8 +48,10 @@ public class UserServiceImpl implements UserService {
 
     @NonNull
     @Override
-    public Observable<UserInfoBean> subscribeUser() {
-        return null;
+    public Observable<Optional<UserInfoBean>> subscribeUser() {
+        return UserInfoManager
+                .getInstance()
+                .subscribeUserInfo();
     }
 
     @Override
