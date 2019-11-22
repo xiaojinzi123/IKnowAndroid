@@ -73,6 +73,11 @@ public class UserServiceImpl implements UserService {
         return R.drawable.user_default_avatar;
     }
 
+    @Override
+    public int getDefaultUserBg() {
+        return R.drawable.user_default_background;
+    }
+
     @NonNull
     @Override
     public Completable updateUserAndToken(@NonNull String token, @NonNull UserInfoBean userInfoBean) {

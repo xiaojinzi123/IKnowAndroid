@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion versions.android_compile_sdk
@@ -10,6 +11,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [HOST: "base"]
+            }
+        }
     }
 
     compileOptions {
@@ -47,9 +53,6 @@ dependencies {
     api libs.design
     // glide
     api libs.glide
-    annotationProcessor libs.glide_compiler
-
-    api libs.component_impl_rx
     api libs.lifecycle_extensions
     api libs.room
     api libs.room_rxjava2
@@ -59,6 +62,11 @@ dependencies {
     api libs.databinding
     api libs.retrofit2_converter_gson
     api libs.retrofit2_rxjava2_adapter
+
+    // 组件化
+    kapt libs.component_compiler
+    api libs.component_impl_rx
+
     api project(':ModuleBeans')
     api project(':LibResource')
     api project(':LibTools')

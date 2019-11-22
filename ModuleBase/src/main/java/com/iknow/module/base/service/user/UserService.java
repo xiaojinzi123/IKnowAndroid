@@ -59,6 +59,12 @@ public interface UserService {
     int getDefaultUserAvatar();
 
     /**
+     * 获取用户的默认背景图
+     */
+    @DrawableRes
+    int getDefaultUserBg();
+
+    /**
      * 更新 Token
      */
     @NonNull

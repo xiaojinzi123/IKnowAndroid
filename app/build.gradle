@@ -42,6 +42,7 @@ android {
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    kapt libs.glide_compiler
     kapt libs.component_compiler
 
     implementation project(':ModuleBase')

@@ -22,6 +22,7 @@ class App : MultiDexApplication() {
         // 初始化组件化
         Component.init(this, BuildConfig.DEBUG)
         ModuleManager.getInstance().registerArr(
+            ModuleInfo.Base.NAME,
             ModuleInfo.App.NAME,
             ModuleInfo.Datasource.NAME,
             ModuleInfo.Welcome.NAME,

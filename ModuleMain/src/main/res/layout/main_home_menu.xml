@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ui_default_user_wall" />
+                tools:src="@drawable/ui_default_user_wall" />
 
         <ImageView
                 android:id="@+id/iv_user_icon"
@@ -27,18 +27,18 @@
                 android:layout_marginStart="@dimen/ui_content_margin"
                 android:layout_marginBottom="80dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ui_default_user_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@drawable/ui_default_user_icon" />
 
         <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textAllCaps="false"
                 android:textColor="@color/resource_white"
                 android:textSize="18dp"
-                android:textAllCaps="false"
-                android:layout_marginStart="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_user_icon"
                 app:layout_constraintStart_toEndOf="@+id/iv_user_icon"
                 tools:text="@string/resource_home" />

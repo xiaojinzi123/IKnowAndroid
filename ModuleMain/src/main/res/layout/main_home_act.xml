@@ -30,6 +30,7 @@
         </RelativeLayout>
 
         <com.iknow.module.main.view.HomeMenuWidget
+                android:id="@+id/widget_home_menu"
                 android:layout_width="match_parent"
                 android:clickable="true"
                 android:layout_height="match_parent"

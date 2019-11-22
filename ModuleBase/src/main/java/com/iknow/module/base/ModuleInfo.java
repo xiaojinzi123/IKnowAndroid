@@ -15,6 +15,18 @@ public class ModuleInfo {
     public static final String HTTPS_SCHEME = "https";
 
     /**
+     * Base 模块
+     */
+    public static class Base {
+
+        /**
+         * 名称
+         */
+        public static final String NAME = "base";
+
+    }
+
+    /**
      * App 模块
      */
     public static class App {
