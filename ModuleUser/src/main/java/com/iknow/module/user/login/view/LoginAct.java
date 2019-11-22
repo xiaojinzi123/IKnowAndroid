@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.iknow.module.base.ModuleInfo;
-import com.iknow.module.base.service.help.HelpService;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.view.inter.IBaseView;
@@ -18,8 +17,9 @@ import com.iknow.module.base.widget.TextWatcherAdapter;
 import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserLoginActBinding;
 import com.iknow.module.user.login.vm.LoginViewModel;
+import com.xiaojinzi.component.anno.FiledAutowiredAnno;
 import com.xiaojinzi.component.anno.RouterAnno;
-import com.xiaojinzi.component.impl.service.RxServiceManager;
+import com.xiaojinzi.component.impl.Router;
 
 import io.reactivex.functions.Consumer;
 
@@ -30,6 +30,13 @@ import io.reactivex.functions.Consumer;
         path = ModuleInfo.User.LOGIN
 )
 public class LoginAct extends BaseAct<LoginViewModel> {
+
+    /**
+     * 0 表示跳转过来是登陆的, 并且返回 {@link Activity#RESULT_OK}
+     * 1 表示启动登陆, 会跳转到主页
+     */
+    @FiledAutowiredAnno("businessType")
+    int businessType = 0;
 
     private UserLoginActBinding mBinding;    // DataBinding 对象
 
@@ -113,7 +120,7 @@ public class LoginAct extends BaseAct<LoginViewModel> {
 
         subscibeUi(
                 mViewModel.loginSuccessObservable(),
-                b -> returnData()
+                b -> onLoginSuccess()
         );
 
     }
@@ -129,10 +136,18 @@ public class LoginAct extends BaseAct<LoginViewModel> {
     private void initTabLayout() {
     }
 
-    private void returnData() {
-        Intent intent = new Intent();
-        setResult(Activity.RESULT_OK, intent);
-        finish();
+    private void onLoginSuccess() {
+
+        if (businessType == 1) {
+            Router.with(this)
+                    .host(ModuleInfo.Main.NAME)
+                    .path(ModuleInfo.Main.HOME)
+                    .forward();
+        }else {
+            Intent intent = new Intent();
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+        }
 
         /*RxServiceManager.with(HelpService.class)
                 .flatMap(item -> item.phoneCheck(this))

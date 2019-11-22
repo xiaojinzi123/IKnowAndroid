@@ -46,8 +46,9 @@ public class LoadingAct extends BaseAct<LoadingViewModel> {
         subscibeUi(
                 mViewModel.countdownObservable(),
                 () -> Router.with(mContext)
-                        .host(ModuleInfo.Main.NAME)
-                        .path(ModuleInfo.Main.HOME)
+                        .host(ModuleInfo.User.NAME)
+                        .path(ModuleInfo.User.LOGIN)
+                        .putInt("businessType", 1)
                         .afterEventAction(() -> finish())
                         .forward()
         );

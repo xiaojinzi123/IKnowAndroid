@@ -49,7 +49,7 @@ public class LoginInterceptor implements RouterInterceptor {
                     .path(ModuleInfo.User.LOGIN)
                     .requestCodeRandom()
                     // 匹配目标界面返回的 ResultCode
-                    .navigateForResultCodeMatch(new CallbackAdapter() {
+                    .forwardForResultCodeMatch(new CallbackAdapter() {
                         @Override
                         public void onSuccess(@NonNull RouterResult result) {
                             chain.proceed(chain.request());
@@ -60,7 +60,6 @@ public class LoginInterceptor implements RouterInterceptor {
                             chain.callback().onError(new Exception("login fail"));
                         }
                     }, Activity.RESULT_OK);
-
         }
     }
 

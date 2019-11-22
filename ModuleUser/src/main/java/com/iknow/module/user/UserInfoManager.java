@@ -1,12 +1,14 @@
 package com.iknow.module.user;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.iknow.lib.beans.user.UserInfoBean;
-import com.iknow.module.base.support.HotObservable;
+import com.iknow.module.base.support.HotObservableAnno;
 
 import java.util.Optional;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
 
@@ -36,7 +38,7 @@ public class UserInfoManager {
      * 订阅一个用户信息
      */
     @NonNull
-    @HotObservable
+    @HotObservableAnno
     public Observable<Optional<UserInfoBean>> subscribeUserInfo() {
         return userInfoSubject;
     }
@@ -44,6 +46,13 @@ public class UserInfoManager {
     public boolean isLogin() {
         return userInfoSubject.getValue() != null
                 && userInfoSubject.getValue().isPresent();
+    }
+
+    @NonNull
+    public Completable updateUser(@Nullable UserInfoBean userInfoBean) {
+        return Completable.fromAction(() -> {
+            userInfoSubject.onNext(Optional.of(userInfoBean));
+        });
     }
 
 }

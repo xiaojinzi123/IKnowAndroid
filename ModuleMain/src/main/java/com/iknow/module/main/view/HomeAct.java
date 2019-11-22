@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.iknow.module.base.FragmentInfo;
-import com.iknow.module.base.InterceptorInfo;
 import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.main.R;
@@ -20,8 +19,7 @@ import com.xiaojinzi.component.impl.Router;
  * 主界面
  */
 @RouterAnno(
-        path = ModuleInfo.Main.HOME,
-        interceptorNames = InterceptorInfo.USER_LOGIN
+        path = ModuleInfo.Main.HOME
 )
 public class HomeAct extends BaseAct {
 

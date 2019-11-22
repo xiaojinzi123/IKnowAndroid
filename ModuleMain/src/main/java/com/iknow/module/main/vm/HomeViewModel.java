@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import com.iknow.lib.beans.ArticleBean;
 import com.iknow.lib.beans.BannerBean;
 import com.iknow.module.base.service.datasource.DataSourceService;
-import com.iknow.module.base.support.HotObservable;
+import com.iknow.module.base.support.HotObservableAnno;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.vm.BaseViewModel;
 import com.xiaojinzi.component.impl.service.RxServiceManager;
@@ -52,12 +52,12 @@ public class HomeViewModel extends BaseViewModel {
         );
     }
 
-    @HotObservable("banner数据")
+    @HotObservableAnno("banner数据")
     public Observable<List<BannerBean>> getBannerSubject() {
         return bannerSubject;
     }
 
-    @HotObservable("文章列表数据")
+    @HotObservableAnno("文章列表数据")
     public Observable<List<ArticleBean>> getArticleSubject() {
         return articleSubject;
     }

@@ -5,10 +5,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.SOURCE)
-@Target({ElementType.METHOD, ElementType.FIELD})
-public @interface HotObservable {
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE})
+public @interface SubscribeLoadingAnno {
 
-    String value() default "";
+    /**
+     * 是否订阅加载框
+     */
+    boolean value() default true;
 
 }

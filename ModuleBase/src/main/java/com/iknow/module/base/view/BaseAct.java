@@ -3,6 +3,7 @@ package com.iknow.module.base.view;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -12,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.iknow.module.base.support.SubscribeLoadingAnno;
+import com.iknow.module.base.support.SubscribeTipAnno;
 import com.iknow.module.base.view.inter.BaseViewImpl;
 import com.iknow.module.base.view.inter.IBaseView;
 import com.iknow.module.base.vm.BaseViewModel;
@@ -99,18 +103,24 @@ public abstract class BaseAct<VM extends BaseViewModel> extends AppCompatActivit
     protected void onInit() {
         Component.inject(this);
         if (mViewModel != null) {
-            subscibeUi(mViewModel.loadingObservable(), isLoading -> {
-                if (isLoading && mView != null) {
-                    mView.showProgress();
-                } else {
-                    mView.closeProgress();
-                }
-            });
-            subscibeUi(mViewModel.tipObservable(), tip -> {
-                if (mView != null) {
-                    mView.tip(tip);
-                }
-            });
+            SubscribeLoadingAnno subscribeLoadingAnno = this.getClass().getAnnotation(SubscribeLoadingAnno.class);
+            if (subscribeLoadingAnno == null || subscribeLoadingAnno.value()) {
+                subscibeUi(mViewModel.loadingObservable(), isLoading -> {
+                    if (isLoading && mView != null) {
+                        mView.showProgress();
+                    } else {
+                        mView.closeProgress();
+                    }
+                });
+            }
+            SubscribeTipAnno subscribeTipAnno = this.getClass().getAnnotation(SubscribeTipAnno.class);
+            if (subscribeTipAnno == null || subscribeTipAnno.value()) {
+                subscibeUi(mViewModel.tipObservable(), tip -> {
+                    if (mView != null) {
+                        mView.tip(tip);
+                    }
+                });
+            }
         }
     }
 
