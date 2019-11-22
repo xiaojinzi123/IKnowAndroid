@@ -25,12 +25,26 @@ public class UserServiceImpl implements UserService {
 
     @NonNull
     @Override
+    public Maybe<String> getToken() {
+        return UserInfoManager.getInstance().subscribeToken()
+                .firstOrError()
+                .flatMapMaybe(item -> {
+                    if (item.isPresent()) {
+                        return Maybe.just(item.get());
+                    }else {
+                        return Maybe.empty();
+                    }
+                });
+    }
+
+    @NonNull
+    @Override
     public Maybe<UserInfoBean> getUserInfo() {
         return UserInfoManager.getInstance().subscribeUserInfo()
                 .firstOrError()
-                .flatMapMaybe(userInfoBeanOptional -> {
-                    if (userInfoBeanOptional.isPresent()) {
-                        return Maybe.just(userInfoBeanOptional.get());
+                .flatMapMaybe(item -> {
+                    if (item.isPresent()) {
+                        return Maybe.just(item.get());
                     }else {
                         return Maybe.empty();
                     }
@@ -57,6 +71,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public int getDefaultUserAvatar() {
         return R.drawable.user_default_avatar;
+    }
+
+    @NonNull
+    @Override
+    public Completable updateUserAndToken(@NonNull String token, @NonNull UserInfoBean userInfoBean) {
+        Objects.nonNull(token);
+        Objects.nonNull(userInfoBean);
+        return UserInfoManager
+                .getInstance()
+                .updateUserAndToken(token, userInfoBean);
     }
 
     @NonNull

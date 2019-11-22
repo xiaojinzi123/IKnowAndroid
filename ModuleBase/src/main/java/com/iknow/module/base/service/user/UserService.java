@@ -23,7 +23,13 @@ public interface UserService {
     boolean isLogin();
 
     /**
-     * 获取用户信息, 可能为空, 既没有信号发射出来, 只有完成信号
+     * 获取 Token, 可能为空信号, 既没有信号发射出来, 只有完成信号
+     */
+    @NonNull
+    Maybe<String> getToken();
+
+    /**
+     * 获取用户信息, 可能为空信号, 既没有信号发射出来, 只有完成信号
      */
     @NonNull
     Maybe<UserInfoBean> getUserInfo();
@@ -51,6 +57,12 @@ public interface UserService {
      */
     @DrawableRes
     int getDefaultUserAvatar();
+
+    /**
+     * 更新 Token
+     */
+    @NonNull
+    Completable updateUserAndToken(@NonNull String token, @NonNull UserInfoBean userInfoBean);
 
     /**
      * 更新用户信息

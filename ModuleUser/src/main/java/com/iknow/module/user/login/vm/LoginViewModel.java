@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
+import com.iknow.lib.beans.LoginBean;
 import com.iknow.lib.beans.user.UserInfoBean;
 import com.iknow.module.base.service.datasource.DataSourceService;
 import com.iknow.module.base.service.user.UserService;
@@ -70,21 +71,19 @@ public class LoginViewModel extends BaseViewModel {
      */
     public void login() {
 
-        Single<UserInfoBean> loginObservable = RxServiceManager.with(DataSourceService.class)
-                .flatMap(service -> service.login(mUserName.getValue(), mPassword.getValue()))
-                .map(item -> new UserInfoBean(item));
+        Single<LoginBean> loginObservable = RxServiceManager.with(DataSourceService.class)
+                .flatMap(service -> service.login(mUserName.getValue(), mPassword.getValue()));
+
         Single<UserService> userServiceObservable = RxServiceManager.with(UserService.class);
 
         Completable observable = Single
-                .zip(loginObservable, userServiceObservable, (loginBean, userService) -> userService.updateUser(loginBean))
+                .zip(loginObservable, userServiceObservable, (loginBean, userService) -> userService.updateUserAndToken(loginBean.getToken(), loginBean.getUserInfo()))
                 .flatMapCompletable(item -> item);
 
-        subscribe(observable, new CompleableObserverAdapter(new Action() {
-            @Override
-            public void run() throws Exception {
-                mLoginSuccess.onNext(true);
-            }
-        }));
+        subscribe(observable, new CompleableObserverAdapter(
+                () -> mLoginSuccess.onNext(true))
+        );
+
     }
 
     public Observable<String> userName() {

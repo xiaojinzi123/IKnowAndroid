@@ -41,7 +41,7 @@ public interface IknowApi {
     );
 
     @RemoveShell
-    @GET("user/{id}")
+    @GET("user/fullInfo/{id}")
     Single<UserInfoBean> getUser(@Path("id") Integer userId);
 
 }

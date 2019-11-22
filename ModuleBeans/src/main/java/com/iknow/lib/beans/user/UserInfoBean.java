@@ -1,26 +1,18 @@
 package com.iknow.lib.beans.user;
 
-import androidx.annotation.NonNull;
-
-import com.iknow.lib.beans.LoginBean;
-
 public class UserInfoBean {
 
     private Integer id;
     private String name;
     private String gender;
+    private String avatar;
+    private String backgroundUrl;
 
-    public UserInfoBean(@NonNull LoginBean target) {
-        id = target.getUserId();
-        name = target.getName();
-        gender = target.getGender();
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,6 +30,22 @@ public class UserInfoBean {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getBackgroundUrl() {
+        return backgroundUrl;
+    }
+
+    public void setBackgroundUrl(String backgroundUrl) {
+        this.backgroundUrl = backgroundUrl;
     }
 
 }
