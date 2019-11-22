@@ -11,6 +11,9 @@ import java.util.Optional;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
+/**
+ * 用户的 Service
+ */
 public interface UserService {
 
     /**
