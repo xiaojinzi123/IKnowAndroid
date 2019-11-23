@@ -33,11 +33,13 @@ public class LoginInterceptor implements RouterInterceptor {
         UserService userService = ServiceManager.get(UserService.class);
         if (userService == null) {
             chain.callback().onError(new ServiceNotFoundException("can't found UserService"));
+            // TODO: 2019/11/23 return不需要了，下面已经没有可执行的代码了
             return;
         } else if (userService.isLogin()) {
             // 可以直接操作 Ui, 因为拦截器的线程在主线程
             // Toast.makeText(context, "已经登录,正在帮您跳转", Toast.LENGTH_SHORT).show();
             chain.proceed(chain.request());
+            // TODO: 2019/11/23 return不需要了，下面已经没有可执行的代码了
             return;
         } else {
             // 可以直接操作 Ui, 因为拦截器的线程在主线程

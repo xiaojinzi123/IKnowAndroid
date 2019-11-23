@@ -2,29 +2,25 @@ package com.iknow.module.user.login.vm;
 
 import android.app.Application;
 import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
-
 import com.iknow.lib.beans.LoginBean;
-import com.iknow.lib.beans.user.UserInfoBean;
 import com.iknow.module.base.service.datasource.DataSourceService;
 import com.iknow.module.base.service.user.UserService;
 import com.iknow.module.base.support.CompleableObserverAdapter;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.vm.BaseViewModel;
 import com.xiaojinzi.component.impl.service.RxServiceManager;
-
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Action;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
 
 /**
  * desc:
- * auth: 32052
+ *
+ * @author: 32052
  * time: 2019/4/25
  */
 public class LoginViewModel extends BaseViewModel {
@@ -32,11 +28,15 @@ public class LoginViewModel extends BaseViewModel {
     private BehaviorSubject<String> mUserName = BehaviorSubject.createDefault("");
     private BehaviorSubject<String> mPassword = BehaviorSubject.createDefault("");
 
-    // 账号清楚图标是否显示
-    private Subject<Boolean> mUserNameVisiable = BehaviorSubject.createDefault(false);
-    private Subject<Boolean> mPasswordVisiable = BehaviorSubject.createDefault(false);
+    /**
+     * 账号清楚图标是否显示
+     */
+    private Subject<Boolean> mUserNameVisible = BehaviorSubject.createDefault(false);
+    private Subject<Boolean> mPasswordVisible = BehaviorSubject.createDefault(false);
 
-    // 登录按钮是否有用
+    /**
+     * 登录按钮是否有用
+     */
     private Subject<Boolean> mCommitEnable = BehaviorSubject.createDefault(false);
 
     /**
@@ -48,11 +48,11 @@ public class LoginViewModel extends BaseViewModel {
         super(application);
 
         disposables.add(
-                mUserName.map(s -> !TextUtils.isEmpty(s)).subscribe(b -> mUserNameVisiable.onNext(b))
+                mUserName.map(s -> !TextUtils.isEmpty(s)).subscribe(b -> mUserNameVisible.onNext(b))
         );
 
         disposables.add(
-                mPassword.map(s -> !TextUtils.isEmpty(s)).subscribe(b -> mPasswordVisiable.onNext(b))
+                mPassword.map(s -> !TextUtils.isEmpty(s)).subscribe(b -> mPasswordVisible.onNext(b))
         );
 
         disposables.add(
@@ -95,11 +95,11 @@ public class LoginViewModel extends BaseViewModel {
     }
 
     public Observable<Boolean> userNameClearViewObservable() {
-        return mUserNameVisiable;
+        return mUserNameVisible;
     }
 
     public Observable<Boolean> passwordClearViewObservable() {
-        return mPasswordVisiable;
+        return mPasswordVisible;
     }
 
     public Observable<Boolean> canCommitObservable() {

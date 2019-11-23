@@ -43,6 +43,10 @@ public class ModuleInfo {
         public static final String NAME = "user";
         // 登陆界面
         public static final String LOGIN = "login";
+        /**
+         * 注册界面
+         */
+        public static final String LOGIN_REGISTER = "login_register";
 
     }
 

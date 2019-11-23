@@ -1,8 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.iknow.module.user">
+
     <application>
+        <activity android:name=".login.view.RegisterActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/Theme.Design.Light"
+                  android:label="@string/login_register_title"
+                  android:launchMode="singleTop"/>
+
         <meta-data
                 android:name="host_user"
-                android:value="user" />
+                android:value="user"/>
     </application>
+
 </manifest>

@@ -5,16 +5,10 @@ import com.iknow.lib.beans.BannerBean;
 import com.iknow.lib.beans.LoginBean;
 import com.iknow.lib.beans.user.UserInfoBean;
 import com.iknow.module.datasource.network.support.RemoveShell;
+import io.reactivex.Single;
+import retrofit2.http.*;
 
 import java.util.List;
-
-import io.reactivex.Single;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * 项目的接口文件
@@ -37,6 +31,14 @@ public interface IknowApi {
     @POST("user/login")
     Single<LoginBean> login(
             @Field("userName") String userName,
+            @Field("password") String password
+    );
+
+    @RemoveShell
+    @FormUrlEncoded
+    @POST("user/register")
+    Single<LoginBean> register(
+            @Field("phone") String phone,
             @Field("password") String password
     );
 
