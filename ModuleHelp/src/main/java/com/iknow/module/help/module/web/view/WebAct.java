@@ -1,4 +1,4 @@
-package com.iknow.module.help.web.view;
+package com.iknow.module.help.module.web.view;
 
 import android.text.TextUtils;
 import android.view.View;
@@ -10,7 +10,7 @@ import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.help.R;
 import com.iknow.module.help.databinding.HelpWebActBinding;
-import com.iknow.module.help.web.vm.WebViewModel;
+import com.iknow.module.help.module.web.vm.WebViewModel;
 import com.xiaojinzi.component.anno.FiledAutowiredAnno;
 import com.xiaojinzi.component.anno.RouterAnno;
 

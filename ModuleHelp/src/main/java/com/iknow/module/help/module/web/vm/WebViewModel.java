@@ -1,4 +1,4 @@
-package com.iknow.module.help.web.vm;
+package com.iknow.module.help.module.web.vm;
 
 import android.app.Application;
 

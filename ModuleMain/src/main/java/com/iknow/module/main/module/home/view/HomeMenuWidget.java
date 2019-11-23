@@ -44,6 +44,7 @@ public class HomeMenuWidget extends FrameLayout {
         tv_name = findViewById(R.id.tv_name);
         cl_header = findViewById(R.id.cl_header);
         ll_setting = findViewById(R.id.ll_setting);
+        ll_address = findViewById(R.id.ll_address);
 
         cl_header.setOnClickListener( view -> {
             Router.with(context)
@@ -59,6 +60,13 @@ public class HomeMenuWidget extends FrameLayout {
                     .forward();
         });
 
+        ll_address.setOnClickListener( view -> {
+            Router.with(context)
+                    .host(ModuleInfo.Help.NAME)
+                    .path(ModuleInfo.Help.ADDRESS_SELECT)
+                    .forward();
+        });
+
         init(context);
 
     }
@@ -68,6 +76,7 @@ public class HomeMenuWidget extends FrameLayout {
     private TextView tv_name;
     private ConstraintLayout cl_header;
     private LinearLayout ll_setting;
+    private LinearLayout ll_address;
 
     private CompositeDisposable disposables = new CompositeDisposable();
 

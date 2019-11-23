@@ -3,10 +3,13 @@
         package="com.iknow.module.help">
 
     <application>
+        <activity android:name=".module.area.view.AddressSelectAct"></activity>
+
         <meta-data
                 android:name="host_help"
                 android:value="help" />
-        <activity android:name=".web.view.WebAct" />
+
+        <activity android:name=".module.web.view.WebAct" />
     </application>
 
 </manifest>
