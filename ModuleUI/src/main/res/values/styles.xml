@@ -43,4 +43,22 @@
         <item name="android:windowExitAnimation">@anim/ui_loading_dialog_exit_anim</item>
     </style>
 
+    <!--按钮统一样式-->
+    <style name="Common_Button_Style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/d_100</item>
+        <item name="android:textSize">@dimen/spx_36</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/ui_button_selector</item>
+        <item name="android:textColor">@color/resource_white</item>
+        <item name="android:layout_marginLeft">@dimen/d_30</item>
+        <item name="android:layout_marginRight">@dimen/d_30</item>
+    </style>
+
+    <style name="Login_TextInputLayout_Style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/d_32</item>
+        <item name="android:layout_marginRight">@dimen/d_32</item>
+    </style>
 </resources>

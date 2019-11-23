@@ -1,20 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
-
-    <dimen name="resource_2">2dp</dimen>
-    <dimen name="resource_4">4dp</dimen>
-    <dimen name="resource_6">6dp</dimen>
-    <dimen name="resource_8">8dp</dimen>
-    <dimen name="resource_10">10dp</dimen>
-    <dimen name="resource_14">14dp</dimen>
-    <dimen name="resource_16">16dp</dimen>
-    <dimen name="resource_18">18dp</dimen>
-    <dimen name="resource_20">20dp</dimen>
-    <dimen name="resource_26">26dp</dimen>
-    <dimen name="resource_32">32dp</dimen>
-    <dimen name="resource_45">45dp</dimen>
-
-    <dimen name="divider">1px</dimen>
     <dimen name="card_common_margin_left">@dimen/d_15</dimen>
     <dimen name="d_m_60">-30.00dp</dimen>
     <dimen name="d_m_30">-15.00dp</dimen>
@@ -545,37 +530,4 @@
     <dimen name="d_810">405.00dp</dimen>
     <dimen name="d_848">424.00dp</dimen>
 
-    <dimen name="sp_11">11sp</dimen>
-    <dimen name="sp_12">12sp</dimen>
-    <dimen name="sp_13">13sp</dimen>
-    <dimen name="sp_14">14sp</dimen>
-    <dimen name="sp_15">15sp</dimen>
-    <dimen name="sp_16">16sp</dimen>
-    <dimen name="sp_17">17sp</dimen>
-    <dimen name="sp_18">18sp</dimen>
-    <dimen name="sp_20">20sp</dimen>
-
-    <dimen name="spx_12">6.00sp</dimen>
-    <dimen name="spx_14">7.00sp</dimen>
-    <dimen name="spx_16">8.00sp</dimen>
-    <dimen name="spx_18">9.00sp</dimen>
-    <dimen name="spx_20">10.00sp</dimen>
-    <dimen name="spx_22">11.00sp</dimen>
-    <dimen name="spx_23">11.50sp</dimen>
-    <dimen name="spx_24">12.00sp</dimen>
-    <dimen name="spx_26">13.00sp</dimen>
-    <dimen name="spx_28">14.00sp</dimen>
-    <dimen name="spx_30">15.00sp</dimen>
-    <dimen name="spx_32">16.00sp</dimen>
-    <dimen name="spx_34">17.00sp</dimen>
-    <dimen name="spx_36">18.00sp</dimen>
-    <dimen name="spx_38">19.00sp</dimen>
-    <dimen name="spx_40">20.00sp</dimen>
-    <dimen name="spx_42">21.00sp</dimen>
-    <dimen name="spx_44">22.00sp</dimen>
-    <dimen name="spx_46">23.00sp</dimen>
-    <dimen name="spx_48">24.00sp</dimen>
-    <dimen name="spx_70">35.00sp</dimen>
-    <dimen name="spx_82">41.00sp</dimen>
-    <dimen name="spx_90">45.00sp</dimen>
 </resources>

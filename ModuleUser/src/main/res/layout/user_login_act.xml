@@ -5,19 +5,20 @@
         tools:ignore="MissingDefaultResource">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/view_root"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="top"
-            android:orientation="vertical">
+                  android:id="@+id/view_root"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="top"
+                  android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
+                android:visibility="gone"
                 app:navigationIcon="@null"
-                app:title="@string/resource_login" />
+                app:title="@string/resource_login"/>
 
         <ImageView
                 android:layout_width="80dp"
@@ -26,7 +27,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="30dp"
-                android:src="@drawable/ui_logo" />
+                android:src="@drawable/ui_logo"/>
 
         <RelativeLayout
                 android:layout_width="match_parent"
@@ -45,7 +46,7 @@
                     android:maxLines="1"
                     android:text=""
                     android:textSize="@dimen/ui_text_normal"
-                    tools:text="123123" />
+                    tools:text="123123"/>
 
             <ImageView
                     android:id="@+id/iv_username_clear"
@@ -55,7 +56,7 @@
                     android:layout_alignBottom="@+id/et_username"
                     android:layout_marginBottom="@dimen/resource_10"
                     android:padding="@dimen/resource_2"
-                    android:src="@drawable/resource_close" />
+                    android:src="@drawable/resource_close"/>
 
             <EditText
                     android:id="@+id/et_password"
@@ -68,7 +69,7 @@
                     android:maxLines="1"
                     android:text=""
                     android:textSize="@dimen/ui_text_normal"
-                    tools:text="123123" />
+                    tools:text="123123"/>
 
             <ImageView
                     android:id="@+id/iv_password_clear"
@@ -78,7 +79,7 @@
                     android:layout_alignBottom="@+id/et_password"
                     android:layout_marginBottom="@dimen/resource_10"
                     android:padding="@dimen/resource_2"
-                    android:src="@drawable/resource_close" />
+                    android:src="@drawable/resource_close"/>
 
             <TextView
                     android:id="@+id/tv_error"
@@ -89,7 +90,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/resource_red"
                     android:textSize="14dp"
-                    tools:text="用户名不存在" />
+                    tools:text="用户名不存在"/>
 
             <Button
                     android:id="@+id/btn_login"
@@ -97,9 +98,19 @@
                     android:layout_height="50dp"
                     android:layout_below="@+id/tv_error"
                     android:layout_margin="10dp"
-                    android:text="登录" />
+                    android:text="登录"/>
 
         </RelativeLayout>
+
+        <TextView
+                android:id="@+id/login_register_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ui_text1"
+                android:textSize="16sp"
+                android:padding="5dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/login_register_text"/>
 
     </LinearLayout>
 

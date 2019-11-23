@@ -1,15 +1,13 @@
 package com.iknow.module.base.service.datasource;
 
 import androidx.annotation.NonNull;
-
 import com.iknow.lib.beans.ArticleBean;
 import com.iknow.lib.beans.BannerBean;
 import com.iknow.lib.beans.LoginBean;
 import com.iknow.lib.beans.user.UserInfoBean;
+import io.reactivex.Single;
 
 import java.util.List;
-
-import io.reactivex.Single;
 
 /**
  * 整体架构中的 DataSource 层
@@ -32,6 +30,15 @@ public interface DataSourceService {
      */
     @NonNull
     Single<LoginBean> login(@NonNull String userName, @NonNull String password);
+
+    /**
+     * 注册
+     *
+     * @param phoneNum 手机号码
+     * @param userName 用户昵称
+     * @return 登录成功
+     */
+    Single<LoginBean> register(@NonNull String phoneNum, @NonNull String userName);
 
     /**
      * 获取banner 的数据

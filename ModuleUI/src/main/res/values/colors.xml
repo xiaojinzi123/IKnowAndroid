@@ -19,4 +19,8 @@
     <color name="button_primary">@color/ui_primary</color>
     <color name="button_disabled">@color/ui_disabled</color>
 
+    <!--黑色字体颜色-->
+    <color name="color_text1">#000000</color>
+    <color name="color_text2">#99000000</color>
+    <color name="color_text3">#59000000</color>
 </resources>

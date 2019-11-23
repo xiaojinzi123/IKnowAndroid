@@ -3,7 +3,14 @@
         package="com.iknow.module.user">
 
     <application>
-        <activity android:name=".edit.view.UserInfoEditAct"></activity>
+        <activity android:name=".edit.view.UserInfoEditAct" />
+
+        <activity
+                android:name=".login.view.RegisterActivity"
+                android:label="@string/login_register_title"
+                android:launchMode="singleTop"
+                android:screenOrientation="portrait"
+                android:theme="@style/Theme.Design.Light" />
 
         <meta-data
                 android:name="host_user"

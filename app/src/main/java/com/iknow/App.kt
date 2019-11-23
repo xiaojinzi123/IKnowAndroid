@@ -1,10 +1,13 @@
 package com.iknow
 
+import android.app.Activity
+import android.os.Bundle
 import androidx.multidex.MultiDexApplication
 import com.iknow.lib.tools.ToolsConfig
 import com.iknow.module.base.ModuleInfo
 import com.xiaojinzi.component.Component
 import com.xiaojinzi.component.impl.application.ModuleManager
+import com.xiaojinzi.component.support.LogUtil
 import com.xiaojinzi.component.support.RxErrorIgnoreUtil
 
 /**
@@ -35,6 +38,32 @@ class App : MultiDexApplication() {
         // 初始化各个基础库
         ToolsConfig.init(this, BuildConfig.DEBUG)
 
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+            override fun onActivityPaused(activity: Activity?) {
+            }
+
+            override fun onActivityResumed(activity: Activity?) {
+                if (activity != null) {
+                    LogUtil.log("ljl", "activity:" + activity.localClassName)
+                }
+            }
+
+            override fun onActivityStarted(activity: Activity?) {
+            }
+
+            override fun onActivityDestroyed(activity: Activity?) {
+            }
+
+            override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
+            }
+
+            override fun onActivityStopped(activity: Activity?) {
+            }
+
+            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
+            }
+
+        })
     }
 
 }

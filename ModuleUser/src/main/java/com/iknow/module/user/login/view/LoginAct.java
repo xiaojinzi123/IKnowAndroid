@@ -3,12 +3,14 @@ package com.iknow.module.user.login.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import androidx.appcompat.app.ActionBar;
 import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.base.view.Tip;
@@ -16,6 +18,7 @@ import com.iknow.module.base.view.inter.IBaseView;
 import com.iknow.module.base.widget.TextWatcherAdapter;
 import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserLoginActBinding;
+import com.iknow.module.user.login.constants.LoginConstants;
 import com.iknow.module.user.login.vm.LoginViewModel;
 import com.xiaojinzi.component.anno.FiledAutowiredAnno;
 import com.xiaojinzi.component.anno.RouterAnno;
@@ -57,6 +60,29 @@ public class LoginAct extends BaseAct<LoginViewModel> {
     };
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent != null) {
+            String userName = intent.getStringExtra(LoginConstants.KEY_USER_NAME);
+            String password = intent.getStringExtra(LoginConstants.KEY_PASSWORD);
+            if (!TextUtils.isDigitsOnly(userName) && !TextUtils.isEmpty(password)) {
+                mBinding.etUsername.removeTextChangedListener(usernameTextWatcher);
+                mBinding.etUsername.setText(userName);
+                mBinding.etUsername.setSelection(userName.length());
+                mBinding.etUsername.addTextChangedListener(usernameTextWatcher);
+
+                mBinding.etPassword.removeTextChangedListener(passwordWatcher);
+                mBinding.etPassword.setText(password);
+                mBinding.etPassword.setSelection(password.length());
+                mBinding.etPassword.addTextChangedListener(passwordWatcher);
+                mBinding.btnLogin.setEnabled(true);
+
+                mViewModel.login();
+            }
+        }
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.user_login_act;
     }
@@ -77,7 +103,10 @@ public class LoginAct extends BaseAct<LoginViewModel> {
     protected void onInit() {
         super.onInit();
         setSupportActionBar(mBinding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }
         initListener();
         initTabLayout();
 
@@ -131,6 +160,16 @@ public class LoginAct extends BaseAct<LoginViewModel> {
         mBinding.ivUsernameClear.setOnClickListener(v -> mViewModel.clearUserName());
         mBinding.ivPasswordClear.setOnClickListener(v -> mViewModel.clearPassword());
         mBinding.btnLogin.setOnClickListener(v -> mViewModel.login());
+        mBinding.loginRegisterTv.setOnClickListener(v -> goToRegisterAccount());
+    }
+
+    private void goToRegisterAccount() {
+        // TODO: 2019/11/22 用户注册
+        Router.with(mContext)
+                .host(ModuleInfo.User.NAME)
+                .path(ModuleInfo.User.LOGIN_REGISTER)
+                .putInt("businessType", 1)
+                .forward();
     }
 
     private void initTabLayout() {
@@ -144,7 +183,7 @@ public class LoginAct extends BaseAct<LoginViewModel> {
                     .path(ModuleInfo.Main.HOME)
                     .afterJumpAction(this::finish)
                     .forward();
-        }else {
+        } else {
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);
             finish();
@@ -162,12 +201,12 @@ public class LoginAct extends BaseAct<LoginViewModel> {
     @Override
     protected IBaseView onCreateBaseView() {
         final IBaseView target = super.onCreateBaseView();
-        return new IBaseView.IBaseViewProxy(target){
+        return new IBaseView.IBaseViewProxy(target) {
             @Override
             public void tip(@NonNull Tip tip) {
                 if (tip.getTipEnum() == Tip.TipEnum.Error) {
                     mBinding.tvError.setText(tip.getTip());
-                }else {
+                } else {
                     super.tip(tip);
                 }
             }
