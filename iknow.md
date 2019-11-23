@@ -1,0 +1,13 @@
+
+- 模块划分
+    - 如果一个功能不明确放到哪里, 暂时先全部放在 Main 模块中.
+    - 如果一个功能你非常明确是属于哪个模块, 一起交流下, 创建一个新的 Module 即可
+- 项目所有地方都使用 RxJava 的热信号, 不可出现使用 RxBus、广播
+- 路由跳转都必须使用 `Component` 组件化框架跳转.
+- 资源文件命名问题
+    - 所有的资源文件都必须是模块的名称开头的!
+    - Activity 使用 act 结尾
+    - Fragment 使用 frag 结尾
+    - Activity 的资源文件必须_act 结尾
+    - Fragment 的资源文件必须_frag 结尾
+    - 比如用户模块的登陆 Fragment 界面的资源文件名称为：user_login_frag.xml

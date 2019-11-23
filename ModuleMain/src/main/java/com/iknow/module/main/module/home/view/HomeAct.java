@@ -1,4 +1,4 @@
-package com.iknow.module.main.view;
+package com.iknow.module.main.module.home.view;
 
 import android.view.Gravity;
 import android.view.View;
@@ -27,7 +27,10 @@ public class HomeAct extends BaseAct {
 
     @Override
     protected View getLayoutView() {
-        mBinding = DataBindingUtil.setContentView(mContext, R.layout.main_home_act);
+        mBinding = DataBindingUtil.inflate(
+                getLayoutInflater(), R.layout.main_home_act,
+                null, false
+        );
         return mBinding.getRoot();
     }
 

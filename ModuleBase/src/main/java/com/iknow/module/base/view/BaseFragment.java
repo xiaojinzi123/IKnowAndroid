@@ -1,20 +1,22 @@
 package com.iknow.module.base.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.iknow.module.base.view.inter.BaseViewImpl;
 import com.iknow.module.base.view.inter.IBaseView;
 import com.iknow.module.base.vm.BaseViewModel;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -43,7 +45,11 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
      * 上下文,其实使用的过程中,不可能为空
      * 除非你在销毁了或者没初始化之前就使用了
      */
+    @Nullable
     protected FragmentActivity mContext;
+
+    @Nullable
+    protected Fragment mFragment;
 
     /**
      * 缓存当前的Fragment的视图
@@ -69,6 +75,7 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mFragment = this;
         mContext = getActivity();
     }
 

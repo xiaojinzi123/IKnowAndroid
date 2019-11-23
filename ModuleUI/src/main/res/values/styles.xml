@@ -7,6 +7,8 @@
         <item name="colorPrimary">@color/resource_theme</item>
         <item name="colorPrimaryDark">@color/resourceColorPrimaryDark</item>
         <item name="colorAccent">@color/resourceColorAccent</item>
+        <item name="homeAsUpIndicator">@drawable/ui_back1</item>
+        <item name="android:homeAsUpIndicator">@drawable/ui_back1</item>
         <item name="android:statusBarColor" tools:targetApi="lollipop">@color/resource_theme</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>

@@ -1,4 +1,4 @@
-package com.iknow.module.main.vm;
+package com.iknow.module.main.module.home.vm;
 
 import android.app.Application;
 

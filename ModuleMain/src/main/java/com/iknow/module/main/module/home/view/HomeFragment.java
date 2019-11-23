@@ -1,4 +1,4 @@
-package com.iknow.module.main.view;
+package com.iknow.module.main.module.home.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.iknow.module.base.FragmentInfo;
+import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseFragment;
-import com.iknow.module.base.view.Tip;
 import com.iknow.module.main.R;
 import com.iknow.module.main.adapter.HomeAdapter;
-import com.iknow.module.main.vm.HomeViewModel;
+import com.iknow.module.main.module.home.vm.HomeViewModel;
 import com.xiaojinzi.component.anno.FragmentAnno;
+import com.xiaojinzi.component.impl.Router;
 
 @FragmentAnno(FragmentInfo.Main.HOME)
 public class HomeFragment extends BaseFragment<HomeViewModel> {
@@ -51,7 +52,17 @@ public class HomeFragment extends BaseFragment<HomeViewModel> {
             HomeAdapter homeAdapter = new HomeAdapter(articleBeans);
             homeAdapter.setOnItemClickListener(
                     (adapter, view, position) -> {
-                        mView.tip(Tip.normal("提示：" + position));
+                        if (position >= 0) {
+                            String articleId = String.valueOf(
+                                    homeAdapter.getData().get(position).getId()
+                            );
+                            Router.with(mFragment)
+                                    .host(ModuleInfo.Main.NAME)
+                                    .path(ModuleInfo.Main.ARTICLE_DETAIL)
+                                    .putString("articleId", articleId)
+                                    .forward();
+                        }
+
                     });
             rv.setAdapter(homeAdapter);
         });

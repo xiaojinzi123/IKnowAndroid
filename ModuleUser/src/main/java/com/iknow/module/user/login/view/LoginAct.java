@@ -142,6 +142,7 @@ public class LoginAct extends BaseAct<LoginViewModel> {
             Router.with(this)
                     .host(ModuleInfo.Main.NAME)
                     .path(ModuleInfo.Main.HOME)
+                    .afterJumpAction(this::finish)
                     .forward();
         }else {
             Intent intent = new Intent();

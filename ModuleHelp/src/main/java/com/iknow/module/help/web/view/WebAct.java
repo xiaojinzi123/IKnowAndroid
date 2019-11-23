@@ -26,7 +26,10 @@ public class WebAct extends BaseAct<WebViewModel> {
 
     @Override
     protected View getLayoutView() {
-        mBinding = DataBindingUtil.setContentView(mContext, R.layout.help_web_act);
+        mBinding = DataBindingUtil.inflate(
+                getLayoutInflater(), R.layout.help_web_act,
+                null, false
+        );
         return mBinding.getRoot();
     }
 

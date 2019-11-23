@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.iknow.module.main">
+        package="com.iknow.module.main">
 
     <application>
+        <activity android:name=".module.article.view.ArticleDetailAct"></activity>
+        <activity android:name=".module.setting.view.SettingAct" />
+
         <meta-data
                 android:name="host_main"
                 android:value="main" />
-        <activity android:name=".view.HomeAct"
-                  android:label="@string/resource_home"/>
+
+        <activity
+                android:name=".module.home.view.HomeAct"
+                android:label="@string/resource_home" />
     </application>
 
 </manifest>
