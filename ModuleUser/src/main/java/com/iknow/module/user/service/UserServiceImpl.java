@@ -1,4 +1,4 @@
-package com.iknow.module.user.login.service;
+package com.iknow.module.user.service;
 
 import androidx.annotation.NonNull;
 

@@ -1,4 +1,4 @@
-package com.iknow.module.user.login.view;
+package com.iknow.module.user.module.login.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,19 +11,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 
 import com.iknow.module.base.ModuleInfo;
-import com.iknow.module.base.service.help.SmsService;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.view.inter.IBaseView;
 import com.iknow.module.base.widget.TextWatcherAdapter;
 import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserLoginActBinding;
-import com.iknow.module.user.login.vm.LoginViewModel;
+import com.iknow.module.user.module.login.vm.LoginViewModel;
 import com.xiaojinzi.component.anno.FiledAutowiredAnno;
 import com.xiaojinzi.component.anno.RouterAnno;
 import com.xiaojinzi.component.impl.Router;
 import com.xiaojinzi.component.impl.RouterResult;
-import com.xiaojinzi.component.impl.service.RxServiceManager;
 import com.xiaojinzi.component.support.CallbackAdapter;
 
 import io.reactivex.functions.Consumer;
@@ -159,13 +157,6 @@ public class LoginAct extends BaseAct<LoginViewModel> {
     }
 
     private void onLoginSuccess() {
-        if (true) {
-            RxServiceManager.with(SmsService.class)
-                    .flatMapCompletable(item -> item.sendSms("15857913627"))
-                    .subscribe();
-            return;
-        }
-
         if (businessType == 1) {
             Router.with(this)
                     .host(ModuleInfo.Main.NAME)

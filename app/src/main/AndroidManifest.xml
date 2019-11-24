@@ -15,7 +15,7 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
         <activity
-                android:name=".module.user.login.view.LoginAct"
+                android:name=".module.user.module.login.view.LoginAct"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait" />
     </application>

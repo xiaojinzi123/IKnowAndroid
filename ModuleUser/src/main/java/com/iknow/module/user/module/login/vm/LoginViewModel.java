@@ -1,4 +1,4 @@
-package com.iknow.module.user.login.vm;
+package com.iknow.module.user.module.login.vm;
 
 import android.app.Application;
 import android.text.TextUtils;

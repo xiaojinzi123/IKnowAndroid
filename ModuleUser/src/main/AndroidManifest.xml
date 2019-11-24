@@ -3,10 +3,10 @@
         package="com.iknow.module.user">
 
     <application>
-        <activity android:name=".edit.view.UserInfoEditAct" />
+        <activity android:name=".module.edit.view.UserInfoEditAct" />
 
         <activity
-                android:name=".login.view.RegisterActivity"
+                android:name=".module.login.view.RegisterActivity"
                 android:label="@string/resource_register"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait" />

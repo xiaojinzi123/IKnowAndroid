@@ -1,4 +1,4 @@
-package com.iknow.module.user.login.interceptor;
+package com.iknow.module.user.interceptor;
 
 import android.app.Activity;
 import android.content.Context;

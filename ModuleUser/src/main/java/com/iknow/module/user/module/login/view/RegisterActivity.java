@@ -1,4 +1,4 @@
-package com.iknow.module.user.login.view;
+package com.iknow.module.user.module.login.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserRegisterActivityBinding;
-import com.iknow.module.user.login.vm.RegisterViewModel;
+import com.iknow.module.user.module.login.vm.RegisterViewModel;
 import com.xiaojinzi.component.anno.RouterAnno;
 
 /**

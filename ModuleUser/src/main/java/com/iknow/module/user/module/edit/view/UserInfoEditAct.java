@@ -1,4 +1,4 @@
-package com.iknow.module.user.edit.view;
+package com.iknow.module.user.module.edit.view;
 
 import android.view.View;
 
@@ -10,7 +10,7 @@ import com.iknow.module.base.service.user.UserService;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserUserInfoEditActBinding;
-import com.iknow.module.user.edit.vm.UserInfoEditViewModel;
+import com.iknow.module.user.module.edit.vm.UserInfoEditViewModel;
 import com.xiaojinzi.component.anno.RouterAnno;
 import com.xiaojinzi.component.impl.service.RxServiceManager;
 

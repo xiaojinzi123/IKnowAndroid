@@ -1,4 +1,4 @@
-package com.iknow.module.user.edit.vm;
+package com.iknow.module.user.module.edit.vm;
 
 import android.app.Application;
 

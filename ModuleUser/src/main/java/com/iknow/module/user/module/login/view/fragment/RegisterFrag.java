@@ -1,6 +1,5 @@
-package com.iknow.module.user.login.view.fragment;
+package com.iknow.module.user.module.login.view.fragment;
 
-import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -8,14 +7,15 @@ import androidx.fragment.app.Fragment;
  * auth: 32052
  * time: 2019/4/28
  */
-public class LoginFrag extends Fragment {
+public class RegisterFrag extends Fragment {
+
 
     /**
-     * Creates Login fragment
-     * @return LoginFrgm
+     * Creates Register fragment
+     * @return RegisterFrgm
      */
-    public static LoginFrag getFrag() {
-        LoginFrag fragment = new LoginFrag();
+    public static RegisterFrag getFrag() {
+        RegisterFrag fragment = new RegisterFrag();
 //        Bundle args = new Bundle();
 //        args.putInt(KEY_PRODUCT_ID, productId);
 //        fragment.setArguments(args);
