@@ -3,26 +3,28 @@ package com.iknow.module.user.login.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import androidx.appcompat.app.ActionBar;
+
 import com.iknow.module.base.ModuleInfo;
+import com.iknow.module.base.service.help.SmsService;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.view.inter.IBaseView;
 import com.iknow.module.base.widget.TextWatcherAdapter;
 import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserLoginActBinding;
-import com.iknow.module.user.login.constants.LoginConstants;
 import com.iknow.module.user.login.vm.LoginViewModel;
 import com.xiaojinzi.component.anno.FiledAutowiredAnno;
 import com.xiaojinzi.component.anno.RouterAnno;
 import com.xiaojinzi.component.impl.Router;
+import com.xiaojinzi.component.impl.RouterResult;
+import com.xiaojinzi.component.impl.service.RxServiceManager;
+import com.xiaojinzi.component.support.CallbackAdapter;
 
 import io.reactivex.functions.Consumer;
 
@@ -58,29 +60,6 @@ public class LoginAct extends BaseAct<LoginViewModel> {
             mViewModel.setPassword(s.toString());
         }
     };
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        if (intent != null) {
-            String userName = intent.getStringExtra(LoginConstants.KEY_USER_NAME);
-            String password = intent.getStringExtra(LoginConstants.KEY_PASSWORD);
-            if (!TextUtils.isDigitsOnly(userName) && !TextUtils.isEmpty(password)) {
-                mBinding.etUsername.removeTextChangedListener(usernameTextWatcher);
-                mBinding.etUsername.setText(userName);
-                mBinding.etUsername.setSelection(userName.length());
-                mBinding.etUsername.addTextChangedListener(usernameTextWatcher);
-
-                mBinding.etPassword.removeTextChangedListener(passwordWatcher);
-                mBinding.etPassword.setText(password);
-                mBinding.etPassword.setSelection(password.length());
-                mBinding.etPassword.addTextChangedListener(passwordWatcher);
-                mBinding.btnLogin.setEnabled(true);
-
-                mViewModel.login();
-            }
-        }
-    }
 
     @Override
     protected int getLayoutId() {
@@ -164,17 +143,28 @@ public class LoginAct extends BaseAct<LoginViewModel> {
     }
 
     private void goToRegisterAccount() {
-        // TODO: 2019/11/22 用户注册
         Router.with(mContext)
                 .host(ModuleInfo.User.NAME)
                 .path(ModuleInfo.User.LOGIN_REGISTER)
-                .forward();
+                .forwardForResultCodeMatch(new CallbackAdapter() {
+                    @Override
+                    public void onSuccess(@NonNull RouterResult result) {
+                        super.onSuccess(result);
+                        onLoginSuccess();
+                    }
+                }, Activity.RESULT_OK);
     }
 
     private void initTabLayout() {
     }
 
     private void onLoginSuccess() {
+        if (true) {
+            RxServiceManager.with(SmsService.class)
+                    .flatMapCompletable(item -> item.sendSms("15857913627"))
+                    .subscribe();
+            return;
+        }
 
         if (businessType == 1) {
             Router.with(this)
@@ -187,13 +177,6 @@ public class LoginAct extends BaseAct<LoginViewModel> {
             setResult(Activity.RESULT_OK, intent);
             finish();
         }
-
-        /*RxServiceManager.with(HelpService.class)
-                .flatMap(item -> item.phoneCheck(this))
-                .subscribe(item -> {
-                    System.out.println("2313123");
-                });*/
-
     }
 
     @NonNull

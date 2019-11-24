@@ -1,5 +1,8 @@
 package com.iknow.module.user.login.view;
 
+import android.app.Activity;
+import android.content.Intent;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 
@@ -7,10 +10,8 @@ import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserRegisterActivityBinding;
-import com.iknow.module.user.login.constants.LoginConstants;
 import com.iknow.module.user.login.vm.RegisterViewModel;
 import com.xiaojinzi.component.anno.RouterAnno;
-import com.xiaojinzi.component.impl.Router;
 
 /**
  * 注册页面
@@ -57,13 +58,9 @@ public class RegisterActivity extends BaseAct<RegisterViewModel> {
     }
 
     private void onRegisterSuccess() {
-        //这里应该还需要搞一个密码的。
-        Router.with(mContext)
-                .host(ModuleInfo.User.NAME)
-                .path(ModuleInfo.User.LOGIN)
-                .putString(LoginConstants.KEY_USER_NAME, String.valueOf(mBinding.registerUserNameEt.getText()))
-                .afterEventAction(this::finish)
-                .forward();
+        Intent intent = new Intent();
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 
     private void initListener() {
