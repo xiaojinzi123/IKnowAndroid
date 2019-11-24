@@ -7,10 +7,9 @@
 
         <activity
                 android:name=".login.view.RegisterActivity"
-                android:label="@string/login_register_title"
+                android:label="@string/resource_register"
                 android:launchMode="singleTop"
-                android:screenOrientation="portrait"
-                android:theme="@style/Theme.Design.Light" />
+                android:screenOrientation="portrait" />
 
         <meta-data
                 android:name="host_user"

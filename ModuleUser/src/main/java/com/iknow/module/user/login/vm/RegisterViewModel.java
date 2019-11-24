@@ -1,13 +1,17 @@
 package com.iknow.module.user.login.vm;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
+
 import com.iknow.lib.beans.LoginBean;
 import com.iknow.module.base.service.datasource.DataSourceService;
 import com.iknow.module.base.service.user.UserService;
 import com.iknow.module.base.support.CompleableObserverAdapter;
+import com.iknow.module.base.support.HotObservableAnno;
 import com.iknow.module.base.vm.BaseViewModel;
 import com.xiaojinzi.component.impl.service.RxServiceManager;
+
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -16,7 +20,7 @@ import io.reactivex.subjects.Subject;
 
 /**
  * @Author：briskemen time：2019/11/23
- **/
+ */
 public class RegisterViewModel extends BaseViewModel {
 
     private BehaviorSubject<String> mPhoneNum = BehaviorSubject.createDefault("");
@@ -74,6 +78,8 @@ public class RegisterViewModel extends BaseViewModel {
      *
      * @return
      */
+    @HotObservableAnno
+    @NonNull
     public Observable<Boolean> registerSuccessObservable() {
         return mRegisterSuccess.filter(b -> b);
     }

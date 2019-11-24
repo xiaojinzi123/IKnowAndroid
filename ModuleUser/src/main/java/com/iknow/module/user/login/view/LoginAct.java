@@ -168,7 +168,6 @@ public class LoginAct extends BaseAct<LoginViewModel> {
         Router.with(mContext)
                 .host(ModuleInfo.User.NAME)
                 .path(ModuleInfo.User.LOGIN_REGISTER)
-                .putInt("businessType", 1)
                 .forward();
     }
 

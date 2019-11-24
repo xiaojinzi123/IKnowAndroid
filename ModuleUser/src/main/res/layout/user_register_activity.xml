@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/ll_root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -12,24 +12,24 @@
 
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_user_name_til"
-                android:layout_marginTop="@dimen/d_80"
                 style="@style/Login_TextInputLayout_Style"
-                android:hint="@string/login_register_user_name_hint"
+                android:layout_marginTop="@dimen/d_80"
+                android:hint="@string/resource_please_input_user_nick_name"
                 app:counterEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/register_user_name_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:imeOptions="actionDone"/>
+                    android:imeOptions="actionDone" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_phone_til"
-                android:layout_marginTop="@dimen/d_10"
                 style="@style/Login_TextInputLayout_Style"
-                android:hint="@string/login_register_phone_num_hint"
+                android:layout_marginTop="@dimen/d_10"
+                android:hint="@string/resource_please_input_phone"
                 app:counterEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionDone"
-                    android:inputType="phone"/>
+                    android:inputType="phone" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,6 +45,7 @@
                 android:id="@+id/register_click_tv"
                 style="@style/Common_Button_Style"
                 android:layout_marginTop="@dimen/d_40"
-                android:text="@string/login_register_click_text"/>
+                android:text="@string/resource_register_immediatly" />
+
     </LinearLayout>
 </layout>

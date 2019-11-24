@@ -16,6 +16,12 @@
                 android:fitsSystemWindows="true"
                 app:title="@string/resource_detail" />
 
+        <TextView
+                android:layout_marginHorizontal="10dp"
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
     </LinearLayout>
 
 </layout>

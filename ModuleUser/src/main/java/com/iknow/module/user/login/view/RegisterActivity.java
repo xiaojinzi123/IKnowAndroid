@@ -1,14 +1,12 @@
 package com.iknow.module.user.login.view;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+
 import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
-import com.iknow.module.base.view.Tip;
-import com.iknow.module.base.view.inter.IBaseView;
 import com.iknow.module.user.R;
-import com.iknow.module.user.databinding.ActivityRegisterBinding;
+import com.iknow.module.user.databinding.UserRegisterActivityBinding;
 import com.iknow.module.user.login.constants.LoginConstants;
 import com.iknow.module.user.login.vm.RegisterViewModel;
 import com.xiaojinzi.component.anno.RouterAnno;
@@ -24,17 +22,17 @@ import com.xiaojinzi.component.impl.Router;
 )
 public class RegisterActivity extends BaseAct<RegisterViewModel> {
 
-    private ActivityRegisterBinding mBinding;
+    private UserRegisterActivityBinding mBinding;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_register;
+        return R.layout.user_register_activity;
     }
 
     @Override
     protected void onInjectView() {
         super.onInjectView();
-        mBinding = ActivityRegisterBinding.bind(findViewById(R.id.ll_root));
+        mBinding = UserRegisterActivityBinding.bind(findViewById(R.id.ll_root));
     }
 
     @Nullable
@@ -72,14 +70,4 @@ public class RegisterActivity extends BaseAct<RegisterViewModel> {
         mBinding.registerClickTv.setOnClickListener(v -> mViewModel.register());
     }
 
-    @NonNull
-    @Override
-    protected IBaseView onCreateBaseView() {
-        final IBaseView target = super.onCreateBaseView();
-        return new IBaseView.IBaseViewProxy(target) {
-            @Override
-            public void tip(@NonNull Tip tip) {
-            }
-        };
-    }
 }

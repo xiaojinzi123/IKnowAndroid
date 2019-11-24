@@ -110,7 +110,7 @@
                 android:textSize="16sp"
                 android:padding="5dp"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/login_register_text"/>
+                android:text="@string/resource_register_accout"/>
 
     </LinearLayout>
 

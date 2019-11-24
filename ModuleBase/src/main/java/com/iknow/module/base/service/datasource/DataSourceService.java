@@ -1,13 +1,16 @@
 package com.iknow.module.base.service.datasource;
 
 import androidx.annotation.NonNull;
+
 import com.iknow.lib.beans.ArticleBean;
+import com.iknow.lib.beans.ArticleDetailBean;
 import com.iknow.lib.beans.BannerBean;
 import com.iknow.lib.beans.LoginBean;
 import com.iknow.lib.beans.user.UserInfoBean;
-import io.reactivex.Single;
 
 import java.util.List;
+
+import io.reactivex.Single;
 
 /**
  * 整体架构中的 DataSource 层
@@ -38,6 +41,7 @@ public interface DataSourceService {
      * @param userName 用户昵称
      * @return 登录成功
      */
+    @NonNull
     Single<LoginBean> register(@NonNull String phoneNum, @NonNull String userName);
 
     /**
@@ -51,11 +55,20 @@ public interface DataSourceService {
      *
      * @param pageNumber 第几页
      * @param pageSize   每页的数量
-     * @return
      */
     @NonNull
     Single<List<ArticleBean>> articleList(
             int pageNumber, int pageSize
+    );
+
+    /**
+     * 获取文章详情
+     *
+     * @param articleId 文章的ID
+     */
+    @NonNull
+    Single<ArticleDetailBean> articleDetail(
+            String articleId
     );
 
 }

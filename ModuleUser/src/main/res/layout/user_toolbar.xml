@@ -6,5 +6,5 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:subtitle="@string/login_register_title"
+        app:subtitle="@string/resource_register"
         app:subtitleTextColor="@color/color_text1"/>

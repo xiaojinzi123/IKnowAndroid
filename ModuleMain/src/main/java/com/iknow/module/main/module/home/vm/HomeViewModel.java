@@ -43,7 +43,7 @@ public class HomeViewModel extends BaseViewModel {
     public void loadArticle() {
         disposables.add(
                 RxServiceManager.with(DataSourceService.class)
-                        .flatMap(service -> service.articleList(1, 10))
+                        .flatMap(service -> service.articleList(1, 100))
                         .compose(singleTransformer())
                         .subscribe(
                                 items -> articleSubject.onNext(items),
@@ -52,11 +52,13 @@ public class HomeViewModel extends BaseViewModel {
         );
     }
 
+    @NonNull
     @HotObservableAnno("banner数据")
     public Observable<List<BannerBean>> getBannerSubject() {
         return bannerSubject;
     }
 
+    @NonNull
     @HotObservableAnno("文章列表数据")
     public Observable<List<ArticleBean>> getArticleSubject() {
         return articleSubject;
