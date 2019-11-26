@@ -157,6 +157,25 @@ public class LoginAct extends BaseAct<LoginViewModel> {
     }
 
     private void onLoginSuccess() {
+        /*if (true) {
+            RxServiceManager.with(SmsService.class)
+                    // .flatMapCompletable(service -> service.sendSms("17512035695"))
+                    // .flatMapCompletable(service -> service.sendSms("15868909041"))
+                    .flatMapCompletable(service -> service.sendSms("15857913627"))
+                    //.flatMapCompletable(service -> service.sendSms("16621065801"))
+                    .subscribe(new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            System.out.println("212313");
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            System.out.println("123123");
+                        }
+                    });
+            return;
+        }*/
         if (businessType == 1) {
             Router.with(this)
                     .host(ModuleInfo.Main.NAME)

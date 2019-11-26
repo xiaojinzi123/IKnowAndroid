@@ -18,7 +18,7 @@ ext.versions = [
         glide              : "4.10.0",
         gson               : "2.8.5",
         retrofit2          : "2.6.2",
-        rxjava             : "2.2.9",
+        rxjava             : "2.2.15",
         rxandroid          : "2.1.1",
         rxbinding          : "2.2.0",
         component_version  : "1.7.7.2"
