@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.annotation.NonNull;
 
 import com.iknow.lib.beans.help.ActivityLifecycleBean;
+import com.iknow.lib.beans.help.ClipboardContent;
 import com.iknow.module.base.support.HotObservableAnno;
 
 import io.reactivex.Observable;
@@ -17,6 +18,14 @@ public interface CommonService {
      */
     @NonNull
     @HotObservableAnno
-    Observable<ActivityLifecycleBean> subscribeActivityLifecy();
+    Observable<ActivityLifecycleBean> subscribeActivityLifecycle();
+
+    /**
+     * 订阅 剪切板的内容
+     * 这是一个热信号
+     */
+    @NonNull
+    @HotObservableAnno
+    Observable<ClipboardContent> subscribeClipboard();
 
 }

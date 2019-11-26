@@ -104,7 +104,7 @@ public class HomeMenuWidget extends FrameLayout {
         }
         disposables.add(RxServiceManager
                 .with(CommonService.class)
-                .flatMapObservable(service -> service.subscribeActivityLifecy())
+                .flatMapObservable(service -> service.subscribeActivityLifecycle())
                 // 比如是当前的 Activity
                 .filter(item -> item.getTarget() == context)
                 // 必须是销毁的事件

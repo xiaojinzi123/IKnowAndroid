@@ -13,7 +13,7 @@ public class CommonServiceImpl implements CommonService {
 
     @NonNull
     @Override
-    public Observable<ActivityLifecycleBean> subscribeActivityLifecy() {
+    public Observable<ActivityLifecycleBean> subscribeActivityLifecycle() {
         return CommonActivityLifecycleCallback.activityLifecycleBehaviorSubject;
     }
 
