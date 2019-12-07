@@ -1,6 +1,5 @@
 package com.iknow.module.main.module.article.view;
 
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
@@ -18,10 +17,11 @@ import com.iknow.module.main.databinding.MainArticleDetailActBinding;
 import com.iknow.module.main.module.article.vm.ArticleDetailViewModel;
 import com.xiaojinzi.component.anno.FiledAutowiredAnno;
 import com.xiaojinzi.component.anno.RouterAnno;
+import com.xiaojinzi.component.impl.Router;
 
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;
-import io.noties.markwon.core.MarkwonTheme;
+import io.noties.markwon.MarkwonConfiguration;
 import io.noties.markwon.image.AsyncDrawable;
 import io.noties.markwon.image.glide.GlideImagesPlugin;
 
@@ -78,10 +78,13 @@ public class ArticleDetailAct extends BaseAct<ArticleDetailViewModel> {
                     }))
                     .usePlugin(new AbstractMarkwonPlugin() {
                         @Override
-                        public void configureTheme(@NonNull MarkwonTheme.Builder builder) {
-                            builder
-                                    .codeTextColor(Color.BLACK)
-                                    .codeBackgroundColor(Color.GREEN);
+                        public void configureConfiguration(@NonNull MarkwonConfiguration.Builder builder) {
+                            super.configureConfiguration(builder);
+                            builder.linkResolver((view, link) -> {
+                                Router.with(mContext)
+                                        .url(link)
+                                        .forward();
+                            });
                         }
                     })
                     .build();

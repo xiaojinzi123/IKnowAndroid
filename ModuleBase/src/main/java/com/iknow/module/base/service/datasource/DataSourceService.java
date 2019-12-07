@@ -2,10 +2,11 @@ package com.iknow.module.base.service.datasource;
 
 import androidx.annotation.NonNull;
 
-import com.iknow.lib.beans.ArticleBean;
-import com.iknow.lib.beans.ArticleDetailBean;
-import com.iknow.lib.beans.BannerBean;
-import com.iknow.lib.beans.LoginBean;
+import com.iknow.lib.beans.main.ArticleBean;
+import com.iknow.lib.beans.main.ArticleDetailBean;
+import com.iknow.lib.beans.main.BannerBean;
+import com.iknow.lib.beans.main.GirlBean;
+import com.iknow.lib.beans.user.LoginBean;
 import com.iknow.lib.beans.user.UserInfoBean;
 
 import java.util.List;
@@ -70,5 +71,11 @@ public interface DataSourceService {
     Single<ArticleDetailBean> articleDetail(
             String articleId
     );
+
+    /**
+     * 获取美女列表
+     */
+    @NonNull
+    Single<List<GirlBean>> getGirlList(int page, int pageSize);
 
 }

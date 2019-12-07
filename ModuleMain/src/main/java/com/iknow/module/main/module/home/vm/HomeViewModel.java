@@ -4,8 +4,8 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-import com.iknow.lib.beans.ArticleBean;
-import com.iknow.lib.beans.BannerBean;
+import com.iknow.lib.beans.main.ArticleBean;
+import com.iknow.lib.beans.main.BannerBean;
 import com.iknow.module.base.service.datasource.DataSourceService;
 import com.iknow.module.base.support.HotObservableAnno;
 import com.iknow.module.base.view.Tip;

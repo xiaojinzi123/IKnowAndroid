@@ -3,7 +3,7 @@ package com.iknow.module.user.module.login.vm;
 import android.app.Application;
 import android.text.TextUtils;
 import androidx.annotation.NonNull;
-import com.iknow.lib.beans.LoginBean;
+import com.iknow.lib.beans.user.LoginBean;
 import com.iknow.module.base.service.datasource.DataSourceService;
 import com.iknow.module.base.service.user.UserService;
 import com.iknow.module.base.support.CompleableObserverAdapter;

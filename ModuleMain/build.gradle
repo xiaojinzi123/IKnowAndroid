@@ -41,7 +41,7 @@ dependencies {
     implementation project(':ModuleBase')
     kapt libs.component_compiler
 
-    implementation "io.noties.markwon:core:4.2.0"
-    implementation "io.noties.markwon:image-glide:4.2.0"
+    implementation libs.markwon
+    implementation libs.markwon_image
 
 }

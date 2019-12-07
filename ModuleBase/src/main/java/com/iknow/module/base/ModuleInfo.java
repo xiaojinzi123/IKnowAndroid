@@ -47,6 +47,8 @@ public class ModuleInfo {
         public static final String HOME = "home";
         // 设置界面
         public static final String SETTING = "setting";
+        // 美女界面
+        public static final String GIRL = "girl";
         // 文章详情界面
         public static final String ARTICLE_DETAIL = "article/detail";
     }

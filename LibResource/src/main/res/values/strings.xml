@@ -2,6 +2,7 @@
     <string name="app_name">LibResource</string>
     <string name="resource_login">Login</string>
     <string name="resource_home">Home</string>
+    <string name="resource_beauty_girl">美女</string>
     <string name="resource_setting">设置</string>
     <string name="resource_detail">详情</string>
     <string name="resource_edit_user_info">编辑用户信息</string>
@@ -14,4 +15,7 @@
     <string name="resource_please_input_phone">请输入手机号码</string>
     <string name="resource_please_input_user_nick_name">请输入用户昵称</string>
     <string name="resource_register_immediatly">立即注册</string>
+    <string name="resource_please_login">请登录</string>
+    <string name="resource_click_to_login">点击登录</string>
+    <string name="resource_beauty_image">美女图片</string>
 </resources>

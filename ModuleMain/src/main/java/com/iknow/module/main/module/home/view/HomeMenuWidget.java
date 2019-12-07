@@ -14,6 +14,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Lifecycle;
 
 import com.bumptech.glide.Glide;
+import com.iknow.lib.beans.user.UserInfoBean;
+import com.iknow.lib.tools.ResourceUtil;
 import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.service.CommonService;
 import com.iknow.module.base.service.user.UserService;
@@ -43,6 +45,7 @@ public class HomeMenuWidget extends FrameLayout {
         iv_user_icon = findViewById(R.id.iv_user_icon);
         tv_name = findViewById(R.id.tv_name);
         cl_header = findViewById(R.id.cl_header);
+        ll_beauty_girl = findViewById(R.id.ll_beauty_girl);
         ll_setting = findViewById(R.id.ll_setting);
         ll_address = findViewById(R.id.ll_address);
 
@@ -50,6 +53,13 @@ public class HomeMenuWidget extends FrameLayout {
             Router.with(context)
                     .host(ModuleInfo.User.NAME)
                     .path(ModuleInfo.User.EDIT)
+                    .forward();
+        });
+
+        ll_beauty_girl.setOnClickListener( view -> {
+            Router.with(context)
+                    .host(ModuleInfo.Main.NAME)
+                    .path(ModuleInfo.Main.GIRL)
                     .forward();
         });
 
@@ -75,6 +85,7 @@ public class HomeMenuWidget extends FrameLayout {
     private ImageView iv_user_icon;
     private TextView tv_name;
     private ConstraintLayout cl_header;
+    private LinearLayout ll_beauty_girl;
     private LinearLayout ll_setting;
     private LinearLayout ll_address;
 
@@ -87,18 +98,25 @@ public class HomeMenuWidget extends FrameLayout {
                     userService.subscribeUser()
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(item -> {
-                                item.ifPresent(userInfo -> {
+                                String defaultUserBg = null, defaultUserAvatar = null;
+                                if (item.isPresent()) {
+                                    UserInfoBean userInfo = item.get();
                                     tv_name.setText(userInfo.getName());
-                                    Glide.with(context)
-                                            .load(userInfo.getBackgroundUrl())
-                                            .placeholder(userService == null ? 0 : userService.getDefaultUserBg())
-                                            .into(iv_user_bg);
-                                    Glide.with(context)
-                                            .load(userInfo.getAvatar())
-                                            .placeholder(userService == null ? 0 : userService.getDefaultUserAvatar())
-                                            .circleCrop()
-                                            .into(iv_user_icon);
-                                });
+                                    defaultUserBg = userInfo.getBackgroundUrl();
+                                    defaultUserAvatar = userInfo.getAvatar();
+                                }else {
+                                    // 登录提示
+                                    tv_name.setText(ResourceUtil.getString(R.string.resource_click_to_login));
+                                }
+                                Glide.with(context)
+                                        .load(defaultUserBg)
+                                        .placeholder(userService.getDefaultUserBg())
+                                        .into(iv_user_bg);
+                                Glide.with(context)
+                                        .load(defaultUserAvatar)
+                                        .placeholder(userService.getDefaultUserAvatar())
+                                        .circleCrop()
+                                        .into(iv_user_icon);
                             })
             );
         }

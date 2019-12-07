@@ -1,9 +1,10 @@
 package com.iknow.module.datasource.network.apis;
 
-import com.iknow.lib.beans.ArticleBean;
-import com.iknow.lib.beans.ArticleDetailBean;
-import com.iknow.lib.beans.BannerBean;
-import com.iknow.lib.beans.LoginBean;
+import com.iknow.lib.beans.main.ArticleBean;
+import com.iknow.lib.beans.main.ArticleDetailBean;
+import com.iknow.lib.beans.main.BannerBean;
+import com.iknow.lib.beans.main.GirlBean;
+import com.iknow.lib.beans.user.LoginBean;
 import com.iknow.lib.beans.user.UserInfoBean;
 import com.iknow.module.datasource.network.support.RemoveShell;
 
@@ -58,5 +59,12 @@ public interface IknowApi {
     @RemoveShell
     @GET("user/fullInfo/{id}")
     Single<UserInfoBean> getUser(@Path("id") Integer userId);
+
+    @RemoveShell
+    @GET("image/girl/list")
+    Single<List<GirlBean>> getGirlList(
+            @Query("page") int page,
+            @Query("pageSize") int pageSize
+    );
 
 }

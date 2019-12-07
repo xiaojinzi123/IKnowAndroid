@@ -33,10 +33,12 @@ public class UserInfoManager {
     }
 
     // token
-    private BehaviorSubject<Optional<String>> tokenSubject = BehaviorSubject.create();
+    private BehaviorSubject<Optional<String>>
+            tokenSubject = BehaviorSubject.createDefault(Optional.empty());
 
     // 用户信息
-    private BehaviorSubject<Optional<UserInfoBean>> userInfoSubject = BehaviorSubject.create();
+    private BehaviorSubject<Optional<UserInfoBean>>
+            userInfoSubject = BehaviorSubject.createDefault(Optional.empty());
 
     /**
      * 订阅一个 Token

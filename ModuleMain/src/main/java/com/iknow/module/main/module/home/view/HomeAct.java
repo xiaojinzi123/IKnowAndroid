@@ -1,6 +1,7 @@
 package com.iknow.module.main.module.home.view;
 
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
@@ -50,4 +51,14 @@ public class HomeAct extends BaseAct {
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mBinding.drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+                mBinding.drawerLayout.closeDrawer(Gravity.LEFT);
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

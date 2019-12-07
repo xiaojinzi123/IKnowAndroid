@@ -1,4 +1,4 @@
-package com.iknow.lib.beans;
+package com.iknow.lib.beans.main;
 
 import java.util.List;
 

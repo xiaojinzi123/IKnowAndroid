@@ -48,6 +48,10 @@ public class WebAct extends BaseAct<WebViewModel> {
     protected void onInit() {
         super.onInit();
 
+        setSupportActionBar(mBinding.toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         if (!TextUtils.isEmpty(url)) {
             mBinding.web.loadUrl(url);
         }

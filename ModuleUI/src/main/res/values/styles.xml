@@ -30,6 +30,7 @@
 
     <style name="UiButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/ui_button_selector</item>
+        <item name="android:textColor">@color/resource_white</item>
     </style>
 
     <!-- Dialog进度条 -->

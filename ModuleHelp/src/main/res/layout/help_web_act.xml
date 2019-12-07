@@ -13,7 +13,15 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true" />
+                android:fitsSystemWindows="true">
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:src="@drawable/resource_close" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <WebView
                 android:id="@+id/web"

@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.iknow.lib.beans.ArticleBean;
+import com.iknow.lib.beans.main.ArticleBean;
 import com.iknow.module.main.R;
 
 import java.util.List;

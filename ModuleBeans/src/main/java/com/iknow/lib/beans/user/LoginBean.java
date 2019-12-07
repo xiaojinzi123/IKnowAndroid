@@ -1,21 +1,9 @@
-package com.iknow.lib.beans;
-
-import com.iknow.lib.beans.user.UserInfoBean;
+package com.iknow.lib.beans.user;
 
 public class LoginBean {
 
     private String token;
-    private String userName;
-
     private UserInfoBean userInfo;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getToken() {
         return token;
