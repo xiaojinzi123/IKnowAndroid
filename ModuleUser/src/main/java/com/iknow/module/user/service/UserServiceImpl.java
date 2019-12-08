@@ -25,6 +25,12 @@ public class UserServiceImpl implements UserService {
 
     @NonNull
     @Override
+    public Completable loginOut() {
+        return UserInfoManager.getInstance().loginOut();
+    }
+
+    @NonNull
+    @Override
     public Maybe<String> getToken() {
         return UserInfoManager.getInstance().subscribeToken()
                 .firstOrError()

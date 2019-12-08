@@ -23,6 +23,12 @@ public interface UserService {
     boolean isLogin();
 
     /**
+     * 登出
+     */
+    @NonNull
+    Completable loginOut();
+
+    /**
      * 获取 Token, 可能为空信号, 既没有信号发射出来, 只有完成信号
      */
     @NonNull

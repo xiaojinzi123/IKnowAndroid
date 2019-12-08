@@ -1,5 +1,8 @@
 package com.iknow.lib.beans.user;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class LoginBean {
 
     private String token;

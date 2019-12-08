@@ -5,10 +5,12 @@ import android.view.View;
 import androidx.databinding.DataBindingUtil;
 
 import com.iknow.module.base.ModuleInfo;
+import com.iknow.module.base.service.user.UserService;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.main.R;
 import com.iknow.module.main.databinding.MainSettingActBinding;
 import com.xiaojinzi.component.anno.RouterAnno;
+import com.xiaojinzi.component.impl.service.RxServiceManager;
 
 @RouterAnno(
         path = ModuleInfo.Main.SETTING
@@ -32,6 +34,13 @@ public class SettingAct extends BaseAct {
         super.onInit();
         setSupportActionBar(mBinding.toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        mBinding.btLoginOut.setOnClickListener(v -> {
+            RxServiceManager.with(UserService.class)
+                    .flatMapCompletable(service -> service.loginOut())
+                    .subscribe(() -> finish());
+        });
+
     }
 
     @Override

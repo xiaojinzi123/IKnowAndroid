@@ -1,5 +1,8 @@
 package com.iknow.lib.beans.main;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class GirlBean {
 
     private Integer id;

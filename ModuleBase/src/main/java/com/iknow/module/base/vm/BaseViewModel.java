@@ -152,6 +152,7 @@ public class BaseViewModel extends AndroidViewModel {
             tipSubject.onNext(Tip.error(error.getMessage()));
         } else {
             tipSubject.onNext(Tip.error("未知异常"));
+            error.printStackTrace();
         }
     }
 

@@ -2,8 +2,10 @@ package com.iknow.lib.beans.help;
 
 import android.app.Activity;
 
+import androidx.annotation.Keep;
 import androidx.lifecycle.Lifecycle;
 
+@Keep
 public class ActivityLifecycleBean {
 
     private Activity target;

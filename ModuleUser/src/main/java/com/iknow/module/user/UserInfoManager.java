@@ -80,4 +80,12 @@ public class UserInfoManager {
         });
     }
 
+    @NonNull
+    public Completable loginOut() {
+        return Completable.fromAction(() -> {
+            tokenSubject.onNext(Optional.empty());
+            userInfoSubject.onNext(Optional.empty());
+        });
+    }
+
 }

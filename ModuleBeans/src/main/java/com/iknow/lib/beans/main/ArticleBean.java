@@ -1,7 +1,10 @@
 package com.iknow.lib.beans.main;
 
+import androidx.annotation.Keep;
+
 import java.util.List;
 
+@Keep
 public class ArticleBean {
 
     private int id;

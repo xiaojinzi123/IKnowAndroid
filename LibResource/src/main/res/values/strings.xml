@@ -18,4 +18,7 @@
     <string name="resource_please_login">请登录</string>
     <string name="resource_click_to_login">点击登录</string>
     <string name="resource_beauty_image">美女图片</string>
+    <string name="resource_login_out">退出登录</string>
+    <string name="resource_error_show">错误展示</string>
+    <string name="resource_reboot_application">重启应用</string>
 </resources>

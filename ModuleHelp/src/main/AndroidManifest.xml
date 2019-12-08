@@ -2,14 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="com.iknow.module.help">
 
-    <application>
-        <activity android:name=".module.area.view.AddressSelectAct"></activity>
+    <application android:theme="@style/AppTheme">
+        <activity
+                android:name=".module.error.view.ErrorAct"
+                android:process=":error">
+            <intent-filter>
+                <action android:name="iknow_error"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".module.area.view.AddressSelectAct" />
+        <activity android:name=".module.web.view.WebAct" />
 
         <meta-data
                 android:name="host_help"
                 android:value="help" />
-
-        <activity android:name=".module.web.view.WebAct" />
     </application>
 
 </manifest>

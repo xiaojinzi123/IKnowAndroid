@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,28 +50,28 @@ public class HomeMenuWidget extends FrameLayout {
         ll_setting = findViewById(R.id.ll_setting);
         ll_address = findViewById(R.id.ll_address);
 
-        cl_header.setOnClickListener( view -> {
+        cl_header.setOnClickListener(view -> {
             Router.with(context)
                     .host(ModuleInfo.User.NAME)
                     .path(ModuleInfo.User.EDIT)
                     .forward();
         });
 
-        ll_beauty_girl.setOnClickListener( view -> {
+        ll_beauty_girl.setOnClickListener(view -> {
             Router.with(context)
                     .host(ModuleInfo.Main.NAME)
                     .path(ModuleInfo.Main.GIRL)
                     .forward();
         });
 
-        ll_setting.setOnClickListener( view -> {
+        ll_setting.setOnClickListener(view -> {
             Router.with(context)
                     .host(ModuleInfo.Main.NAME)
                     .path(ModuleInfo.Main.SETTING)
                     .forward();
         });
 
-        ll_address.setOnClickListener( view -> {
+        ll_address.setOnClickListener(view -> {
             Router.with(context)
                     .host(ModuleInfo.Help.NAME)
                     .path(ModuleInfo.Help.ADDRESS_SELECT)
@@ -104,7 +105,7 @@ public class HomeMenuWidget extends FrameLayout {
                                     tv_name.setText(userInfo.getName());
                                     defaultUserBg = userInfo.getBackgroundUrl();
                                     defaultUserAvatar = userInfo.getAvatar();
-                                }else {
+                                } else {
                                     // 登录提示
                                     tv_name.setText(ResourceUtil.getString(R.string.resource_click_to_login));
                                 }
@@ -127,7 +128,11 @@ public class HomeMenuWidget extends FrameLayout {
                 .filter(item -> item.getTarget() == context)
                 // 必须是销毁的事件
                 .filter(item -> item.getEvent() == Lifecycle.Event.ON_DESTROY)
-                .subscribe(item -> disposables.clear())
+                .subscribe(
+                        item -> disposables.clear(),
+                        error -> {
+                            Toast.makeText(context, "提示：" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        })
         );
 
     }

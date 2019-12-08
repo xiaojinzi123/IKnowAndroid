@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
@@ -16,11 +16,14 @@
                 android:fitsSystemWindows="true"
                 app:title="@string/resource_setting" />
 
-        <TextView
-                android:layout_width="wrap_content"
+        <Button
+                android:id="@+id/bt_login_out"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="设置界面" />
+                android:layout_alignParentBottom="true"
+                android:layout_margin="40dp"
+                android:text="@string/resource_login_out" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </layout>

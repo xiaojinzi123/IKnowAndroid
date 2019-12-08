@@ -1,10 +1,12 @@
 package com.iknow.module.base.support;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import io.reactivex.functions.Consumer;
 
+@Keep
 public class SingleObserverAdapter<T> {
 
     @NonNull
