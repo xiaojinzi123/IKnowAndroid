@@ -57,6 +57,19 @@ public class HomeMenuWidget extends FrameLayout {
                     .forward();
         });
 
+        tv_name.setOnClickListener(view -> {
+            RxServiceManager.with(UserService.class)
+                    .map(item -> item.isLogin())
+                    .filter(item -> !item)
+                    .subscribe(b -> Router
+                            .with(context)
+                            .host(ModuleInfo.User.NAME)
+                            .path(ModuleInfo.User.LOGIN)
+                            .forward()
+                    );
+
+        });
+
         ll_beauty_girl.setOnClickListener(view -> {
             Router.with(context)
                     .host(ModuleInfo.Main.NAME)
