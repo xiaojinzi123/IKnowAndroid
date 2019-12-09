@@ -7,3 +7,5 @@
 同时项目也是一个完整的组件化项目. 组件化方案 [Component](https://github.com/xiaojinzi123/Component) 技术支持!
 
 欢迎大家围观! UI 较丑, 还请见谅!
+
+部分界面展示: ![](https://i.loli.net/2019/12/09/ug1A7FWl2NMDwXq.png)
