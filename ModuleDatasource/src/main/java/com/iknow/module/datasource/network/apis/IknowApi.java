@@ -1,5 +1,7 @@
 package com.iknow.module.datasource.network.apis;
 
+import androidx.annotation.Keep;
+
 import com.iknow.lib.beans.main.ArticleBean;
 import com.iknow.lib.beans.main.ArticleDetailBean;
 import com.iknow.lib.beans.main.BannerBean;

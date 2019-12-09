@@ -2,22 +2,36 @@ package com.iknow.module.datasource.network.convert;
 
 import android.text.TextUtils;
 
-import com.google.gson.*;
+import androidx.annotation.Keep;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
-import com.iknow.module.datasource.network.exception.NetworkException;
 import com.iknow.module.datasource.network.EmptyResponse;
 import com.iknow.module.datasource.network.Result;
+import com.iknow.module.datasource.network.exception.NetworkException;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.lang.reflect.Type;
 
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
-import java.io.*;
-import java.lang.reflect.Type;
-
 /**
  * 脱壳转换
  */
+@Keep
 final class IknowResponseBodyConverter<T> implements Converter<ResponseBody, T> {
 
     private final Gson gson;
@@ -38,6 +52,14 @@ final class IknowResponseBodyConverter<T> implements Converter<ResponseBody, T> 
         if (TextUtils.isEmpty(body)) {
             throw new JsonParseException("The body is empty that can't convert Object!");
         }
+
+        try {
+            JSONObject jb = new JSONObject(body);
+        } catch (JSONException e) {
+            throw new IOException(e);
+        }
+
+        System.out.println("body = " + body);
 
         Result response;
         try {

@@ -1,6 +1,7 @@
 package com.iknow.module.base.service.user;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 
 import com.iknow.lib.beans.user.UserInfoBean;

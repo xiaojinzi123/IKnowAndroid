@@ -1,5 +1,6 @@
 package com.iknow.module.user.service;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 
 import com.iknow.lib.beans.user.UserInfoBean;

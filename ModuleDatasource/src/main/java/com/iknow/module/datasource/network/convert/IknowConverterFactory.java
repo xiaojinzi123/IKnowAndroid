@@ -1,5 +1,7 @@
 package com.iknow.module.datasource.network.convert;
 
+import androidx.annotation.Keep;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
@@ -22,6 +24,7 @@ import retrofit2.Retrofit;
  * you must {@linkplain Retrofit.Builder#addConverterFactory(Converter.Factory) add this instance}
  * last to allow the other converters a chance to see their types.
  */
+@Keep
 public final class IknowConverterFactory extends Converter.Factory {
     /**
      * Create an instance using a default {@link Gson} instance for conversion. Encoding to JSON and

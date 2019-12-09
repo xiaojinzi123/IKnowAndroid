@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.iknow.module.base.FragmentInfo;
 import com.iknow.module.base.ModuleInfo;
@@ -21,6 +22,7 @@ import com.xiaojinzi.component.impl.Router;
 @FragmentAnno(FragmentInfo.Main.HOME)
 public class HomeFragment extends BaseFragment<HomeViewModel> {
 
+    SwipeRefreshLayout srl;
     RecyclerView rv;
 
     @Nullable
@@ -38,6 +40,7 @@ public class HomeFragment extends BaseFragment<HomeViewModel> {
     protected void injectView(View contentView) {
         super.injectView(contentView);
         rv = contentView.findViewById(R.id.rv);
+        srl = contentView.findViewById(R.id.srl);
     }
 
     @Override
@@ -47,6 +50,10 @@ public class HomeFragment extends BaseFragment<HomeViewModel> {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(layoutManager);
+
+        subscibe(mViewModel.subscribeRefreshObservable(), state -> {
+            srl.setRefreshing(state);
+        });
 
         subscibe(mViewModel.getArticleSubject(), articleBeans -> {
             HomeAdapter homeAdapter = new HomeAdapter(articleBeans);
@@ -65,6 +72,10 @@ public class HomeFragment extends BaseFragment<HomeViewModel> {
 
                     });
             rv.setAdapter(homeAdapter);
+        });
+
+        srl.setOnRefreshListener(() -> {
+            mViewModel.refresh();
         });
 
     }

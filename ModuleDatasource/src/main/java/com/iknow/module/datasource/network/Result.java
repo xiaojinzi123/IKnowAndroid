@@ -1,10 +1,13 @@
 package com.iknow.module.datasource.network;
 
+import androidx.annotation.Keep;
+
 /**
  * @author Bacchus
  * @desc http响应体
  * @date: 2019.04.28
  */
+@Keep
 public class Result<T> {
 
     private static final int SUCCESS_CODE = 0;

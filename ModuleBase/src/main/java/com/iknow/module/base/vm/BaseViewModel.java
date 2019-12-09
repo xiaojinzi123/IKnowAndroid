@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.iknow.module.base.support.CompleableObserverAdapter;
+import com.iknow.module.base.support.HotObservableAnno;
 import com.iknow.module.base.support.ServiceException;
 import com.iknow.module.base.support.SingleObserverAdapter;
 import com.iknow.module.base.view.Tip;
@@ -78,6 +79,7 @@ public class BaseViewModel extends AndroidViewModel {
      * @return 返回的热信号
      */
     @NonNull
+    @HotObservableAnno
     public Observable<Boolean> loadingObservable() {
         return loadingSubject;
     }
@@ -88,6 +90,7 @@ public class BaseViewModel extends AndroidViewModel {
      * @return 返回的热信号
      */
     @NonNull
+    @HotObservableAnno
     public Observable<Tip> tipObservable() {
         return tipSubject;
     }
@@ -142,7 +145,7 @@ public class BaseViewModel extends AndroidViewModel {
         return disposable;
     }
 
-    private void normalErrorSolve(@NonNull Throwable error) {
+    protected final void normalErrorSolve(@NonNull Throwable error) {
         error = Utils.getRealThrowable(error);
         String message = error.getMessage();
         if (message == null) {
@@ -151,7 +154,7 @@ public class BaseViewModel extends AndroidViewModel {
         if (error instanceof ServiceException) {
             tipSubject.onNext(Tip.error(error.getMessage()));
         } else {
-            tipSubject.onNext(Tip.error("未知异常"));
+            tipSubject.onNext(Tip.error("未知异常" + error.getClass().getName()));
             error.printStackTrace();
         }
     }
