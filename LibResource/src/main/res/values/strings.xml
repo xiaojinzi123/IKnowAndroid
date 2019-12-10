@@ -21,4 +21,6 @@
     <string name="resource_login_out">退出登录</string>
     <string name="resource_error_show">错误展示</string>
     <string name="resource_reboot_application">重启应用</string>
+    <string name="resource_common_url">常用网址</string>
+    <string name="resource_sign_in">签到</string>
 </resources>

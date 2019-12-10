@@ -1,10 +1,9 @@
 package com.iknow.module.datasource.network.apis;
 
-import androidx.annotation.Keep;
-
 import com.iknow.lib.beans.main.ArticleBean;
 import com.iknow.lib.beans.main.ArticleDetailBean;
 import com.iknow.lib.beans.main.BannerBean;
+import com.iknow.lib.beans.main.CommonUrlBean;
 import com.iknow.lib.beans.main.GirlBean;
 import com.iknow.lib.beans.user.LoginBean;
 import com.iknow.lib.beans.user.UserInfoBean;
@@ -68,5 +67,9 @@ public interface IknowApi {
             @Query("page") int page,
             @Query("pageSize") int pageSize
     );
+
+    @RemoveShell
+    @GET("common/url/listAll")
+    Single<List<CommonUrlBean>> getAllCommonUrl();
 
 }

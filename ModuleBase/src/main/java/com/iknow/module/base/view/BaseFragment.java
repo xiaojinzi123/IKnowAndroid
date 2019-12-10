@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.iknow.module.base.view.inter.BaseViewImpl;
 import com.iknow.module.base.view.inter.IBaseView;
 import com.iknow.module.base.vm.BaseViewModel;
+import com.xiaojinzi.component.Component;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -119,8 +120,9 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
      */
     @CallSuper
     protected void onInit() {
+        Component.inject(this);
         if (mViewModel != null) {
-            disposables.add(mViewModel.loadingObservable()
+            disposables.add(mViewModel.subscribeLoadingObservable()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Consumer<Boolean>() {
                         @Override
@@ -133,7 +135,7 @@ public abstract class BaseFragment<VM extends BaseViewModel> extends Fragment {
                         }
                     })
             );
-            disposables.add(mViewModel.tipObservable()
+            disposables.add(mViewModel.subscribeTipObservable()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Consumer<Tip>() {
                         @Override

@@ -3,6 +3,8 @@
         package="com.iknow.module.main">
 
     <application android:theme="@style/AppTheme">
+        <activity android:name=".module.common.url.view.CommonUrlAct"></activity>
+
         <meta-data
                 android:name="host_main"
                 android:value="main" />

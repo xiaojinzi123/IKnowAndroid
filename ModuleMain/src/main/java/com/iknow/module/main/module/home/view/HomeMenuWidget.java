@@ -1,6 +1,7 @@
 package com.iknow.module.main.module.home.view;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -25,6 +26,9 @@ import com.xiaojinzi.component.impl.Router;
 import com.xiaojinzi.component.impl.service.RxServiceManager;
 import com.xiaojinzi.component.impl.service.ServiceManager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -45,7 +49,9 @@ public class HomeMenuWidget extends FrameLayout {
         iv_user_bg = findViewById(R.id.iv_user_bg);
         iv_user_icon = findViewById(R.id.iv_user_icon);
         tv_name = findViewById(R.id.tv_name);
+        tv_sign_in = findViewById(R.id.tv_sign_in);
         cl_header = findViewById(R.id.cl_header);
+        ll_common_url = findViewById(R.id.ll_common_url);
         ll_beauty_girl = findViewById(R.id.ll_beauty_girl);
         ll_setting = findViewById(R.id.ll_setting);
         ll_address = findViewById(R.id.ll_address);
@@ -57,17 +63,47 @@ public class HomeMenuWidget extends FrameLayout {
                     .forward();
         });
 
-        tv_name.setOnClickListener(view -> {
-            RxServiceManager.with(UserService.class)
-                    .map(item -> item.isLogin())
-                    .filter(item -> !item)
-                    .subscribe(b -> Router
-                            .with(context)
-                            .host(ModuleInfo.User.NAME)
-                            .path(ModuleInfo.User.LOGIN)
-                            .forward()
-                    );
+        iv_user_bg.setOnClickListener(view -> {
+            String url = (String) view.getTag(1);
+            if (!TextUtils.isEmpty(url)) {
+                Router.with(context)
+                        .host(ModuleInfo.Help.NAME)
+                        .path(ModuleInfo.Help.IMAGE_PREVIEW)
+                        .putStringArrayList("images", new ArrayList<>(Arrays.asList(url)))
+                        .forward();
+            }
+        });
 
+        tv_name.setOnClickListener(view -> {
+            disposables.add(
+                    RxServiceManager.with(UserService.class)
+                            .map(item -> item.isLogin())
+                            .filter(item -> !item)
+                            .subscribe(b -> Router
+                                    .with(context)
+                                    .host(ModuleInfo.User.NAME)
+                                    .path(ModuleInfo.User.LOGIN)
+                                    .forward()
+                            )
+            );
+        });
+
+        tv_sign_in.setOnClickListener(view -> {
+            disposables.add(
+                    RxServiceManager.with(UserService.class)
+                            .flatMapCompletable(service -> service.signIn())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(() -> {
+                                Toast.makeText(context, "签到成功", Toast.LENGTH_SHORT).show();
+                            })
+            );
+        });
+
+        ll_common_url.setOnClickListener(view -> {
+            Router.with(context)
+                    .host(ModuleInfo.Main.NAME)
+                    .path(ModuleInfo.Main.COMMON_URL)
+                    .forward();
         });
 
         ll_beauty_girl.setOnClickListener(view -> {
@@ -98,7 +134,9 @@ public class HomeMenuWidget extends FrameLayout {
     private ImageView iv_user_bg;
     private ImageView iv_user_icon;
     private TextView tv_name;
+    private TextView tv_sign_in;
     private ConstraintLayout cl_header;
+    private LinearLayout ll_common_url;
     private LinearLayout ll_beauty_girl;
     private LinearLayout ll_setting;
     private LinearLayout ll_address;
@@ -112,22 +150,23 @@ public class HomeMenuWidget extends FrameLayout {
                     userService.subscribeUser()
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(item -> {
-                                String defaultUserBg = null, defaultUserAvatar = null;
+                                String userBg = null, userAvatar = null;
                                 if (item.isPresent()) {
                                     UserInfoBean userInfo = item.get();
                                     tv_name.setText(userInfo.getName());
-                                    defaultUserBg = userInfo.getBackgroundUrl();
-                                    defaultUserAvatar = userInfo.getAvatar();
+                                    userBg = userInfo.getBackgroundUrl();
+                                    userAvatar = userInfo.getAvatar();
                                 } else {
                                     // 登录提示
                                     tv_name.setText(ResourceUtil.getString(R.string.resource_click_to_login));
                                 }
+                                iv_user_bg.setTag(1, userBg);
                                 Glide.with(context)
-                                        .load(defaultUserBg)
+                                        .load(userBg)
                                         .placeholder(userService.getDefaultUserBg())
                                         .into(iv_user_bg);
                                 Glide.with(context)
-                                        .load(defaultUserAvatar)
+                                        .load(userAvatar)
                                         .placeholder(userService.getDefaultUserAvatar())
                                         .circleCrop()
                                         .into(iv_user_icon);

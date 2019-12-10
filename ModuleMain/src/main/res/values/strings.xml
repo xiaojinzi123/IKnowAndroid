@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ModuleMain</string>
+    <string name="resource_please_press_again_to_exit_app">再按一次退出应用!</string>
 </resources>

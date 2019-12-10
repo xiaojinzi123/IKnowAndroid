@@ -105,7 +105,7 @@ public abstract class BaseAct<VM extends BaseViewModel> extends AppCompatActivit
         if (mViewModel != null) {
             SubscribeLoadingAnno subscribeLoadingAnno = this.getClass().getAnnotation(SubscribeLoadingAnno.class);
             if (subscribeLoadingAnno == null || subscribeLoadingAnno.value()) {
-                subscibeUi(mViewModel.loadingObservable(), isLoading -> {
+                subscibeUi(mViewModel.subscribeLoadingObservable(), isLoading -> {
                     if (isLoading && mView != null) {
                         mView.showProgress();
                     } else {
@@ -115,7 +115,7 @@ public abstract class BaseAct<VM extends BaseViewModel> extends AppCompatActivit
             }
             SubscribeTipAnno subscribeTipAnno = this.getClass().getAnnotation(SubscribeTipAnno.class);
             if (subscribeTipAnno == null || subscribeTipAnno.value()) {
-                subscibeUi(mViewModel.tipObservable(), tip -> {
+                subscibeUi(mViewModel.subscribeTipObservable(), tip -> {
                     if (mView != null) {
                         mView.tip(tip);
                     }

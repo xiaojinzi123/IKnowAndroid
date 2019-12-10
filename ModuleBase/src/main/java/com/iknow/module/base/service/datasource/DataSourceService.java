@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.iknow.lib.beans.main.ArticleBean;
 import com.iknow.lib.beans.main.ArticleDetailBean;
 import com.iknow.lib.beans.main.BannerBean;
+import com.iknow.lib.beans.main.CommonUrlBean;
 import com.iknow.lib.beans.main.GirlBean;
 import com.iknow.lib.beans.user.LoginBean;
 import com.iknow.lib.beans.user.UserInfoBean;
@@ -77,5 +78,11 @@ public interface DataSourceService {
      */
     @NonNull
     Single<List<GirlBean>> getGirlList(int page, int pageSize);
+
+    /**
+     * 获取常用网址列表
+     */
+    @NonNull
+    Single<List<CommonUrlBean>> getAllCommonUrl();
 
 }

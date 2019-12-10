@@ -8,4 +8,8 @@
 
 欢迎大家围观! UI 较丑, 还请见谅!
 
+## 测试账号
+
+账号：123 密码：123
+
 部分界面展示: <img width="200px" src="https://i.loli.net/2019/12/09/ug1A7FWl2NMDwXq.png" />

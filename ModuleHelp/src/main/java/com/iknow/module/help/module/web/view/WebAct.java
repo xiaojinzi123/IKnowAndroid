@@ -2,6 +2,8 @@ package com.iknow.module.help.module.web.view;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebViewClient;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -51,6 +53,11 @@ public class WebAct extends BaseAct<WebViewModel> {
         setSupportActionBar(mBinding.toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        mBinding.web.getSettings().setJavaScriptEnabled(true);
+        mBinding.web.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        mBinding.web.setWebViewClient(new WebViewClient());
+        mBinding.web.setWebChromeClient(new WebChromeClient());
 
         if (!TextUtils.isEmpty(url)) {
             mBinding.web.loadUrl(url);

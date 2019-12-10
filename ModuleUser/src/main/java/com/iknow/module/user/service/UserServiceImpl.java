@@ -1,6 +1,5 @@
 package com.iknow.module.user.service;
 
-import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 
 import com.iknow.lib.beans.user.UserInfoBean;
@@ -11,6 +10,7 @@ import com.xiaojinzi.component.anno.ServiceAnno;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
                 .flatMapMaybe(item -> {
                     if (item.isPresent()) {
                         return Maybe.just(item.get());
-                    }else {
+                    } else {
                         return Maybe.empty();
                     }
                 });
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
                 .flatMapMaybe(item -> {
                     if (item.isPresent()) {
                         return Maybe.just(item.get());
-                    }else {
+                    } else {
                         return Maybe.empty();
                     }
                 });
@@ -102,6 +102,12 @@ public class UserServiceImpl implements UserService {
         return UserInfoManager
                 .getInstance()
                 .updateUser(userInfoBean);
+    }
+
+    @NonNull
+    @Override
+    public Completable signIn() {
+        return Completable.complete().delay(2, TimeUnit.SECONDS);
     }
 
 }

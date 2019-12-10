@@ -51,6 +51,8 @@ public class ModuleInfo {
         public static final String GIRL = "girl";
         // 文章详情界面
         public static final String ARTICLE_DETAIL = "article/detail";
+        // 常用网址界面
+        public static final String COMMON_URL = "common/url";
     }
 
     public static class Datasource {
@@ -62,6 +64,7 @@ public class ModuleInfo {
         public static final String NAME = "help";
         public static final String WEB = "web";
         public static final String ADDRESS_SELECT = "addressSelect";
+        public static final String IMAGE_PREVIEW = "imagePreview";
     }
 
 

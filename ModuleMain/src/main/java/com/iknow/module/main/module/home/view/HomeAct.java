@@ -1,5 +1,6 @@
 package com.iknow.module.main.module.home.view;
 
+import android.os.Process;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -8,9 +9,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.iknow.lib.tools.ResourceUtil;
 import com.iknow.module.base.FragmentInfo;
 import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
+import com.iknow.module.base.view.Tip;
 import com.iknow.module.main.R;
 import com.iknow.module.main.databinding.MainHomeActBinding;
 import com.xiaojinzi.component.anno.RouterAnno;
@@ -51,13 +54,26 @@ public class HomeAct extends BaseAct {
 
     }
 
+    private int keyBackCount = 0;
+    private long lastKeyBackTime;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (mBinding.drawerLayout.isDrawerOpen(Gravity.LEFT)) {
                 mBinding.drawerLayout.closeDrawer(Gravity.LEFT);
-                return true;
+            }else {
+                if (keyBackCount == 0 || System.currentTimeMillis() - lastKeyBackTime > 2 * 1000) {
+                    keyBackCount = 0;
+                    keyBackCount++;
+                    lastKeyBackTime = System.currentTimeMillis();
+                    mView.tip(Tip.normal(ResourceUtil.getString(R.string.resource_please_press_again_to_exit_app)));
+                }else {
+                    finish();
+                    Process.killProcess(Process.myPid());
+                }
             }
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }

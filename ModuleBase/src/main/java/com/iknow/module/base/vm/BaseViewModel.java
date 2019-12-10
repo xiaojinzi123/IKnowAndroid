@@ -60,6 +60,12 @@ public class BaseViewModel extends AndroidViewModel {
     protected CompositeDisposable disposables = new CompositeDisposable();
 
     /**
+     * 表示一个初始化的状态.
+     */
+    @NonNull
+    protected final Subject<Boolean> initSubject = BehaviorSubject.createDefault(false);
+
+    /**
      * 表示 loading 状态,false 表示关闭 loading 弹框,true 表示打开
      * 实际是一个 {@link Subject}
      */
@@ -80,7 +86,18 @@ public class BaseViewModel extends AndroidViewModel {
      */
     @NonNull
     @HotObservableAnno
-    public Observable<Boolean> loadingObservable() {
+    public Observable<Boolean> subscribeInitObservable() {
+        return initSubject;
+    }
+
+    /**
+     * 返回的热信号
+     *
+     * @return 返回的热信号
+     */
+    @NonNull
+    @HotObservableAnno
+    public Observable<Boolean> subscribeLoadingObservable() {
         return loadingSubject;
     }
 
@@ -91,7 +108,7 @@ public class BaseViewModel extends AndroidViewModel {
      */
     @NonNull
     @HotObservableAnno
-    public Observable<Tip> tipObservable() {
+    public Observable<Tip> subscribeTipObservable() {
         return tipSubject;
     }
 

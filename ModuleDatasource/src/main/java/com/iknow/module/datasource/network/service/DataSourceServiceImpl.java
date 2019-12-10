@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.iknow.lib.beans.main.ArticleBean;
 import com.iknow.lib.beans.main.ArticleDetailBean;
 import com.iknow.lib.beans.main.BannerBean;
+import com.iknow.lib.beans.main.CommonUrlBean;
 import com.iknow.lib.beans.main.GirlBean;
 import com.iknow.lib.beans.user.LoginBean;
 import com.iknow.lib.beans.user.UserInfoBean;
@@ -72,4 +73,13 @@ public class DataSourceServiceImpl implements DataSourceService {
                 .getIknowApi()
                 .getGirlList(page, pageSize);
     }
+
+    @NonNull
+    @Override
+    public Single<List<CommonUrlBean>> getAllCommonUrl() {
+        return ApiManager.getInstance()
+                .getIknowApi()
+                .getAllCommonUrl();
+    }
+
 }
