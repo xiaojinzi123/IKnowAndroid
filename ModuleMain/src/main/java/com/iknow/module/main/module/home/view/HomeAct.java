@@ -5,19 +5,26 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.iknow.lib.tools.ResourceUtil;
 import com.iknow.module.base.FragmentInfo;
 import com.iknow.module.base.ModuleInfo;
+import com.iknow.module.base.service.main.HomeMenuService;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.main.R;
 import com.iknow.module.main.databinding.MainHomeActBinding;
 import com.xiaojinzi.component.anno.RouterAnno;
 import com.xiaojinzi.component.impl.Router;
+import com.xiaojinzi.component.impl.service.RxServiceManager;
+import com.xiaojinzi.component.impl.service.ServiceManager;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * 主界面
@@ -42,7 +49,21 @@ public class HomeAct extends BaseAct {
     protected void onInit() {
         super.onInit();
         setSupportActionBar(mBinding.toolbar);
-        mBinding.toolbar.setNavigationOnClickListener(v -> mBinding.drawerLayout.openDrawer(Gravity.LEFT));
+        mBinding.toolbar.setNavigationOnClickListener(v -> ServiceManager.get(HomeMenuService.class).openMenu());
+
+        disposables.add(
+                RxServiceManager.with(HomeMenuService.class)
+                        .flatMapObservable(service -> service.subscribeMenuState())
+                        .distinctUntilChanged()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(b -> {
+                            if (b) {
+                                mBinding.drawerLayout.openDrawer(Gravity.LEFT);
+                            } else {
+                                mBinding.drawerLayout.closeDrawer(Gravity.LEFT);
+                            }
+                        })
+        );
 
         // 拿到 HomeFragment
         Fragment homeFragment = Router.with(FragmentInfo.Main.HOME).navigate();
@@ -52,6 +73,28 @@ public class HomeAct extends BaseAct {
             ft.commit();
         }
 
+        mBinding.drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                ServiceManager.get(HomeMenuService.class)
+                        .openMenu();
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+                ServiceManager.get(HomeMenuService.class)
+                        .closeMenu();
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+            }
+        });
+
     }
 
     private int keyBackCount = 0;
@@ -60,15 +103,16 @@ public class HomeAct extends BaseAct {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (mBinding.drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-                mBinding.drawerLayout.closeDrawer(Gravity.LEFT);
-            }else {
+            HomeMenuService homeMenuService = ServiceManager.get(HomeMenuService.class);
+            if (!homeMenuService.isMenuClosed()) {
+                homeMenuService.closeMenu();
+            } else {
                 if (keyBackCount == 0 || System.currentTimeMillis() - lastKeyBackTime > 2 * 1000) {
                     keyBackCount = 0;
                     keyBackCount++;
                     lastKeyBackTime = System.currentTimeMillis();
                     mView.tip(Tip.normal(ResourceUtil.getString(R.string.resource_please_press_again_to_exit_app)));
-                }else {
+                } else {
                     finish();
                     Process.killProcess(Process.myPid());
                 }

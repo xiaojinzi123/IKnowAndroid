@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.iknow.lib.tools.ResourceUtil;
 import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.help.R;
@@ -58,7 +59,7 @@ public class ImagePreviewAct extends BaseAct<ImagePreviewViewModel> {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         subscibeUi(mViewModel.subscribeImageIndexObservable(), result -> {
-            toolbar.setTitle(String.format("(%d)", result));
+            toolbar.setTitle(String.format(ResourceUtil.getString(R.string.resource_page_index_of), result + 1));
         });
 
         vp.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

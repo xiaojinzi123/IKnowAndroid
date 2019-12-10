@@ -1,7 +1,6 @@
 package com.iknow.module.main.module.home.view;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,6 +19,7 @@ import com.iknow.lib.beans.user.UserInfoBean;
 import com.iknow.lib.tools.ResourceUtil;
 import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.service.CommonService;
+import com.iknow.module.base.service.main.HomeMenuService;
 import com.iknow.module.base.service.user.UserService;
 import com.iknow.module.main.R;
 import com.xiaojinzi.component.impl.Router;
@@ -60,18 +60,25 @@ public class HomeMenuWidget extends FrameLayout {
             Router.with(context)
                     .host(ModuleInfo.User.NAME)
                     .path(ModuleInfo.User.EDIT)
+                    .afterJumpAction(() -> closeMenu())
                     .forward();
         });
 
         iv_user_bg.setOnClickListener(view -> {
-            String url = (String) view.getTag(1);
-            if (!TextUtils.isEmpty(url)) {
-                Router.with(context)
-                        .host(ModuleInfo.Help.NAME)
-                        .path(ModuleInfo.Help.IMAGE_PREVIEW)
-                        .putStringArrayList("images", new ArrayList<>(Arrays.asList(url)))
-                        .forward();
-            }
+            disposables.add(
+                    RxServiceManager.with(UserService.class)
+                            .flatMapMaybe(service -> service.getUserInfo())
+                            .map(item -> item.getBackgroundUrl() == null ? "" : item.getBackgroundUrl())
+                            .filter(item -> !item.isEmpty())
+                            .subscribe(url -> {
+                                Router.with(context)
+                                        .host(ModuleInfo.Help.NAME)
+                                        .path(ModuleInfo.Help.IMAGE_PREVIEW)
+                                        .putStringArrayList("images", new ArrayList<>(Arrays.asList(url)))
+                                        .afterJumpAction(() -> closeMenu())
+                                        .forward();
+                            })
+            );
         });
 
         tv_name.setOnClickListener(view -> {
@@ -83,6 +90,7 @@ public class HomeMenuWidget extends FrameLayout {
                                     .with(context)
                                     .host(ModuleInfo.User.NAME)
                                     .path(ModuleInfo.User.LOGIN)
+                                    .afterJumpAction(() -> closeMenu())
                                     .forward()
                             )
             );
@@ -103,6 +111,7 @@ public class HomeMenuWidget extends FrameLayout {
             Router.with(context)
                     .host(ModuleInfo.Main.NAME)
                     .path(ModuleInfo.Main.COMMON_URL)
+                    .afterJumpAction(() -> closeMenu())
                     .forward();
         });
 
@@ -110,6 +119,7 @@ public class HomeMenuWidget extends FrameLayout {
             Router.with(context)
                     .host(ModuleInfo.Main.NAME)
                     .path(ModuleInfo.Main.GIRL)
+                    .afterJumpAction(() -> closeMenu())
                     .forward();
         });
 
@@ -117,6 +127,7 @@ public class HomeMenuWidget extends FrameLayout {
             Router.with(context)
                     .host(ModuleInfo.Main.NAME)
                     .path(ModuleInfo.Main.SETTING)
+                    .afterJumpAction(() -> closeMenu())
                     .forward();
         });
 
@@ -124,6 +135,7 @@ public class HomeMenuWidget extends FrameLayout {
             Router.with(context)
                     .host(ModuleInfo.Help.NAME)
                     .path(ModuleInfo.Help.ADDRESS_SELECT)
+                    .afterJumpAction(() -> closeMenu())
                     .forward();
         });
 
@@ -160,7 +172,6 @@ public class HomeMenuWidget extends FrameLayout {
                                     // 登录提示
                                     tv_name.setText(ResourceUtil.getString(R.string.resource_click_to_login));
                                 }
-                                iv_user_bg.setTag(1, userBg);
                                 Glide.with(context)
                                         .load(userBg)
                                         .placeholder(userService.getDefaultUserBg())
@@ -187,6 +198,11 @@ public class HomeMenuWidget extends FrameLayout {
                         })
         );
 
+    }
+
+    private void closeMenu() {
+        ServiceManager.get(HomeMenuService.class)
+                .closeMenu();
     }
 
 }

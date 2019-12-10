@@ -23,4 +23,5 @@
     <string name="resource_reboot_application">重启应用</string>
     <string name="resource_common_url">常用网址</string>
     <string name="resource_sign_in">签到</string>
+    <string name="resource_page_index_of">第%d张</string>
 </resources>
