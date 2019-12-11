@@ -53,6 +53,8 @@ public class ModuleInfo {
         public static final String ARTICLE_DETAIL = "article/detail";
         // 常用网址界面
         public static final String COMMON_URL = "common/url";
+        // 关于界面
+        public static final String ABOAT = "aboat";
     }
 
     public static class Datasource {

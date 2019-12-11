@@ -9,12 +9,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Lifecycle;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.iknow.lib.beans.user.UserInfoBean;
 import com.iknow.lib.tools.ResourceUtil;
 import com.iknow.module.base.ModuleInfo;
@@ -34,6 +39,7 @@ import io.reactivex.disposables.CompositeDisposable;
 
 public class HomeMenuWidget extends FrameLayout {
 
+
     public HomeMenuWidget(@NonNull Context context) {
         this(context, null);
     }
@@ -51,10 +57,61 @@ public class HomeMenuWidget extends FrameLayout {
         tv_name = findViewById(R.id.tv_name);
         tv_sign_in = findViewById(R.id.tv_sign_in);
         cl_header = findViewById(R.id.cl_header);
-        ll_common_url = findViewById(R.id.ll_common_url);
-        ll_beauty_girl = findViewById(R.id.ll_beauty_girl);
+        rv_items = findViewById(R.id.rv_items);
         ll_setting = findViewById(R.id.ll_setting);
         ll_address = findViewById(R.id.ll_address);
+
+        LinearLayoutManager manager = new LinearLayoutManager(context);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        rv_items.setLayoutManager(manager);
+
+        class Item {
+            @DrawableRes
+            public final int iconRsd;
+            public final String name;
+            // 跳转的 url
+            public final String url;
+
+            public Item(int iconRsd, String name, String url) {
+                this.iconRsd = iconRsd;
+                this.name = name;
+                this.url = url;
+            }
+        }
+
+        Item[] items = new Item[]{
+                new Item(
+                        R.drawable.main_home_common_url_item_icon,
+                        "常用网址",
+                        String.format("router://%s/%s", ModuleInfo.Main.NAME, ModuleInfo.Main.COMMON_URL)
+                ),
+                new Item(
+                        R.drawable.main_home_girl_item_icon,
+                        "美女图片",
+                        String.format("router://%s/%s", ModuleInfo.Main.NAME, ModuleInfo.Main.GIRL)
+                ),
+                new Item(
+                        R.drawable.main_home_menu_item_aboat_icon,
+                        "关于我们",
+                        String.format("router://%s/%s", ModuleInfo.Main.NAME, ModuleInfo.Main.ABOAT)
+                )
+        };
+
+        BaseQuickAdapter<Item, BaseViewHolder> adapter = new BaseQuickAdapter<Item, BaseViewHolder>(R.layout.main_home_menu_item, Arrays.asList(items)) {
+            @Override
+            protected void convert(@NonNull BaseViewHolder helper, Item item) {
+                ImageView iv = helper.getView(R.id.iv_icon);
+                TextView tv_name = helper.getView(R.id.tv_name);
+                iv.setImageResource(item.iconRsd);
+                tv_name.setText(item.name);
+            }
+        };
+        rv_items.setAdapter(adapter);
+        adapter.setOnItemClickListener((adapter1, view, position) -> {
+            Router.with(context)
+                    .url(adapter.getData().get(position).url)
+                    .forward();
+        });
 
         cl_header.setOnClickListener(view -> {
             Router.with(context)
@@ -107,22 +164,6 @@ public class HomeMenuWidget extends FrameLayout {
             );
         });
 
-        ll_common_url.setOnClickListener(view -> {
-            Router.with(context)
-                    .host(ModuleInfo.Main.NAME)
-                    .path(ModuleInfo.Main.COMMON_URL)
-                    .afterJumpAction(() -> closeMenu())
-                    .forward();
-        });
-
-        ll_beauty_girl.setOnClickListener(view -> {
-            Router.with(context)
-                    .host(ModuleInfo.Main.NAME)
-                    .path(ModuleInfo.Main.GIRL)
-                    .afterJumpAction(() -> closeMenu())
-                    .forward();
-        });
-
         ll_setting.setOnClickListener(view -> {
             Router.with(context)
                     .host(ModuleInfo.Main.NAME)
@@ -148,8 +189,7 @@ public class HomeMenuWidget extends FrameLayout {
     private TextView tv_name;
     private TextView tv_sign_in;
     private ConstraintLayout cl_header;
-    private LinearLayout ll_common_url;
-    private LinearLayout ll_beauty_girl;
+    private RecyclerView rv_items;
     private LinearLayout ll_setting;
     private LinearLayout ll_address;
 
