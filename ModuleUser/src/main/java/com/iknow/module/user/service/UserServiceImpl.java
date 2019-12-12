@@ -1,12 +1,17 @@
 package com.iknow.module.user.service;
 
+import android.app.Activity;
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import com.iknow.lib.beans.user.UserInfoBean;
+import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.service.user.UserService;
 import com.iknow.module.user.R;
 import com.iknow.module.user.UserInfoManager;
 import com.xiaojinzi.component.anno.ServiceAnno;
+import com.xiaojinzi.component.impl.RxRouter;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -22,6 +27,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isLogin() {
         return UserInfoManager.getInstance().isLogin();
+    }
+
+    @NonNull
+    @Override
+    public Completable login(Context context) {
+        return RxRouter.with(context)
+                .host(ModuleInfo.User.NAME)
+                .path(ModuleInfo.User.LOGIN)
+                .requestCodeRandom()
+                .resultCodeMatchCall(Activity.RESULT_OK);
     }
 
     @NonNull

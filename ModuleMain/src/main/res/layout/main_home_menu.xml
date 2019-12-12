@@ -53,10 +53,10 @@
                 android:gravity="center"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="5dp"
+                android:text="@string/resource_sign_in"
                 android:textColor="@color/resource_white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                tools:text="@string/resource_sign_in" />
+                app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

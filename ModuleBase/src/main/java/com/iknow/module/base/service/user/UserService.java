@@ -1,5 +1,7 @@
 package com.iknow.module.base.service.user;
 
+import android.content.Context;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
@@ -21,6 +23,14 @@ public interface UserService {
      * 是否已经登录
      */
     boolean isLogin();
+
+    /**
+     * 登陆
+     *
+     * @param context 必须和 Activity 相关的 Context
+     */
+    @NonNull
+    Completable login(@NonNull Context context);
 
     /**
      * 登出
@@ -87,7 +97,6 @@ public interface UserService {
      */
     @NonNull
     Completable signIn();
-
 
 
 }

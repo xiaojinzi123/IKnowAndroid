@@ -139,18 +139,16 @@ public class HomeMenuWidget extends FrameLayout {
             );
         });
 
+        iv_user_icon.setOnClickListener(view -> {
+            gotoUserInfoEditView();
+        });
+
         tv_name.setOnClickListener(view -> {
             disposables.add(
                     RxServiceManager.with(UserService.class)
                             .map(item -> item.isLogin())
                             .filter(item -> !item)
-                            .subscribe(b -> Router
-                                    .with(context)
-                                    .host(ModuleInfo.User.NAME)
-                                    .path(ModuleInfo.User.LOGIN)
-                                    .afterJumpAction(() -> closeMenu())
-                                    .forward()
-                            )
+                            .subscribe(b -> gotoLoginView())
             );
         });
 
@@ -242,8 +240,25 @@ public class HomeMenuWidget extends FrameLayout {
     }
 
     private void closeMenu() {
-        ServiceManager.get(HomeMenuService.class)
-                .closeMenu();
+        ServiceManager.get(HomeMenuService.class).closeMenu();
+    }
+
+    private void gotoUserInfoEditView() {
+        Router
+                .with(getContext())
+                .host(ModuleInfo.User.NAME)
+                .path(ModuleInfo.User.EDIT)
+                .afterJumpAction(() -> closeMenu())
+                .forward();
+    }
+
+    private void gotoLoginView() {
+        Router
+                .with(getContext())
+                .host(ModuleInfo.User.NAME)
+                .path(ModuleInfo.User.LOGIN)
+                .afterJumpAction(() -> closeMenu())
+                .forward();
     }
 
 }

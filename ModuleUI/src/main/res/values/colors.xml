@@ -4,10 +4,10 @@
     <color name="resourceColorPrimaryDark">#00574B</color>
     <color name="resourceColorAccent">#D81B60</color>
     <color name="resource_white">#FFFFFF</color>
-    <color name="resource_theme">#98D373</color>
+    <color name="resource_theme">#00796B</color>
 
     <!--整个项目的主风格-->
-    <color name="ui_primary">#98D373</color>
+    <color name="ui_primary">@color/resource_theme</color>
     <!--整个项目的不可用的时候的风格-->
     <color name="ui_disabled">#EFD4D4</color>
 
