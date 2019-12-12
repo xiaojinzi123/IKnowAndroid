@@ -23,8 +23,8 @@
 
         <ImageView
                 android:id="@+id/iv_user_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="@dimen/ui_content_margin"
                 android:layout_marginBottom="80dp"
                 android:scaleType="fitXY"
@@ -51,8 +51,8 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/main_home_sign_in_bg"
                 android:gravity="center"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="5dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="3dp"
                 android:text="@string/resource_sign_in"
                 android:textColor="@color/resource_white"
                 app:layout_constraintBottom_toBottomOf="parent"

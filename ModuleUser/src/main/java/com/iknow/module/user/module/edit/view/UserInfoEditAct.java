@@ -2,17 +2,17 @@ package com.iknow.module.user.module.edit.view;
 
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
 import com.iknow.module.base.InterceptorInfo;
 import com.iknow.module.base.ModuleInfo;
-import com.iknow.module.base.service.user.UserService;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserUserInfoEditActBinding;
 import com.iknow.module.user.module.edit.vm.UserInfoEditViewModel;
 import com.xiaojinzi.component.anno.RouterAnno;
-import com.xiaojinzi.component.impl.service.RxServiceManager;
 
 /**
  * 此界面改的可不只是远程的用户信息.
@@ -36,6 +36,12 @@ public class UserInfoEditAct extends BaseAct<UserInfoEditViewModel> {
         return mBinding.getRoot();
     }
 
+    @Nullable
+    @Override
+    protected Class<? extends UserInfoEditViewModel> getViewModelClass() {
+        return UserInfoEditViewModel.class;
+    }
+
     @Override
     protected void onInjectView() {
         super.onInjectView();
@@ -47,17 +53,15 @@ public class UserInfoEditAct extends BaseAct<UserInfoEditViewModel> {
         setSupportActionBar(mBinding.toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        mBinding.btTest.setOnClickListener(view -> {
-
-            RxServiceManager.with(UserService.class)
-                    .flatMapMaybe(service -> service.getUserInfo())
-                    .doOnSuccess(item -> item.setName("修改过的名称"))
-                    .flatMapCompletable(item ->
-                            RxServiceManager.with(UserService.class)
-                                    .flatMapCompletable(innerItem -> innerItem.updateUser(item))
-                    )
-                    .subscribe();
-
+        subscibeUi(mViewModel.subscribeUserInfo(), userInfo -> {
+            mBinding.tvUserName.setText(userInfo.getName());
+            Glide.with(mContext)
+                    .load(userInfo.getBackgroundUrl())
+                    .into(mBinding.ivBg);
+            Glide.with(mContext)
+                    .load(userInfo.getAvatar())
+                    .circleCrop()
+                    .into(mBinding.ivAvatar);
         });
 
     }

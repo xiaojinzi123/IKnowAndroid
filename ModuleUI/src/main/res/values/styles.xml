@@ -16,6 +16,7 @@
         <item name="android:windowActionBar">false</item>
         <item name="toolbarStyle">@style/AppToolbar</item>
         <item name="buttonStyle">@style/UiButton</item>
+        <item name="android:textViewStyle">@style/UiTextView</item>
     </style>
 
     <style name="AppToolbar" parent="@style/Widget.AppCompat.Toolbar">
@@ -31,6 +32,10 @@
     <style name="UiButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/ui_button_selector</item>
         <item name="android:textColor">@color/resource_white</item>
+    </style>
+
+    <style name="UiTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/ui_text</item>
     </style>
 
     <!-- Dialog进度条 -->
@@ -62,4 +67,5 @@
         <item name="android:layout_marginLeft">@dimen/d_32</item>
         <item name="android:layout_marginRight">@dimen/d_32</item>
     </style>
+
 </resources>

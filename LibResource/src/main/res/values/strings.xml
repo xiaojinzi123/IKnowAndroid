@@ -30,4 +30,6 @@
     <string name="resource_page_index_of">第%d张</string>
     <string name="resource_aboat">关于</string>
     <string name="resource_resend_sms_code">重新发送(%ds)</string>
+    <string name="resource_change_avatar">更换头像</string>
+    <string name="resource_nick_name">昵称</string>
 </resources>
