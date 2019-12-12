@@ -9,7 +9,7 @@
     <!--整个项目的主风格-->
     <color name="ui_primary">@color/resource_theme</color>
     <!--整个项目的不可用的时候的风格-->
-    <color name="ui_disabled">#EFD4D4</color>
+    <color name="ui_disabled">#D5C0C0</color>
 
     <color name="ui_text">#333333</color>
     <color name="ui_text1">#3CDACC</color>
@@ -23,4 +23,5 @@
     <color name="color_text1">#000000</color>
     <color name="color_text2">#99000000</color>
     <color name="color_text3">#59000000</color>
+
 </resources>
