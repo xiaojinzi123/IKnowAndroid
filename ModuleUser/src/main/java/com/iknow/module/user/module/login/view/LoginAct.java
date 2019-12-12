@@ -8,7 +8,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 
 import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
@@ -80,10 +79,7 @@ public class LoginAct extends BaseAct<LoginViewModel> {
     protected void onInit() {
         super.onInit();
         setSupportActionBar(mBinding.toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initListener();
         initTabLayout();
 
@@ -144,6 +140,7 @@ public class LoginAct extends BaseAct<LoginViewModel> {
         Router.with(mContext)
                 .host(ModuleInfo.User.NAME)
                 .path(ModuleInfo.User.LOGIN_REGISTER)
+                .requestCodeRandom()
                 .forwardForResultCodeMatch(new CallbackAdapter() {
                     @Override
                     public void onSuccess(@NonNull RouterResult result) {

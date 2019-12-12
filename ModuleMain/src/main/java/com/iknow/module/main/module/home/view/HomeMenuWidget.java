@@ -110,6 +110,7 @@ public class HomeMenuWidget extends FrameLayout {
         adapter.setOnItemClickListener((adapter1, view, position) -> {
             Router.with(context)
                     .url(adapter.getData().get(position).url)
+                    .afterJumpAction(() -> closeMenu())
                     .forward();
         });
 

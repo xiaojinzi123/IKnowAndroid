@@ -5,6 +5,7 @@ import com.iknow.lib.beans.main.ArticleDetailBean;
 import com.iknow.lib.beans.main.BannerBean;
 import com.iknow.lib.beans.main.CommonUrlBean;
 import com.iknow.lib.beans.main.GirlBean;
+import com.iknow.lib.beans.user.CheckCodeBean;
 import com.iknow.lib.beans.user.LoginBean;
 import com.iknow.lib.beans.user.UserInfoBean;
 import com.iknow.module.datasource.network.support.RemoveShell;
@@ -71,5 +72,23 @@ public interface IknowApi {
     @RemoveShell
     @GET("common/url/listAll")
     Single<List<CommonUrlBean>> getAllCommonUrl();
+
+    @RemoveShell
+    @GET("checkCode")
+    Single<CheckCodeBean> getCheckCode();
+
+    @RemoveShell
+    @GET("user/isUserNameExist")
+    Single<Boolean> isUserNameExist(@Query("userName") String userName);
+
+    @RemoveShell
+    @FormUrlEncoded
+    @POST("user/register1")
+    Single<LoginBean> register(
+            @Field("userName") String userName,
+            @Field("password") String password,
+            @Field("checkCodeUid") String checkCodeUid,
+            @Field("checkCode") String checkCode
+    );
 
 }

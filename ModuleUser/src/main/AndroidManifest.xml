@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="com.iknow.module.user">
 
-    <application>
+    <application android:theme="@style/AppTheme">
         <activity android:name=".module.edit.view.UserInfoEditAct" />
 
         <activity
-                android:name=".module.login.view.RegisterActivity"
+                android:name=".module.login.view.RegisterAct"
                 android:label="@string/resource_register"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait" />

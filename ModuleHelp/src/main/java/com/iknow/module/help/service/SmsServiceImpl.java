@@ -10,6 +10,7 @@ import com.xiaojinzi.component.anno.ServiceAnno;
 
 import cn.smssdk.SMSSDK;
 import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 @ServiceAnno(SmsService.class)
 public class SmsServiceImpl implements SmsService {
@@ -20,7 +21,9 @@ public class SmsServiceImpl implements SmsService {
         if (TextUtils.isEmpty(phone)) {
             return Completable.error(new ServiceException("手机号码不能为空"));
         }
-        return Completable.fromAction(() -> SMSSDK.getVerificationCode("86", phone));
+        return Completable
+                .fromAction(() -> SMSSDK.getVerificationCode("86", phone))
+                .subscribeOn(AndroidSchedulers.mainThread());
 
         /*return Completable.fromAction(() -> {
             RegisterPage page = new RegisterPage();

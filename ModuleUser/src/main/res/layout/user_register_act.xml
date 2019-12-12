@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/ll_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".module.login.view.RegisterAct">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/resource_register" />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_user_name"
+                style="@style/Login_TextInputLayout_Style"
+                android:layout_marginTop="20dp"
+                android:hint="@string/resource_please_input_user_nick_name"
+                app:counterEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_password"
+                style="@style/Login_TextInputLayout_Style"
+                android:hint="@string/resource_please_input_password"
+                app:counterEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_password_repeat"
+                style="@style/Login_TextInputLayout_Style"
+                android:hint="@string/resource_please_input_password_again"
+                app:counterEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_password_repeat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tl_check_code"
+                    style="@style/Login_TextInputLayout_Style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/resource_please_input_check_code"
+                    app:counterEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_check_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                    android:id="@+id/iv_check_code"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="fitCenter"
+                    tools:src="@drawable/user_common_check_code_fail" />
+
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/register_click_tv"
+                style="@style/Common_Button_Style"
+                android:layout_marginTop="@dimen/d_40"
+                android:text="@string/resource_register_immediatly" />
+
+    </LinearLayout>
+</layout>

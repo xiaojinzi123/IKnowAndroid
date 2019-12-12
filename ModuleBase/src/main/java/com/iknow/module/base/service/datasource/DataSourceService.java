@@ -7,7 +7,9 @@ import com.iknow.lib.beans.main.ArticleDetailBean;
 import com.iknow.lib.beans.main.BannerBean;
 import com.iknow.lib.beans.main.CommonUrlBean;
 import com.iknow.lib.beans.main.GirlBean;
+import com.iknow.lib.beans.user.CheckCodeBean;
 import com.iknow.lib.beans.user.LoginBean;
+import com.iknow.lib.beans.user.RegisterBeanReq;
 import com.iknow.lib.beans.user.UserInfoBean;
 
 import java.util.List;
@@ -38,13 +40,9 @@ public interface DataSourceService {
 
     /**
      * 注册
-     *
-     * @param phoneNum 手机号码
-     * @param userName 用户昵称
-     * @return 登录成功
      */
     @NonNull
-    Single<LoginBean> register(@NonNull String phoneNum, @NonNull String userName);
+    Single<LoginBean> register(@NonNull RegisterBeanReq req);
 
     /**
      * 获取banner 的数据
@@ -84,5 +82,17 @@ public interface DataSourceService {
      */
     @NonNull
     Single<List<CommonUrlBean>> getAllCommonUrl();
+
+    /**
+     * 获取验证码
+     */
+    @NonNull
+    Single<CheckCodeBean> getCheckCode();
+
+    /**
+     * 用户名是否存在
+     */
+    @NonNull
+    Single<Boolean> isUserNameExist(String userName);
 
 }

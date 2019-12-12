@@ -7,7 +7,9 @@ import com.iknow.lib.beans.main.ArticleDetailBean;
 import com.iknow.lib.beans.main.BannerBean;
 import com.iknow.lib.beans.main.CommonUrlBean;
 import com.iknow.lib.beans.main.GirlBean;
+import com.iknow.lib.beans.user.CheckCodeBean;
 import com.iknow.lib.beans.user.LoginBean;
+import com.iknow.lib.beans.user.RegisterBeanReq;
 import com.iknow.lib.beans.user.UserInfoBean;
 import com.iknow.module.base.service.datasource.DataSourceService;
 import com.iknow.module.datasource.network.ApiManager;
@@ -37,10 +39,13 @@ public class DataSourceServiceImpl implements DataSourceService {
     }
 
     @Override
-    public Single<LoginBean> register(@NonNull String phoneNum, @NonNull String userName) {
+    public Single<LoginBean> register(@NonNull RegisterBeanReq req) {
         return ApiManager.getInstance()
                 .getIknowApi()
-                .register(phoneNum, userName);
+                .register(
+                        req.getUserName(), req.getPassword(),
+                        req.getCheckCodeUid(), req.getCheckCode()
+                );
     }
 
     @Override
@@ -80,6 +85,22 @@ public class DataSourceServiceImpl implements DataSourceService {
         return ApiManager.getInstance()
                 .getIknowApi()
                 .getAllCommonUrl();
+    }
+
+    @NonNull
+    @Override
+    public Single<CheckCodeBean> getCheckCode() {
+        return ApiManager.getInstance()
+                .getIknowApi()
+                .getCheckCode();
+    }
+
+    @NonNull
+    @Override
+    public Single<Boolean> isUserNameExist(String userName) {
+        return ApiManager.getInstance()
+                .getIknowApi()
+                .isUserNameExist(userName);
     }
 
 }
