@@ -15,7 +15,7 @@ import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.main.R;
 import com.iknow.module.main.databinding.MainArticleDetailActBinding;
 import com.iknow.module.main.module.article.vm.ArticleDetailViewModel;
-import com.xiaojinzi.component.anno.FiledAutowiredAnno;
+import com.xiaojinzi.component.anno.FieldAutowiredAnno;
 import com.xiaojinzi.component.anno.RouterAnno;
 import com.xiaojinzi.component.impl.Router;
 
@@ -32,7 +32,7 @@ public class ArticleDetailAct extends BaseAct<ArticleDetailViewModel> {
 
     MainArticleDetailActBinding mBinding;
 
-    @FiledAutowiredAnno("articleId")
+    @FieldAutowiredAnno("articleId")
     String articleId;
 
     @Nullable

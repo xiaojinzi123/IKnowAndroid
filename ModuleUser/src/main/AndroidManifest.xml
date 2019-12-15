@@ -3,8 +3,8 @@
         package="com.iknow.module.user">
 
     <application android:theme="@style/AppTheme">
+        <activity android:name=".module.info.view.UserInfoAct"></activity>
         <activity android:name=".module.edit.view.UserInfoEditAct" />
-
         <activity
                 android:name=".module.login.view.RegisterAct"
                 android:label="@string/resource_register"

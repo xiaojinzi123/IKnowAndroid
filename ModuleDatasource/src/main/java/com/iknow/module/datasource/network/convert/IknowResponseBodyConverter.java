@@ -59,8 +59,6 @@ final class IknowResponseBodyConverter<T> implements Converter<ResponseBody, T> 
             throw new IOException(e);
         }
 
-        System.out.println("body = " + body);
-
         Result response;
         try {
             response = gson.fromJson(body, Result.class);

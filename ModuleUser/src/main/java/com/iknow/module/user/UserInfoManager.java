@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.subjects.BehaviorSubject;
 
 public class UserInfoManager {
@@ -58,9 +59,11 @@ public class UserInfoManager {
         return userInfoSubject;
     }
 
-    public boolean isLogin() {
-        return userInfoSubject.getValue() != null
-                && userInfoSubject.getValue().isPresent();
+    public Single<Boolean> isLogin() {
+        return Single.just(
+                userInfoSubject.getValue() != null
+                        && userInfoSubject.getValue().isPresent()
+        );
     }
 
     @NonNull

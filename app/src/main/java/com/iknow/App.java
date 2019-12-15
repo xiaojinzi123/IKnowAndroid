@@ -20,6 +20,7 @@ public class App extends MultiDexApplication {
 
         // 初始化组件化
         Component.init(this, BuildConfig.DEBUG);
+        // Component.openInitOptimize();
         ModuleManager.getInstance().registerArr(
                 ModuleInfo.Base.NAME,
                 ModuleInfo.App.NAME,

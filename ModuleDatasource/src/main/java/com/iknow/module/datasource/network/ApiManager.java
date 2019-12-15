@@ -21,6 +21,7 @@ public class ApiManager {
     public ApiManager() {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(new OkHttpClient.Builder()
+                        .addInterceptor(new AuthorizationInterceptor())
                         .connectTimeout(30, TimeUnit.SECONDS)
                         .readTimeout(30, TimeUnit.SECONDS)
                         .writeTimeout(30, TimeUnit.SECONDS)

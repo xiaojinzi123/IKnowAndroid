@@ -32,4 +32,5 @@
     <string name="resource_resend_sms_code">重新发送(%ds)</string>
     <string name="resource_change_avatar">更换头像</string>
     <string name="resource_nick_name">昵称</string>
+    <string name="resource_point_format">积分(%d)</string>
 </resources>

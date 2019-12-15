@@ -1,6 +1,7 @@
 package com.iknow.module.main.module.home.view;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -26,6 +27,7 @@ import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.service.CommonService;
 import com.iknow.module.base.service.main.HomeMenuService;
 import com.iknow.module.base.service.user.UserService;
+import com.iknow.module.base.support.ErrorUtil;
 import com.iknow.module.main.R;
 import com.xiaojinzi.component.impl.Router;
 import com.xiaojinzi.component.impl.service.RxServiceManager;
@@ -36,6 +38,7 @@ import java.util.Arrays;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class HomeMenuWidget extends FrameLayout {
 
@@ -55,6 +58,7 @@ public class HomeMenuWidget extends FrameLayout {
         iv_user_bg = findViewById(R.id.iv_user_bg);
         iv_user_icon = findViewById(R.id.iv_user_icon);
         tv_name = findViewById(R.id.tv_name);
+        tv_point = findViewById(R.id.tv_point);
         tv_sign_in = findViewById(R.id.tv_sign_in);
         cl_header = findViewById(R.id.cl_header);
         rv_items = findViewById(R.id.rv_items);
@@ -146,7 +150,7 @@ public class HomeMenuWidget extends FrameLayout {
         tv_name.setOnClickListener(view -> {
             disposables.add(
                     RxServiceManager.with(UserService.class)
-                            .map(item -> item.isLogin())
+                            .flatMap(item -> item.isLogin())
                             .filter(item -> !item)
                             .subscribe(b -> gotoLoginView())
             );
@@ -157,9 +161,18 @@ public class HomeMenuWidget extends FrameLayout {
                     RxServiceManager.with(UserService.class)
                             .flatMapCompletable(service -> service.signIn())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(() -> {
-                                Toast.makeText(context, "签到成功", Toast.LENGTH_SHORT).show();
-                            })
+                            .subscribeOn(Schedulers.io())
+                            .subscribe(
+                                    () -> Toast.makeText(context, "签到成功", Toast.LENGTH_SHORT).show(),
+                                    error -> {
+                                        String msg = ErrorUtil.getServiceExceptionMsg(error);
+                                        if (TextUtils.isEmpty(msg)) {
+                                            Toast.makeText(context, "未知错误", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                            )
             );
         });
 
@@ -186,6 +199,7 @@ public class HomeMenuWidget extends FrameLayout {
     private ImageView iv_user_bg;
     private ImageView iv_user_icon;
     private TextView tv_name;
+    private TextView tv_point;
     private TextView tv_sign_in;
     private ConstraintLayout cl_header;
     private RecyclerView rv_items;
@@ -205,6 +219,12 @@ public class HomeMenuWidget extends FrameLayout {
                                 if (item.isPresent()) {
                                     UserInfoBean userInfo = item.get();
                                     tv_name.setText(userInfo.getName());
+                                    tv_point.setText(
+                                            String.format(
+                                                    ResourceUtil.getString(R.string.resource_point_format),
+                                                    userInfo.getPoint()
+                                            )
+                                    );
                                     userBg = userInfo.getBackgroundUrl();
                                     userAvatar = userInfo.getAvatar();
                                 } else {

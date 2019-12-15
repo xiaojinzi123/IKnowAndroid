@@ -38,6 +38,8 @@ public class ModuleInfo {
         public static final String LOGIN_REGISTER = "login_register";
         // 用户信息标记界面
         public static final String EDIT = "edit";
+        // 个人中心界面
+        public static final String INFO = "info";
     }
 
     public static class Main {

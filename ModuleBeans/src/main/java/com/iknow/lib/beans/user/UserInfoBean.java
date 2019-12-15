@@ -9,6 +9,7 @@ public class UserInfoBean {
     private String name;
     private String gender;
     private String avatar;
+    private int point;
     private String backgroundUrl;
 
     public Integer getId() {
@@ -41,6 +42,14 @@ public class UserInfoBean {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
     }
 
     public String getBackgroundUrl() {

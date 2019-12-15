@@ -14,6 +14,7 @@ import com.iknow.lib.beans.user.UserInfoBean;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -94,5 +95,8 @@ public interface DataSourceService {
      */
     @NonNull
     Single<Boolean> isUserNameExist(String userName);
+
+    @NonNull
+    Completable signIn(Integer userId);
 
 }

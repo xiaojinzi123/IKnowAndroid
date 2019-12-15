@@ -19,6 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
+                android:alpha="0.8"
                 tools:src="@drawable/ui_default_user_wall" />
 
         <ImageView
@@ -43,6 +44,27 @@
                 app:layout_constraintBottom_toBottomOf="@+id/iv_user_icon"
                 app:layout_constraintStart_toEndOf="@+id/iv_user_icon"
                 tools:text="@string/resource_home" />
+
+        <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/main_home_menu_point_icon"
+                android:layout_marginRight="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sign_in"
+                app:layout_constraintRight_toLeftOf="@+id/tv_point"
+                app:layout_constraintTop_toTopOf="@+id/tv_sign_in" />
+
+        <TextView
+                android:id="@+id/tv_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/resource_point_format"
+                android:textColor="@color/resource_white"
+                android:textSize="16dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sign_in"
+                app:layout_constraintRight_toLeftOf="@+id/tv_sign_in"
+                app:layout_constraintTop_toTopOf="@+id/tv_sign_in" />
 
         <TextView
                 android:id="@+id/tv_sign_in"

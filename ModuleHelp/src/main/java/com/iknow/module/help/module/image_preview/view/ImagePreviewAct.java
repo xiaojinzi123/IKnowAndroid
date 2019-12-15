@@ -12,7 +12,7 @@ import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.help.R;
 import com.iknow.module.help.module.image_preview.vm.ImagePreviewViewModel;
-import com.xiaojinzi.component.anno.FiledAutowiredAnno;
+import com.xiaojinzi.component.anno.FieldAutowiredAnno;
 import com.xiaojinzi.component.anno.RouterAnno;
 
 import java.util.ArrayList;
@@ -25,10 +25,10 @@ public class ImagePreviewAct extends BaseAct<ImagePreviewViewModel> {
     ViewPager2 vp;
     Toolbar toolbar;
 
-    @FiledAutowiredAnno("images")
+    @FieldAutowiredAnno("images")
     ArrayList<String> images;
 
-    @FiledAutowiredAnno("position")
+    @FieldAutowiredAnno("position")
     int position;
 
     Fragment[] fragments;

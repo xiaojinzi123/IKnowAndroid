@@ -8,6 +8,7 @@ import com.iknow.lib.beans.main.GirlBean;
 import com.iknow.lib.beans.user.CheckCodeBean;
 import com.iknow.lib.beans.user.LoginBean;
 import com.iknow.lib.beans.user.UserInfoBean;
+import com.iknow.module.datasource.network.EmptyResponse;
 import com.iknow.module.datasource.network.support.RemoveShell;
 
 import java.util.List;
@@ -90,5 +91,9 @@ public interface IknowApi {
             @Field("checkCodeUid") String checkCodeUid,
             @Field("checkCode") String checkCode
     );
+
+    @RemoveShell
+    @POST("user/{userId}/signIn")
+    Single<EmptyResponse> signIn(@Path("userId") Integer userId);
 
 }

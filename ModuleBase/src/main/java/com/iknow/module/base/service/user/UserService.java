@@ -1,7 +1,5 @@
 package com.iknow.module.base.service.user;
 
-import android.content.Context;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
@@ -13,6 +11,7 @@ import java.util.Optional;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  * 用户的 Service
@@ -22,15 +21,13 @@ public interface UserService {
     /**
      * 是否已经登录
      */
-    boolean isLogin();
+    Single<Boolean> isLogin();
 
     /**
      * 登陆
-     *
-     * @param context 必须和 Activity 相关的 Context
      */
     @NonNull
-    Completable login(@NonNull Context context);
+    Completable login();
 
     /**
      * 登出
@@ -49,6 +46,12 @@ public interface UserService {
      */
     @NonNull
     Maybe<UserInfoBean> getUserInfo();
+
+    /**
+     * 获取用户ID, 可能为空信号, 既没有信号发射出来, 只有完成信号
+     */
+    @NonNull
+    Maybe<Integer> getUserId();
 
     /**
      * 订阅登陆状态.

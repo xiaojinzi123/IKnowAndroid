@@ -17,6 +17,7 @@ import com.xiaojinzi.component.anno.ServiceAnno;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 @ServiceAnno(DataSourceService.class)
@@ -101,6 +102,15 @@ public class DataSourceServiceImpl implements DataSourceService {
         return ApiManager.getInstance()
                 .getIknowApi()
                 .isUserNameExist(userName);
+    }
+
+    @NonNull
+    @Override
+    public Completable signIn(Integer userId) {
+        return ApiManager.getInstance()
+                .getIknowApi()
+                .signIn(userId)
+                .ignoreElement();
     }
 
 }

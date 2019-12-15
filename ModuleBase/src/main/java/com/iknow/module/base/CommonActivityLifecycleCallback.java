@@ -13,12 +13,13 @@ import io.reactivex.subjects.PublishSubject;
 public class CommonActivityLifecycleCallback
         implements Application.ActivityLifecycleCallbacks {
 
-    public static
+    public static final
     PublishSubject<ActivityLifecycleBean> activityLifecycleBehaviorSubject
             = PublishSubject.create();
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        ActivityStack.getInstance().pushActivity(activity);
         activityLifecycleBehaviorSubject
                 .onNext(
                         new ActivityLifecycleBean(
@@ -79,6 +80,7 @@ public class CommonActivityLifecycleCallback
 
     @Override
     public void onActivityDestroyed(Activity activity) {
+        ActivityStack.getInstance().removeActivity(activity);
         activityLifecycleBehaviorSubject
                 .onNext(
                         new ActivityLifecycleBean(

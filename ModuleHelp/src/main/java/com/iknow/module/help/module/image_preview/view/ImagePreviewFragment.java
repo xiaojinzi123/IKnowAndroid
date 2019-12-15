@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.iknow.module.base.view.BaseFragment;
 import com.iknow.module.help.R;
-import com.xiaojinzi.component.anno.FiledAutowiredAnno;
+import com.xiaojinzi.component.anno.FieldAutowiredAnno;
 
 public class ImagePreviewFragment extends BaseFragment {
 
@@ -23,7 +23,7 @@ public class ImagePreviewFragment extends BaseFragment {
         return fragment;
     }
 
-    @FiledAutowiredAnno("url")
+    @FieldAutowiredAnno("url")
     String url;
 
     ImageView iv;
