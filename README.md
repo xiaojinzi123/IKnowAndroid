@@ -13,3 +13,11 @@
 账号：123 密码：123
 
 部分界面展示: <img width="200px" src="https://i.loli.net/2019/12/09/ug1A7FWl2NMDwXq.png" />
+
+## 使用到的开源项目
+
+- 组件化框架 [Component`](https://github.com/xiaojinzi123/Component)
+- 图片选择器 [SAlbum](https://github.com/SharryChoo/SAlbum)
+- RecyclerView Adapter [BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
+- 图片加载器 [Glide](https://github.com/bumptech/glide)
+- [Markdown](https://github.com/noties/Markwon)

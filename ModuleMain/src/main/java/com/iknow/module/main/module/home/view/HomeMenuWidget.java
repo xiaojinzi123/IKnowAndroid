@@ -233,11 +233,11 @@ public class HomeMenuWidget extends FrameLayout {
                                 }
                                 Glide.with(context)
                                         .load(userBg)
-                                        .placeholder(userService.getDefaultUserBg())
+                                        .fallback(userService.getDefaultUserBg())
                                         .into(iv_user_bg);
                                 Glide.with(context)
                                         .load(userAvatar)
-                                        .placeholder(userService.getDefaultUserAvatar())
+                                        .fallback(userService.getDefaultUserAvatar())
                                         .circleCrop()
                                         .into(iv_user_icon);
                             })

@@ -48,4 +48,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':ModuleBase')
     kapt libs.component_compiler
+    implementation 'com.github.SharryChoo:SAlbum:1.0.2-rc3'
 }

@@ -9,7 +9,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/LibResource" />
             <option value="$PROJECT_DIR$/LibTools" />
             <option value="$PROJECT_DIR$/LibWidget" />
             <option value="$PROJECT_DIR$/ModuleBase" />
@@ -17,6 +16,7 @@
             <option value="$PROJECT_DIR$/ModuleDatasource" />
             <option value="$PROJECT_DIR$/ModuleHelp" />
             <option value="$PROJECT_DIR$/ModuleMain" />
+            <option value="$PROJECT_DIR$/ModuleResource" />
             <option value="$PROJECT_DIR$/ModuleUI" />
             <option value="$PROJECT_DIR$/ModuleUser" />
             <option value="$PROJECT_DIR$/ModuleWelcome" />
@@ -24,6 +24,7 @@
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>

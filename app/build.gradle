@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-// apply plugin: 'com.xiaojinzi.component.plugin'
+apply plugin: 'com.xiaojinzi.component.plugin'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -34,6 +34,9 @@ android {
                 // 组件化注解驱动器的配置
                 arguments = ["HOST": "app"]
             }
+        }
+        ndk {
+            abiFilters 'armeabi-v7a'    //只生成armv7的so
         }
     }
 

@@ -9,10 +9,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
+
 import com.iknow.lib.tools.ResourceUtil;
 import com.iknow.lib.tools.ToastUtil;
 import com.iknow.module.base.R;
@@ -109,6 +110,8 @@ public class BaseViewImpl implements IBaseView {
                 if (mContext != null) {
                     new AlertDialog.Builder(mContext)
                             .setMessage(tipContent)
+                            .setPositiveButton("ok", (dialog, which) -> dialog.dismiss())
+                            .setCancelable(false)
                             .create()
                             .show();
                 }

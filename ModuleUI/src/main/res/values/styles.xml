@@ -17,6 +17,7 @@
         <item name="toolbarStyle">@style/AppToolbar</item>
         <item name="buttonStyle">@style/UiButton</item>
         <item name="android:textViewStyle">@style/UiTextView</item>
+        <item name="android:alertDialogStyle">@style/UiAlertDialog</item>
     </style>
 
     <style name="AppToolbar" parent="@style/Widget.AppCompat.Toolbar">
@@ -32,6 +33,11 @@
     <style name="UiButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/ui_button_selector</item>
         <item name="android:textColor">@color/resource_white</item>
+    </style>
+
+    <style name="UiAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@drawable/ui_button_selector</item>
+        <item name="android:textColor">@color/ui_text</item>
     </style>
 
     <style name="UiTextView" parent="Widget.AppCompat.TextView">

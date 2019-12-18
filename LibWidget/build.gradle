@@ -22,7 +22,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api project(':LibResource')
+    api project(':ModuleResource')
     implementation libs.kotlin_stdlib
     implementation libs.appcompat
     implementation libs.core_ktx

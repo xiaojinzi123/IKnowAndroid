@@ -28,6 +28,6 @@ dependencies {
     implementation libs.appcompat
     implementation libs.core_ktx
     implementation libs.constraintLayout
-    implementation project(':LibResource')
+    implementation project(':ModuleResource')
     implementation project(':LibTools')
 }

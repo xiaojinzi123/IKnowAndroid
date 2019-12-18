@@ -68,7 +68,7 @@ dependencies {
     api libs.component_impl_rx
 
     api project(':ModuleBeans')
-    api project(':LibResource')
+    api project(':ModuleResource')
     api project(':LibTools')
     api project(':LibWidget')
     api project(':ModuleUI')

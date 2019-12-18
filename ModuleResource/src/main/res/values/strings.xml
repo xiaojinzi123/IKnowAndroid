@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">LibResource</string>
+    <string name="app_name">ModuleResource</string>
     <string name="resource_login">Login</string>
     <string name="resource_home">Home</string>
     <string name="resource_beauty_girl">美女</string>
     <string name="resource_setting">设置</string>
     <string name="resource_detail">详情</string>
+    <string name="resource_user_info">用户信息</string>
     <string name="resource_edit_user_info">编辑用户信息</string>
     <string name="resource_address_select">地址选择</string>
     <string name="resource_component_technical_support">Component 提供组件化支持!</string>
@@ -33,4 +34,5 @@
     <string name="resource_change_avatar">更换头像</string>
     <string name="resource_nick_name">昵称</string>
     <string name="resource_point_format">积分(%d)</string>
+    <string name="resource_cancel">取消</string>
 </resources>
