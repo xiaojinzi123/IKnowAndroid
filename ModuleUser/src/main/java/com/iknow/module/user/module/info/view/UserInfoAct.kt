@@ -52,7 +52,10 @@ class UserInfoAct : BaseAct<UserInfoViewModel?>() {
         // 监听
         mBinding!!.ivBg.setOnClickListener {
             UIBottomMenu.with(mContext)
-                .menuList(arrayOf("test1", "test2", "test3"))
+                .menuList(arrayOf(
+                    getString(R.string.resource_select_from_albums),
+                    getString(R.string.resource_select_from_girl_list)
+                ))
                 .itemClickListener(object : OnItemClickListener {
                     override fun onClick(view: View, position: Int) {
                         Toast.makeText(mContext, "position = $position", Toast.LENGTH_SHORT)

@@ -35,4 +35,6 @@
     <string name="resource_nick_name">昵称</string>
     <string name="resource_point_format">积分(%d)</string>
     <string name="resource_cancel">取消</string>
+    <string name="resource_select_from_albums">从相册选择</string>
+    <string name="resource_select_from_girl_list">从美女列表中选择</string>
 </resources>
