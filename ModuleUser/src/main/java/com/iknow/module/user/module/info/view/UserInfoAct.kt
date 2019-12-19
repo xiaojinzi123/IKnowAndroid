@@ -1,6 +1,7 @@
 package com.iknow.module.user.module.info.view
 
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.iknow.lib.beans.user.UserInfoBean
@@ -8,6 +9,7 @@ import com.iknow.module.base.InterceptorInfo
 import com.iknow.module.base.ModuleInfo
 import com.iknow.module.base.view.BaseAct
 import com.iknow.module.ui.widget.UIBottomMenu
+import com.iknow.module.ui.widget.UIBottomMenu.OnItemClickListener
 import com.iknow.module.user.R
 import com.iknow.module.user.databinding.UserInfoActBinding
 import com.iknow.module.user.module.info.vm.UserInfoViewModel
@@ -49,7 +51,15 @@ class UserInfoAct : BaseAct<UserInfoViewModel?>() {
         }
         // 监听
         mBinding!!.ivBg.setOnClickListener {
-            UIBottomMenu(mContext)
+            UIBottomMenu.with(mContext)
+                .menuList(arrayOf("test1", "test2", "test3"))
+                .itemClickListener(object : OnItemClickListener {
+                    override fun onClick(view: View, position: Int) {
+                        Toast.makeText(mContext, "position = $position", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
+                .build()
                 .show()
         }
     }

@@ -28,6 +28,8 @@ dependencies {
     implementation libs.appcompat
     implementation libs.core_ktx
     implementation libs.constraintLayout
+    api libs.recyclerview
+    api libs.BVAH
     implementation project(':ModuleResource')
     implementation project(':LibTools')
 }

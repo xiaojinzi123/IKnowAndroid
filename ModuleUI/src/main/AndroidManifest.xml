@@ -1,2 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.iknow.module.ui"/>
+    package="com.iknow.module.ui">
+
+    <application android:theme="@style/AppTheme" />
+
+</manifest>

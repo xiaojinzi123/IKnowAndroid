@@ -46,6 +46,7 @@ ext.libs = [
         kotlin_stdlib            : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin_version}",
         // 第三方
         markwon                  : "io.noties.markwon:core:4.2.0",
+        BVAH                  : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx",
         markwon_image            : "io.noties.markwon:image-glide:4.2.0",
         core_ktx                 : "androidx.core:core-ktx:1.1.0",
         gson                     : "com.google.code.gson:gson:${versions.gson}",

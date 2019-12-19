@@ -74,6 +74,6 @@ dependencies {
     api project(':ModuleUI')
 
     // 额外的第三方控件, RecyclerView 适配器
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.49-androidx'
+    api libs.BVAH
 
 }
