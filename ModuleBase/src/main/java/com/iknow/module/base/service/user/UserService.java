@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 import com.iknow.lib.beans.user.UserInfoBean;
+import com.iknow.module.base.support.AutoLoginAnno;
 import com.iknow.module.base.support.HotObservableAnno;
 
 import java.util.Optional;
@@ -99,6 +100,7 @@ public interface UserService {
      * 今日分的签到
      */
     @NonNull
+    @AutoLoginAnno
     Completable signIn();
 
 

@@ -61,25 +61,13 @@ public class RegisterViewModel extends BaseViewModel {
 
         disposables.add(
                 mUserNameVOSubject
-                        .flatMapSingle(userName ->
-                                RxServiceManager.with(DataSourceService.class)
-                                        .flatMap(service -> service.isUserNameExist(userName))
-                                        .map(b -> {
-                                            if (b) {
-                                                return Optional.of("用户名已经存在");
-                                            } else {
-                                                return Optional.<String>empty();
-                                            }
-                                        })
-                                        .onErrorReturn(error -> {
-                                            String errorMsg = ErrorUtil.getServiceExceptionMsg(error);
-                                            if (errorMsg == null) {
-                                                Optional.<String>empty();
-                                            }
-                                            return Optional.of(errorMsg);
-                                        })
-                                        .subscribeOn(Schedulers.io())
-                        )
+                        .flatMapSingle(userName -> {
+                            if (TextUtils.isEmpty(userName)) {
+                                return Single.just(Optional.of("用户名不能为空"));
+                            }else {
+                                return userNameCheck(userName);
+                            }
+                        })
                         .subscribe(errorMsgOptional -> {
                             mUserNameErrorMsgSubject.onNext(errorMsgOptional);
                         })
@@ -113,6 +101,26 @@ public class RegisterViewModel extends BaseViewModel {
         );
 
         refreshCheckCode();
+    }
+
+    private Single<Optional<String>> userNameCheck(String userName) {
+        return RxServiceManager.with(DataSourceService.class)
+                .flatMap(service -> service.isUserNameExist(userName))
+                .map(b -> {
+                    if (b) {
+                        return Optional.of("用户名已经存在");
+                    } else {
+                        return Optional.<String>empty();
+                    }
+                })
+                .onErrorReturn(error -> {
+                    String errorMsg = ErrorUtil.getServiceExceptionMsg(error);
+                    if (errorMsg == null) {
+                        Optional.<String>empty();
+                    }
+                    return Optional.of(errorMsg);
+                })
+                .subscribeOn(Schedulers.io());
     }
 
     /**

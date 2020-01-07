@@ -51,16 +51,16 @@ public class LoadingAct extends BaseAct<LoadingViewModel> {
     }
 
     private void gotoHomeView() {
-        /*Router.with(mContext)
+        Router.with(mContext)
                 .host(ModuleInfo.Main.NAME)
                 .path(ModuleInfo.Main.HOME)
                 .afterEventAction(() -> finish())
-                .forward();*/
-        Router.with(mContext)
-                .host(ModuleInfo.User.NAME)
-                .path(ModuleInfo.User.INFO)
-                .afterEventAction(() -> finish())
                 .forward();
+//        Router.with(mContext)
+//                .host(ModuleInfo.User.NAME)
+//                .path(ModuleInfo.User.INFO)
+//                .afterEventAction(() -> finish())
+//                .forward();
     }
 
 }

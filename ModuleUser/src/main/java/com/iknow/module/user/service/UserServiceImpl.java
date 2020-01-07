@@ -145,21 +145,14 @@ public class UserServiceImpl implements UserService {
     public Completable signIn() {
         Completable signInObservable = Single
                 .zip(
-                        RxServiceManager.with(DataSourceService.class)
-                                .doOnSuccess(item -> {
-                                    System.out.println("213123");
-                                }),
-                        getUserId().toSingle()
-                                .doOnSuccess(item -> {
-                                    System.out.println("213123");
-                                }),
-                        (dataSourceService, userId) -> {
-                            return dataSourceService.signIn(userId);
-                        }
+                        RxServiceManager.with(DataSourceService.class),
+                        getUserId().toSingle(),
+                        (dataSourceService, userId) -> dataSourceService.signIn(userId)
                 )
                 .flatMapCompletable(item -> item);
-        return login()
+        return login() // 登录
                 .observeOn(Schedulers.io())
+                // 签到
                 .andThen(signInObservable);
     }
 
