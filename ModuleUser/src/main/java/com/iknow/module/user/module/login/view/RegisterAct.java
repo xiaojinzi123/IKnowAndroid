@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.iknow.lib.tools.ResourceUtil;
 import com.iknow.module.base.ModuleInfo;
 import com.iknow.module.base.view.BaseAct;
+import com.iknow.module.base.view.BusinessError;
 import com.iknow.module.base.widget.TextWatcherAdapter;
 import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserRegisterActBinding;
@@ -53,11 +56,11 @@ public class RegisterAct extends BaseAct<RegisterViewModel> {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         subscibeUi(
                 mViewModel.subscribeUserNameErrorMsgObservable(),
-                errorMsg -> mBinding.tilUserName.setError(TextUtils.isEmpty(errorMsg) ? null : errorMsg)
+                errorMsg -> mBinding.tilUserName.setError(errorMsg.isPresent() ? errorMsg.get() : null)
         );
         subscibeUi(
                 mViewModel.subscribePasswordErrorMsgObservable(),
-                errorMsg -> mBinding.tilPasswordRepeat.setError(TextUtils.isEmpty(errorMsg) ? null : errorMsg)
+                errorMsg -> mBinding.tilPasswordRepeat.setError(errorMsg.isPresent() ? errorMsg.get() : null)
         );
         subscibeUi(
                 mViewModel.subscribeCheckCodeImageObservable(),
@@ -77,6 +80,14 @@ public class RegisterAct extends BaseAct<RegisterViewModel> {
                 b -> mBinding.registerClickTv.setEnabled(b)
         );
         initListener();
+    }
+
+    @Override
+    protected void onBusinessErrorSolve(@NonNull BusinessError businessError) {
+        super.onBusinessErrorSolve(businessError);
+        if (RegisterViewModel.BUSINESS_ERROR_CHECK_CODE == businessError.getType()) {
+            mBinding.tlCheckCode.setError(businessError.getMsg());
+        }
     }
 
     private void onRegisterSuccess() {

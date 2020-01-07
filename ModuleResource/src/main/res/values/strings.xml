@@ -37,4 +37,6 @@
     <string name="resource_cancel">取消</string>
     <string name="resource_select_from_albums">从相册选择</string>
     <string name="resource_select_from_girl_list">从美女列表中选择</string>
+    <string name="resource_network_connect_exception">网络连接异常</string>
+    <string name="resource_fail_to_get_checkcode">获取验证码失败</string>
 </resources>
