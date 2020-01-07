@@ -35,9 +35,9 @@ android {
                 arguments = ["HOST": "app"]
             }
         }
-        ndk {
+        /*ndk {
             abiFilters 'armeabi-v7a'    //只生成armv7的so
-        }
+        }*/
     }
 
     compileOptions {

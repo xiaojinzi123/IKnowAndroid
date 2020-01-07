@@ -8,15 +8,20 @@ import androidx.annotation.NonNull;
 import com.iknow.lib.beans.user.CheckCodeBean;
 import com.iknow.lib.beans.user.LoginBean;
 import com.iknow.lib.beans.user.RegisterBeanReq;
+import com.iknow.lib.tools.ResourceUtil;
 import com.iknow.module.base.service.datasource.DataSourceService;
 import com.iknow.module.base.service.user.UserService;
 import com.iknow.module.base.support.CompleableObserverAdapter;
 import com.iknow.module.base.support.ErrorUtil;
 import com.iknow.module.base.support.HotObservableAnno;
 import com.iknow.module.base.support.SingleObserverAdapter;
+import com.iknow.module.base.view.BusinessError;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.vm.BaseViewModel;
+import com.iknow.module.user.R;
 import com.xiaojinzi.component.impl.service.RxServiceManager;
+
+import java.util.Optional;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -30,10 +35,13 @@ import io.reactivex.subjects.Subject;
  */
 public class RegisterViewModel extends BaseViewModel {
 
+    public static final int BUSINESS_ERROR_CHECK_CODE = 1;
+
+    private BehaviorSubject<Optional<String>> mUserNameErrorMsgSubject = BehaviorSubject.create();
+    private BehaviorSubject<Optional<String>> mPasswordErrorMsgSubject = BehaviorSubject.create();
+
     private BehaviorSubject<String> mUserNameVOSubject = BehaviorSubject.createDefault("");
-    private BehaviorSubject<String> mUserNameErrorMsgSubject = BehaviorSubject.create();
     private BehaviorSubject<String> mPasswordVOSubject = BehaviorSubject.createDefault("");
-    private BehaviorSubject<String> mPasswordErrorMsgSubject = BehaviorSubject.create();
     private BehaviorSubject<String> mPasswordRepeatVOSubject = BehaviorSubject.createDefault("");
     private BehaviorSubject<String> mCheckCodeVOSubject = BehaviorSubject.createDefault("");
     private BehaviorSubject<CheckCodeBean> checkCodeDTOSubject = BehaviorSubject.create();
@@ -58,22 +66,22 @@ public class RegisterViewModel extends BaseViewModel {
                                         .flatMap(service -> service.isUserNameExist(userName))
                                         .map(b -> {
                                             if (b) {
-                                                return "用户名已经存在";
+                                                return Optional.of("用户名已经存在");
                                             } else {
-                                                return "";
+                                                return Optional.<String>empty();
                                             }
                                         })
                                         .onErrorReturn(error -> {
                                             String errorMsg = ErrorUtil.getServiceExceptionMsg(error);
                                             if (errorMsg == null) {
-                                                errorMsg = "";
+                                                Optional.<String>empty();
                                             }
-                                            return errorMsg;
+                                            return Optional.of(errorMsg);
                                         })
                                         .subscribeOn(Schedulers.io())
                         )
-                        .subscribe(errorMsg -> {
-                            mUserNameErrorMsgSubject.onNext(errorMsg);
+                        .subscribe(errorMsgOptional -> {
+                            mUserNameErrorMsgSubject.onNext(errorMsgOptional);
                         })
         );
 
@@ -81,7 +89,7 @@ public class RegisterViewModel extends BaseViewModel {
                 Observable
                         .combineLatest(
                                 mPasswordVOSubject, mPasswordRepeatVOSubject,
-                                (s1, s2) -> s1.equals(s2) ? "" : "两次密码输入不相同"
+                                (s1, s2) -> s1.equals(s2) ? Optional.<String>empty() : Optional.of("两次密码输入不相同")
                         )
                         .subscribe(result -> {
                             mPasswordErrorMsgSubject.onNext(result);
@@ -94,8 +102,8 @@ public class RegisterViewModel extends BaseViewModel {
                                 mUserNameErrorMsgSubject, mPasswordErrorMsgSubject
                                 , mCheckCodeVOSubject,
                                 (userNameErrorMsg, passwordErrorMsg, checkCode) -> {
-                                    return TextUtils.isEmpty(userNameErrorMsg) &&
-                                            TextUtils.isEmpty(passwordErrorMsg) &&
+                                    return !userNameErrorMsg.isPresent() &&
+                                            !passwordErrorMsg.isPresent() &&
                                             !TextUtils.isEmpty(checkCode);
                                 }
                         )
@@ -152,20 +160,25 @@ public class RegisterViewModel extends BaseViewModel {
 
         subscribe(observable, new SingleObserverAdapter<>(result -> {
             checkCodeDTOSubject.onNext(result);
+        }, error -> {
+            businessErrorSubject.onNext(BusinessError.build(
+                    BUSINESS_ERROR_CHECK_CODE,
+                    ResourceUtil.getString(R.string.resource_fail_to_get_checkcode)
+            ));
         }));
 
     }
 
     @NonNull
     @HotObservableAnno("订阅用户名的错误信息")
-    public Observable<String> subscribeUserNameErrorMsgObservable() {
-        return mUserNameErrorMsgSubject.distinctUntilChanged();
+    public Observable<Optional<String>> subscribeUserNameErrorMsgObservable() {
+        return mUserNameErrorMsgSubject;
     }
 
     @NonNull
     @HotObservableAnno("订阅密码的错误信息")
-    public Observable<String> subscribePasswordErrorMsgObservable() {
-        return mPasswordErrorMsgSubject.distinctUntilChanged();
+    public Observable<Optional<String>> subscribePasswordErrorMsgObservable() {
+        return mPasswordErrorMsgSubject;
     }
 
     @NonNull

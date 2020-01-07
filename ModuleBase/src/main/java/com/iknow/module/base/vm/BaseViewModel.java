@@ -1,16 +1,23 @@
 package com.iknow.module.base.vm;
 
 import android.app.Application;
+import android.app.Service;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.iknow.lib.tools.ResourceUtil;
+import com.iknow.module.base.R;
 import com.iknow.module.base.support.CompleableObserverAdapter;
+import com.iknow.module.base.support.ErrorUtil;
 import com.iknow.module.base.support.HotObservableAnno;
 import com.iknow.module.base.support.ServiceException;
 import com.iknow.module.base.support.SingleObserverAdapter;
+import com.iknow.module.base.view.BusinessError;
 import com.iknow.module.base.view.Tip;
 import com.xiaojinzi.component.support.Utils;
+
+import java.net.ConnectException;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -30,25 +37,6 @@ import io.reactivex.subjects.Subject;
  * @author xiaojinzi
  */
 public class BaseViewModel extends AndroidViewModel {
-
-    private final SingleTransformer singleTransformer = new SingleTransformer() {
-        @Override
-        public SingleSource apply(Single upstream) {
-            return upstream
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .doOnEvent((item, error) -> {
-                        loadingSubject.onNext(false);
-                    })
-                    .doOnSubscribe(
-                            disposable -> loadingSubject.onNext(true)
-                    );
-        }
-    };
-
-    public <T> SingleTransformer<T, T> singleTransformer() {
-        return singleTransformer;
-    }
 
     public BaseViewModel(@NonNull Application application) {
         super(application);
@@ -78,6 +66,13 @@ public class BaseViewModel extends AndroidViewModel {
      */
     @NonNull
     protected final Subject<Tip> tipSubject = BehaviorSubject.create();
+
+    /**
+     * 业务错误
+     * 实际是一个 {@link Subject}
+     */
+    @NonNull
+    protected final Subject<BusinessError> businessErrorSubject = BehaviorSubject.create();
 
     /**
      * 返回的热信号
@@ -110,6 +105,12 @@ public class BaseViewModel extends AndroidViewModel {
     @HotObservableAnno
     public Observable<Tip> subscribeTipObservable() {
         return tipSubject;
+    }
+
+    @NonNull
+    @HotObservableAnno
+    public Observable<BusinessError> subscribeBusinessError() {
+        return businessErrorSubject;
     }
 
     @Override
@@ -163,15 +164,18 @@ public class BaseViewModel extends AndroidViewModel {
     }
 
     protected final void normalErrorSolve(@NonNull Throwable error) {
-        error = Utils.getRealThrowable(error);
-        String message = error.getMessage();
-        if (message == null) {
-            message = "";
-        }
-        if (error instanceof ServiceException) {
-            tipSubject.onNext(Tip.error(error.getMessage()));
+        Throwable realError = null;
+        String message = null;
+        if ((realError = ErrorUtil.isCauseBy(error, ServiceException.class)) != null) {
+            tipSubject.onNext(Tip.error(realError.getMessage()));
+        } else if ((realError = ErrorUtil.isCauseBy(error, ConnectException.class)) != null) {
+            tipSubject.onNext(Tip.error(ResourceUtil.getString(R.string.resource_network_connect_exception)));
         } else {
-            tipSubject.onNext(Tip.error("未知异常" + error.getClass().getName()));
+            message = error.getMessage();
+            if (message == null) {
+                message = "";
+            }
+            tipSubject.onNext(Tip.error(error.getClass().getName() + " 未知异常: " + message));
             error.printStackTrace();
         }
     }

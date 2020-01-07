@@ -121,6 +121,9 @@ public abstract class BaseAct<VM extends BaseViewModel> extends AppCompatActivit
                     }
                 });
             }
+            subscibeUi(mViewModel.subscribeBusinessError(), error -> {
+                onBusinessErrorSolve(error);
+            });
         }
     }
 
@@ -170,6 +173,11 @@ public abstract class BaseAct<VM extends BaseViewModel> extends AppCompatActivit
      * 控件 id 的注入
      */
     protected void onInjectView() {
+    }
+
+    @CallSuper
+    protected void onBusinessErrorSolve(@NonNull BusinessError businessError) {
+        // empty
     }
 
     @Override

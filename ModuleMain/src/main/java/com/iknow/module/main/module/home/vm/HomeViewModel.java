@@ -8,6 +8,7 @@ import com.iknow.lib.beans.main.ArticleBean;
 import com.iknow.lib.beans.main.BannerBean;
 import com.iknow.module.base.service.datasource.DataSourceService;
 import com.iknow.module.base.support.HotObservableAnno;
+import com.iknow.module.base.support.SingleObserverAdapter;
 import com.iknow.module.base.view.Tip;
 import com.iknow.module.base.vm.BaseViewModel;
 import com.xiaojinzi.component.impl.service.RxServiceManager;
@@ -15,6 +16,7 @@ import com.xiaojinzi.component.impl.service.RxServiceManager;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
@@ -51,15 +53,11 @@ public class HomeViewModel extends BaseViewModel {
     }
 
     public void loadBanner() {
-        disposables.add(
-                RxServiceManager.with(DataSourceService.class)
-                        .flatMap(service -> service.bannerList())
-                        .compose(singleTransformer())
-                        .subscribe(
-                                items -> bannerSubject.onNext(items),
-                                error -> tipSubject.onNext(Tip.normal(error.getMessage()))
-                        )
-        );
+        Single<List<BannerBean>> observable = RxServiceManager.with(DataSourceService.class)
+                .flatMap(service -> service.bannerList());
+        subscribe(observable, new SingleObserverAdapter<>(items -> {
+            bannerSubject.onNext(items);
+        }));
     }
 
     @NonNull
