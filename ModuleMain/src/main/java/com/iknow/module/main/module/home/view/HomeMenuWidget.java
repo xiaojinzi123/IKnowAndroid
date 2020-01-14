@@ -83,7 +83,7 @@ public class HomeMenuWidget extends FrameLayout {
             }
         }
 
-        Item[] items = new Item[]{
+        final Item[] items = new Item[]{
                 new Item(
                         R.drawable.main_home_common_url_item_icon,
                         "常用网址",
