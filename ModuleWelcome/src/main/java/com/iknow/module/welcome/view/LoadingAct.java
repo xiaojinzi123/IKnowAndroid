@@ -56,11 +56,11 @@ public class LoadingAct extends BaseAct<LoadingViewModel> {
                 .path(ModuleInfo.Main.HOME)
                 .afterEventAction(() -> finish())
                 .forward();
-//        Router.with(mContext)
-//                .host(ModuleInfo.User.NAME)
-//                .path(ModuleInfo.User.INFO)
-//                .afterEventAction(() -> finish())
-//                .forward();
+        /*Router.with(mContext)
+                .host(ModuleInfo.User.NAME)
+                .path(ModuleInfo.User.INFO)
+                .afterEventAction(() -> finish())
+                .forward();*/
     }
 
 }
