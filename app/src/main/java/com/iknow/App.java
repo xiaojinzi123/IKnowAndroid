@@ -7,6 +7,7 @@ import androidx.multidex.MultiDexApplication;
 import com.iknow.lib.tools.ToolsConfig;
 import com.iknow.module.base.ModuleInfo;
 import com.xiaojinzi.component.Component;
+import com.xiaojinzi.component.Config;
 import com.xiaojinzi.component.impl.application.ModuleManager;
 import com.xiaojinzi.component.support.RxErrorIgnoreUtil;
 
@@ -19,7 +20,15 @@ public class App extends MultiDexApplication {
         super.onCreate();
 
         // 初始化组件化
-        Component.init(this, BuildConfig.DEBUG);
+        Component.init(
+                BuildConfig.DEBUG,
+                Config.with(this)
+                        .defaultScheme("iknow")
+                        .tipWhenUseApplication(true)
+                        .useRouteRepeatCheckInterceptor(true)
+                        .optimizeInit(true)
+                        .build()
+        );
         // Component.openInitOptimize();
         ModuleManager.getInstance().registerArr(
                 ModuleInfo.Base.NAME,

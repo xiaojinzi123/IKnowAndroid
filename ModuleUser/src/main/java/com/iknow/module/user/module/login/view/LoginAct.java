@@ -17,7 +17,7 @@ import com.iknow.module.base.widget.TextWatcherAdapter;
 import com.iknow.module.user.R;
 import com.iknow.module.user.databinding.UserLoginActBinding;
 import com.iknow.module.user.module.login.vm.LoginViewModel;
-import com.xiaojinzi.component.anno.FieldAutowiredAnno;
+import com.xiaojinzi.component.anno.AttrValueAutowiredAnno;
 import com.xiaojinzi.component.anno.RouterAnno;
 import com.xiaojinzi.component.impl.Router;
 import com.xiaojinzi.component.impl.RouterResult;
@@ -37,7 +37,7 @@ public class LoginAct extends BaseAct<LoginViewModel> {
      * 0 表示跳转过来是登陆的, 并且返回 {@link Activity#RESULT_OK}
      * 1 表示启动登陆, 会跳转到主页
      */
-    @FieldAutowiredAnno("businessType")
+    @AttrValueAutowiredAnno("businessType")
     int businessType = 0;
 
     private UserLoginActBinding mBinding;    // DataBinding 对象

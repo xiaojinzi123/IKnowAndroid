@@ -13,7 +13,7 @@ import com.iknow.module.base.view.BaseAct;
 import com.iknow.module.help.R;
 import com.iknow.module.help.databinding.HelpWebActBinding;
 import com.iknow.module.help.module.web.vm.WebViewModel;
-import com.xiaojinzi.component.anno.FieldAutowiredAnno;
+import com.xiaojinzi.component.anno.AttrValueAutowiredAnno;
 import com.xiaojinzi.component.anno.RouterAnno;
 
 @RouterAnno(
@@ -23,7 +23,7 @@ public class WebAct extends BaseAct<WebViewModel> {
 
     private HelpWebActBinding mBinding;
 
-    @FieldAutowiredAnno("data")
+    @AttrValueAutowiredAnno("data")
     String url;
 
     @Override
