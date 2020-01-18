@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
  */
 public class ToastUtil {
 
-
     public static void makeText(@Nullable String msg) {
         if (msg == null || "".equals(msg)) {
             return;
