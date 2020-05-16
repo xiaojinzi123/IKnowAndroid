@@ -121,4 +121,9 @@ public class HomeAct extends BaseAct {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+    }
 }

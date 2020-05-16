@@ -27,7 +27,7 @@ public class ApiManager {
                         .writeTimeout(30, TimeUnit.SECONDS)
                         .build()
                 )
-                .baseUrl("http://xiaojinzi.tpddns.cn:28081/iknow/")
+                .baseUrl("http://xiaojinzi.tpddns.cn:18080/iknow/")
                 .addConverterFactory(IknowConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

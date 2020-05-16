@@ -109,8 +109,6 @@ public class LoginViewModel extends BaseViewModel {
     /**
      * 订阅是否成功的 Observable
      * 只会返回 true 的信号
-     *
-     * @return
      */
     public Observable<Boolean> loginSuccessObservable() {
         return mLoginSuccess.filter(b -> b);

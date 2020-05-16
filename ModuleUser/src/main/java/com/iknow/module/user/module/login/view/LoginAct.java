@@ -24,6 +24,7 @@ import com.xiaojinzi.component.impl.RouterResult;
 import com.xiaojinzi.component.support.CallbackAdapter;
 
 import io.reactivex.functions.Consumer;
+import io.reactivex.subjects.Subject;
 
 /**
  * 登录页面
@@ -177,7 +178,7 @@ public class LoginAct extends BaseAct<LoginViewModel> {
             Router.with(this)
                     .host(ModuleInfo.Main.NAME)
                     .path(ModuleInfo.Main.HOME)
-                    .afterJumpAction(this::finish)
+                    .afterAction(this::finish)
                     .forward();
         } else {
             Intent intent = new Intent();

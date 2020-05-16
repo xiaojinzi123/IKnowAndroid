@@ -14,6 +14,8 @@ import com.xiaojinzi.component.support.RxErrorIgnoreUtil;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import io.reactivex.Completable;
+
 public class App extends MultiDexApplication {
 
     public void onCreate() {
@@ -27,17 +29,8 @@ public class App extends MultiDexApplication {
                         .tipWhenUseApplication(true)
                         .useRouteRepeatCheckInterceptor(true)
                         .optimizeInit(true)
+                        .autoRegisterModule(true)
                         .build()
-        );
-        // Component.openInitOptimize();
-        ModuleManager.getInstance().registerArr(
-                ModuleInfo.Base.NAME,
-                ModuleInfo.App.NAME,
-                ModuleInfo.Datasource.NAME,
-                ModuleInfo.Welcome.NAME,
-                ModuleInfo.Main.NAME,
-                ModuleInfo.User.NAME,
-                ModuleInfo.Help.NAME
         );
         RxErrorIgnoreUtil.ignoreError();
 
@@ -57,6 +50,7 @@ public class App extends MultiDexApplication {
                 startActivity(intent);
             }
             android.os.Process.killProcess(android.os.Process.myPid());
+
         });
 
     }

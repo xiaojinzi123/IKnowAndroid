@@ -114,7 +114,7 @@ public class HomeMenuWidget extends FrameLayout {
         adapter.setOnItemClickListener((adapter1, view, position) -> {
             Router.with(context)
                     .url(adapter.getData().get(position).url)
-                    .afterJumpAction(() -> closeMenu())
+                    .afterAction(() -> closeMenu())
                     .forward();
         });
 
@@ -122,7 +122,7 @@ public class HomeMenuWidget extends FrameLayout {
             Router.with(context)
                     .host(ModuleInfo.User.NAME)
                     .path(ModuleInfo.User.EDIT)
-                    .afterJumpAction(() -> closeMenu())
+                    .afterAction(() -> closeMenu())
                     .forward();
         });
 
@@ -137,7 +137,7 @@ public class HomeMenuWidget extends FrameLayout {
                                         .host(ModuleInfo.Help.NAME)
                                         .path(ModuleInfo.Help.IMAGE_PREVIEW)
                                         .putStringArrayList("images", new ArrayList<>(Arrays.asList(url)))
-                                        .afterJumpAction(() -> closeMenu())
+                                        .afterAction(() -> closeMenu())
                                         .forward();
                             })
             );
@@ -180,7 +180,7 @@ public class HomeMenuWidget extends FrameLayout {
             Router.with(context)
                     .host(ModuleInfo.Main.NAME)
                     .path(ModuleInfo.Main.SETTING)
-                    .afterJumpAction(() -> closeMenu())
+                    .afterAction(() -> closeMenu())
                     .forward();
         });
 
@@ -188,7 +188,7 @@ public class HomeMenuWidget extends FrameLayout {
             Router.with(context)
                     .host(ModuleInfo.Help.NAME)
                     .path(ModuleInfo.Help.ADDRESS_SELECT)
-                    .afterJumpAction(() -> closeMenu())
+                    .afterAction(() -> closeMenu())
                     .forward();
         });
 
@@ -268,7 +268,7 @@ public class HomeMenuWidget extends FrameLayout {
                 .with(getContext())
                 .host(ModuleInfo.User.NAME)
                 .path(ModuleInfo.User.EDIT)
-                .afterJumpAction(() -> closeMenu())
+                .afterAction(() -> closeMenu())
                 .forward();
     }
 
@@ -277,7 +277,7 @@ public class HomeMenuWidget extends FrameLayout {
                 .with(getContext())
                 .host(ModuleInfo.User.NAME)
                 .path(ModuleInfo.User.LOGIN)
-                .afterJumpAction(() -> closeMenu())
+                .afterAction(() -> closeMenu())
                 .forward();
     }
 

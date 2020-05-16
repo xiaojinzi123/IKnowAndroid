@@ -53,7 +53,7 @@ private constructor(context: Context, list: List<String>) :
                 helper.setText(R.id.tv_content, item)
             }
         }
-        adapter.setOnItemClickListener { adapter, view, position ->
+        adapter.setOnItemClickListener { _, view, position ->
             dismiss()
             listener?.onClick(view, position)
         }
@@ -117,10 +117,8 @@ private constructor(context: Context, list: List<String>) :
 
     }
 
-    open interface OnItemClickListener {
-
+    interface OnItemClickListener {
         fun onClick(view: View, position: Int)
-
     }
 
 }
