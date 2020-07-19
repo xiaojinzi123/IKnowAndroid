@@ -94,7 +94,6 @@ public class HomeAct extends BaseAct {
             public void onDrawerStateChanged(int newState) {
             }
         });
-
     }
 
     private int keyBackCount = 0;
