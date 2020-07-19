@@ -21,7 +21,7 @@ ext.versions = [
         rxjava             : "2.2.16",
         rxandroid          : "2.1.1",
         rxbinding          : "2.2.0",
-        component_version  : "1.8.2"
+        component_version  : "1.8.3"
 ]
 ext.libs = [
         // Google 提供的
@@ -55,11 +55,11 @@ ext.libs = [
         retrofit2_converter_gson : "com.squareup.retrofit2:converter-gson:${versions.retrofit2}",
         retrofit2_rxjava2_adapter: "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit2}",
         okhttp                   : "com.squareup.okhttp3:okhttp:3.14.+",
-        component_annotation     : "com.github.xiaojinzi123.Component:component-annotation:${versions.component_version}-androidx",
-        component_compiler       : "com.github.xiaojinzi123.Component:component-compiler:${versions.component_version}-androidx",
-        component_impl           : "com.github.xiaojinzi123.Component:component-impl:${versions.component_version}-androidx",
-        component_impl_rx        : "com.github.xiaojinzi123.Component:component-impl-rx:${versions.component_version}-androidx",
-        component_plugin         : "com.github.xiaojinzi123.Component:component-plugin:${versions.component_version}-androidx",
+        component_annotation     : "com.github.xiaojinzi123.Component:component-annotation:${versions.component_version}-androidx-java8",
+        component_compiler       : "com.github.xiaojinzi123.Component:component-compiler:${versions.component_version}-androidx-java8",
+        component_impl           : "com.github.xiaojinzi123.Component:component-impl:${versions.component_version}-androidx-java8",
+        component_impl_rx        : "com.github.xiaojinzi123.Component:component-impl-rx:${versions.component_version}-androidx-java8",
+        component_plugin         : "com.github.xiaojinzi123.Component:component-plugin:${versions.component_version}-androidx-java8",
         glide                    : "com.github.bumptech.glide:glide:${versions.glide}",
         glide_compiler           : "com.github.bumptech.glide:compiler:${versions.glide}"
 ]

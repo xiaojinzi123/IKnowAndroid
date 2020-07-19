@@ -15,10 +15,6 @@ public class AppInfoUtils {
     /**
      * 返回一个签名的对应类型的字符串
      *
-     * @param context
-     * @param packageName
-     * @param type
-     *
      * @return
      */
     public static String getSingInfo(String packageName, String type) {

@@ -7,6 +7,7 @@ import com.iknow.lib.beans.help.ClipboardContent;
 import com.iknow.module.base.CommonActivityLifecycleCallback;
 import com.xiaojinzi.component.anno.ServiceAnno;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 @ServiceAnno(CommonService.class)
@@ -22,6 +23,12 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public Observable<ClipboardContent> subscribeClipboard() {
         throw new UnsupportedOperationException();
+    }
+
+    @NonNull
+    @Override
+    public Completable setClipboard(@NonNull ClipboardContent clipboardContent) {
+        return Completable.complete();
     }
 
 }

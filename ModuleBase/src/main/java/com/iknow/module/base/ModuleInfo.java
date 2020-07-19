@@ -71,5 +71,10 @@ public class ModuleInfo {
         public static final String IMAGE_PREVIEW = "imagePreview";
     }
 
+    public static class System {
+        public static final String NAME = "system";
+        public static final String WEB = "web";
+    }
+
 
 }

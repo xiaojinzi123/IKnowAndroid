@@ -3,7 +3,7 @@
         package="com.iknow.module.main">
 
     <application android:theme="@style/AppTheme">
-        <activity android:name=".module.aboat.view.AboatAct" />
+        <activity android:name=".module.about.view.AboutAct" />
         <activity android:name=".module.common.url.view.CommonUrlAct" />
 
         <meta-data

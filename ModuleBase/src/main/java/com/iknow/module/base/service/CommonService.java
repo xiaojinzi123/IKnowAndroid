@@ -8,6 +8,7 @@ import com.iknow.lib.beans.help.ActivityLifecycleBean;
 import com.iknow.lib.beans.help.ClipboardContent;
 import com.iknow.module.base.support.HotObservableAnno;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 public interface CommonService {
@@ -27,5 +28,11 @@ public interface CommonService {
     @NonNull
     @HotObservableAnno
     Observable<ClipboardContent> subscribeClipboard();
+
+    /**
+     * 设置剪切板的内容
+     */
+    @NonNull
+    Completable setClipboard(@NonNull ClipboardContent clipboardContent);
 
 }

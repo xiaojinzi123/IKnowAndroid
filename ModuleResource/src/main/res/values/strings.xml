@@ -39,4 +39,5 @@
     <string name="resource_select_from_girl_list">从美女列表中选择</string>
     <string name="resource_network_connect_exception">网络连接异常</string>
     <string name="resource_fail_to_get_checkcode">获取验证码失败</string>
+    <string name="resource_copy_success">复制成功</string>
 </resources>

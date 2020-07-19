@@ -23,7 +23,7 @@ public class WebAct extends BaseAct<WebViewModel> {
 
     private HelpWebActBinding mBinding;
 
-    @AttrValueAutowiredAnno("data")
+    @AttrValueAutowiredAnno("url")
     String url;
 
     @Override
