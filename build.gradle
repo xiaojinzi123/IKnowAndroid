@@ -13,6 +13,9 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url './Repo'
+        }
         maven { url 'https://jitpack.io' }
     }
     dependencies {
@@ -22,6 +25,7 @@ buildscript {
         // 注册MobSDK
         classpath "com.mob.sdk:MobSDK:2018.0319.1724"
         classpath libs.component_plugin
+        classpath "com.xiaojinzi:networklog-plugin:1.0"
     }
 }
 

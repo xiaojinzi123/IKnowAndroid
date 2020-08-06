@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.xiaojinzi.component.plugin'
+apply plugin: 'com.xiaojinzi.networklog.plugin'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'

@@ -1,2 +1,3 @@
+include ':NetworkLogPlugin'
 include ':app', ':ModuleWelcome', ':ModuleUser', ':ModuleBase', ':LibTools', ':ModuleBeans', ':ModuleResource', ':ModuleMain', ':ModuleUI', ':ModuleDatasource', ':ModuleHelp', ':LibWidget'
 rootProject.name='IKnowAndroid'

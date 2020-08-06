@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/ModuleUI" />
             <option value="$PROJECT_DIR$/ModuleUser" />
             <option value="$PROJECT_DIR$/ModuleWelcome" />
+            <option value="$PROJECT_DIR$/NetworkLogPlugin" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

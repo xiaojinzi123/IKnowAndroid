@@ -1,0 +1,29 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation group: 'org.ow2.asm', name: 'asm-all', version: '5.2'
+    implementation 'com.android.tools.build:gradle:3.3.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
+
+group='com.xiaojinzi'
+version="1.0"
+archivesBaseName='networklog-plugin'
+
+uploadArchives{
+    repositories {
+        mavenDeployer{
+            repository(url: uri('../Repo'))
+        }
+    }
+}
