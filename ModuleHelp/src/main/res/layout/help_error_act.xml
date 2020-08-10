@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".module.error.view.ErrorAct">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".module.error.view.ErrorAct">
 
     <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            app:title="@string/resource_error_show" />
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:title="@string/resource_error_show" />
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <TextView
-                android:id="@+id/tv_error"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="测试文本" />
+            android:id="@+id/tv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="测试文本" />
 
     </ScrollView>
 
     <Button
-            android:id="@+id/bt_reboot"
-            android:layout_width="match_parent"
-            android:text="@string/resource_reboot_application"
-            android:layout_height="wrap_content" />
+        android:id="@+id/bt_reboot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/resource_reboot_application" />
 
 </LinearLayout>

@@ -28,6 +28,13 @@ import java.util.zip.ZipEntry;
 
 public class OkHttpInterceptorTransform extends BaseTransform {
 
+    private String networkLogInterceptorStr, networkLogProcessedInterceptorStr;
+
+    public OkHttpInterceptorTransform(String networkLogInterceptorStr, String networkLogProcessedInterceptorStr) {
+        this.networkLogInterceptorStr = networkLogInterceptorStr;
+        this.networkLogProcessedInterceptorStr = networkLogProcessedInterceptorStr;
+    }
+
     @Override
     public String getName() {
         return "NetworkLogPlugin";
@@ -69,16 +76,37 @@ public class OkHttpInterceptorTransform extends BaseTransform {
                         String entryName = jarEntry.getName();
                         // 如果是目标工具类, 就换成手动生成的
                         if ("okhttp3/OkHttpClient.class".equals(entryName)) {
-                            // ClassReader classReader = new ClassReader(jarFile.getInputStream(new ZipEntry(jarEntry)));
-                            System.out.println("找到了---------" + entryName + "," + jarEntry.getComment());
+                            InputStream inputStream = jarFile.getInputStream(new ZipEntry(jarEntry));
+                            byte[] bytes = OkHttpClientClassModify.doModify(inputStream, networkLogInterceptorStr, networkLogProcessedInterceptorStr);
+
+                            /*try {
+                                File file = new File("/Users/xiaojinzi/Documents/test/" + entryName.replace('/', '_'));
+                                file.delete();
+                                FileOutputStream fileOutputStream = new FileOutputStream(file);
+                                fileOutputStream.write(bytes);
+                                fileOutputStream.close();
+                            } catch (Exception ignore) {
+                                // ignore
+                            }*/
+
+                            ZipEntry okHttpClientZipEntry = new ZipEntry(jarEntry.getName());
+                            okHttpClientZipEntry.setSize(bytes.length);
+                            CRC32 crc = new CRC32();
+                            crc.update(bytes);
+                            okHttpClientZipEntry.setCrc(crc.getValue());
+                            jarOutputStream.putNextEntry(okHttpClientZipEntry);
+                            jarOutputStream.write(bytes);
+                            inputStream.close();
+                            jarOutputStream.closeEntry();
+                        } else {
+                            ZipEntry zipEntry = new ZipEntry(jarEntry);
+                            zipEntry.setCompressedSize(-1);
+                            jarOutputStream.putNextEntry(zipEntry);
+                            InputStream inputStream = jarFile.getInputStream(zipEntry);
+                            IOUtil.readAndWrite(inputStream, jarOutputStream);
+                            inputStream.close();
+                            jarOutputStream.closeEntry();
                         }
-                        ZipEntry zipEntry = new ZipEntry(jarEntry);
-                        zipEntry.setCompressedSize(-1);
-                        jarOutputStream.putNextEntry(zipEntry);
-                        InputStream inputStream = jarFile.getInputStream(zipEntry);
-                        IOUtil.readAndWrite(inputStream, jarOutputStream);
-                        inputStream.close();
-                        jarOutputStream.closeEntry();
                     }
                     jarOutputStream.close();
                     FileUtils.copyFile(destJarFile, dest);
@@ -97,7 +125,7 @@ public class OkHttpInterceptorTransform extends BaseTransform {
             }
         } catch (Exception e) {
             e.printStackTrace(System.out);
-            throw e;
+            throw new IOException(e);
         }
 
     }

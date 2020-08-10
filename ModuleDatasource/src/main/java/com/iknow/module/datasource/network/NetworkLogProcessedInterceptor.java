@@ -11,12 +11,12 @@ import com.xiaojinzi.component.impl.service.ServiceManager;
  * 这个类不能删除, 因为字节码会创建这个类的
  */
 @Keep
-public class NetworkLogInterceptor extends BaseNetworkLogInterceptor {
+public class NetworkLogProcessedInterceptor extends BaseNetworkLogInterceptor {
 
     @Override
     protected void doSend(@NonNull NetWorkLogInfoBean netWorkLogInfo) {
         ServiceManager.get(NetworkLogService.class)
-                .send(netWorkLogInfo);
+                .sendProcessed(netWorkLogInfo);
     }
 
 }

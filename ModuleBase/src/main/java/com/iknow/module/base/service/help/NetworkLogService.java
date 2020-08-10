@@ -11,4 +11,9 @@ public interface NetworkLogService {
      */
     void send(@NonNull NetWorkLogInfoBean netWorkLogInfo);
 
+    /**
+     * 发送加工过的
+     */
+    void sendProcessed(@NonNull NetWorkLogInfoBean netWorkLogInfo);
+
 }

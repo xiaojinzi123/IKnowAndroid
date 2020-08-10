@@ -35,8 +35,10 @@ public class MessageBean<T> {
      */
     public static final String DEVICE_NAME_FLAG = "deviceName";
 
+    // 表示原始拦截器
     public static final String NETWORK_FLAG = "network";
-
+    // 处理过的, 基本表示最后一个日志拦截器
+    public static final String NETWORK_PROCESSED_FLAG = "networkProcessed";
     public static final String TAG_FLAG = "tag";
 
     // 表示自身的tag
@@ -67,6 +69,13 @@ public class MessageBean<T> {
     public static MessageBean networkBuild(NetWorkLogInfoBean netWorkLogInfo) {
         MessageBean result = new MessageBean();
         result.setAction(NETWORK_FLAG);
+        result.setData(netWorkLogInfo);
+        return result;
+    }
+
+    public static MessageBean networkProcessedBuild(NetWorkLogInfoBean netWorkLogInfo) {
+        MessageBean result = new MessageBean();
+        result.setAction(NETWORK_PROCESSED_FLAG);
         result.setData(netWorkLogInfo);
         return result;
     }
